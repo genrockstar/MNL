@@ -1,5 +1,60 @@
 
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>MNL Schedule (Protected)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    .hidden { display: none; }
+    input, button { padding: 10px; font-size: 16px; margin: 5px; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>MNL Schedule</h1>
+
+  <!-- Password Gate -->
+  <div id="gate">
+    <p>Enter password to view the schedule:</p>
+    <input id="pwd" type="password" placeholder="Password" />
+    <button id="enterBtn">Unlock</button>
+    <div id="msg" class="error"></div>
+  </div>
+
+  <!-- Protected Content -->
+  <div id="content" class="hidden">
+    <h2>Schedule Details</h2>
+    <p>✅ Welcome! Here is your schedule:</p>
+    <table border="1" style="margin:auto;">
+      <tr><th>Date</th><th>Team</th><th>Shift</th></tr>
+      <tr><td>2026-01-05</td><td>Mandaluyong</td><td>08:00–17:00</td></tr>
+      <tr><td>2026-01-06</td><td>Mandaluyong</td><td>08:00–17:00</td></tr>
+    </table>
+  </div>
+
+  <script>
+    const PLAIN_PASSWORD = "IMTF2026"; // ✅ Set your password here
+    const gate = document.getElementById('gate');
+    const content = document.getElementById('content');
+    const input = document.getElementById('pwd');
+    const msg = document.getElementById('msg');
+
+    document.getElementById('enterBtn').addEventListener('click', () => {
+      msg.textContent = '';
+      if (input.value === PLAIN_PASSWORD) {
+        gate.classList.add('hidden');
+        content.classList.remove('hidden');
+      } else {
+        msg.textContent = 'Incorrect password.';
+      }
+    });
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
@@ -711,4 +766,5 @@
     render();
   </script>
 </body>
+
 </html>
