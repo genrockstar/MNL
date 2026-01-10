@@ -1,340 +1,420 @@
-import React, { useState } from 'react';
-import { Shield, Heart, Wind, Crosshair, Crown, Sword, Skull, Map, Scroll, BookOpen, Anchor, Flame } from 'lucide-react';
-
-const App = () => {
-  const [activeTab, setActiveTab] = useState('legend');
-  const [selectedWarrior, setSelectedWarrior] = useState(null);
-
-  const warriors = [
-    {
-      name: "Pablo",
-      title: "The Strategist",
-      role: "Leader / Mage",
-      icon: <Crown className="w-8 h-8" />,
-      color: "text-blue-400",
-      bg: "bg-blue-900/30",
-      desc: "A strategist with fire in his heart. He guided his brothers with wisdom and fury, ending the Great War with unbound rage.",
-      stats: { str: 40, agi: 50, int: 95 }
-    },
-    {
-      name: "Josh",
-      title: "The Iron Wall",
-      role: "Tank / Guardian",
-      icon: <Shield className="w-8 h-8" />,
-      color: "text-red-400",
-      bg: "bg-red-900/30",
-      desc: "A wall of muscle and courage. His shield was unbreakable, his body a fortress. He fell protecting his brothers against Spain.",
-      stats: { str: 95, agi: 30, int: 40 }
-    },
-    {
-      name: "Justin",
-      title: "The Mender",
-      role: "Healer / Support",
-      icon: <Heart className="w-8 h-8" />,
-      color: "text-green-400",
-      bg: "bg-green-900/30",
-      desc: "Gentle yet unyielding. His touch mended wounds and restored hope until his very last breath on the battlefield.",
-      stats: { str: 30, agi: 45, int: 90 }
-    },
-    {
-      name: "Ken",
-      title: "The Wind Walker",
-      role: "Scout / Jungler",
-      icon: <Wind className="w-8 h-8" />,
-      color: "text-yellow-400",
-      bg: "bg-yellow-900/30",
-      desc: "Swift as the wind, master of the land. A farmer and hunter who fought until the land itself wept for him.",
-      stats: { str: 60, agi: 90, int: 50 }
-    },
-    {
-      name: "Stell",
-      title: "The Silent Arrow",
-      role: "Marksman / Carry",
-      icon: <Crosshair className="w-8 h-8" />,
-      color: "text-purple-400",
-      bg: "bg-purple-900/30",
-      desc: "Silent and precise. His arrows struck like lightning from the shadows until the silence claimed him.",
-      stats: { str: 45, agi: 95, int: 40 }
-    }
-  ];
-
-  const islands = [
-    { name: "Simula", meaning: "The Beginning", desc: "A land of hope and renewal. Champions from here fight for the future.", color: "text-cyan-300" },
-    { name: "Wakas", meaning: "The End", desc: "A land of endings and remembrance. Champions from here fight for the past.", color: "text-rose-300" },
-    { name: "Mahalima", meaning: "The Center", desc: "The sacred battleground forged to honor the fallen five. The seat of power.", color: "text-amber-300" }
-  ];
-
-  return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans selection:bg-amber-500/30">
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-slate-900/90 backdrop-blur-md border-b border-slate-800 z-50">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 font-bold text-xl text-amber-500 tracking-wider">
-            <Anchor className="w-6 h-6" />
-            <span>SULU-BASI ARCHIVES</span>
-          </div>
-          <div className="flex gap-4 text-sm font-medium">
-            <button 
-              onClick={() => setActiveTab('legend')}
-              className={`px-3 py-1 rounded-full transition-all ${activeTab === 'legend' ? 'bg-amber-600 text-white' : 'hover:text-amber-400'}`}
-            >
-              The Legend
-            </button>
-            <button 
-              onClick={() => setActiveTab('warriors')}
-              className={`px-3 py-1 rounded-full transition-all ${activeTab === 'warriors' ? 'bg-amber-600 text-white' : 'hover:text-amber-400'}`}
-            >
-              The Five
-            </button>
-            <button 
-              onClick={() => setActiveTab('aftermath')}
-              className={`px-3 py-1 rounded-full transition-all ${activeTab === 'aftermath' ? 'bg-amber-600 text-white' : 'hover:text-amber-400'}`}
-            >
-              The Ritual
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Content Area */}
-      <main className="pt-24 pb-20 px-4 max-w-6xl mx-auto">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sulu-Basi Archives</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
         
-        {/* HERO SECTION - THE LEGEND */}
-        {activeTab === 'legend' && (
-          <div className="space-y-12 animate-in fade-in duration-700">
-            <div className="text-center space-y-6 py-10">
-              <h1 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-500 to-amber-700">
-                THE WARRIORS OF SULU-BASI
-              </h1>
-              <p className="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
-                They were not kings nor nobles, but chosen by destiny. Five guardians rose to defend the archipelago against the tides of conquest, leaving a legacy written in blood and fire.
-              </p>
+        /* Animation Utilities */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.7s ease-out forwards;
+        }
+        .animate-slide-up {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        .animate-zoom-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 min-h-screen selection:bg-amber-500/30 pb-20">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-slate-900/90 backdrop-blur-md border-b border-slate-800 z-50 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 font-bold text-xl text-amber-500 tracking-wider">
+                <!-- Anchor Icon -->
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+                <span>SULU-BASI ARCHIVES</span>
             </div>
-
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-6 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-2xl">
-                <h3 className="text-2xl font-bold flex items-center gap-2 text-red-400">
-                  <Sword className="w-6 h-6" /> The Wars Against Europe
-                </h3>
-                <div className="space-y-4 relative border-l-2 border-slate-700 ml-3 pl-8 pb-4">
-                  <div className="relative">
-                    <span className="absolute -left-[41px] top-1 w-5 h-5 bg-slate-600 rounded-full border-4 border-slate-900"></span>
-                    <h4 className="font-bold text-slate-200">The German Invasion</h4>
-                    <p className="text-slate-400 text-sm">Crushed by unity. Pablo's tactics and Josh's shield proved impenetrable.</p>
-                  </div>
-                  <div className="relative pt-6">
-                    <span className="absolute -left-[41px] top-7 w-5 h-5 bg-slate-600 rounded-full border-4 border-slate-900"></span>
-                    <h4 className="font-bold text-slate-200">The March of France</h4>
-                    <p className="text-slate-400 text-sm">Broken fleets carried away by the waves. The people sang of triumph.</p>
-                  </div>
-                  <div className="relative pt-6">
-                    <span className="absolute -left-[41px] top-7 w-5 h-5 bg-red-600 rounded-full border-4 border-slate-900 animate-pulse"></span>
-                    <h4 className="font-bold text-red-400">The Spanish Armada</h4>
-                    <p className="text-slate-400 text-sm">An army ten times greater. The battle was brutal. Four guardians fell, leaving only Pablo to end the war in fury.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-gradient-to-br from-amber-900/20 to-slate-900 p-8 rounded-2xl border border-amber-900/30 flex flex-col justify-center items-center text-center space-y-6">
-                <Flame className="w-16 h-16 text-amber-500 animate-pulse" />
-                <h3 className="text-3xl font-bold text-amber-100">"Only Pablo Remained"</h3>
-                <p className="text-amber-200/70 italic">
-                  "Victory brought no peace. Consumed by grief, the Strategist declared a new world order."
-                </p>
-                <button onClick={() => setActiveTab('aftermath')} className="px-6 py-2 bg-amber-700 hover:bg-amber-600 text-white rounded-lg font-medium transition-colors">
-                  Explore the Aftermath
-                </button>
-              </div>
+            <div class="flex gap-4 text-sm font-medium">
+                <button onclick="switchTab('legend')" id="btn-legend" class="px-3 py-1 rounded-full transition-all hover:text-amber-400">The Legend</button>
+                <button onclick="switchTab('warriors')" id="btn-warriors" class="px-3 py-1 rounded-full transition-all hover:text-amber-400">The Five</button>
+                <button onclick="switchTab('aftermath')" id="btn-aftermath" class="px-3 py-1 rounded-full transition-all hover:text-amber-400">The Ritual</button>
             </div>
-          </div>
-        )}
-
-        {/* WARRIORS SECTION */}
-        {activeTab === 'warriors' && (
-          <div className="animate-in slide-in-from-bottom-4 duration-500">
-            <h2 className="text-4xl font-bold text-center mb-12 text-slate-100">The Fallen & The Survivor</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-              {warriors.map((warrior, idx) => (
-                <div 
-                  key={idx}
-                  onClick={() => setSelectedWarrior(warrior)}
-                  className={`group relative p-6 rounded-xl border border-slate-800 hover:border-slate-600 bg-slate-900 hover:bg-slate-800 transition-all cursor-pointer ${selectedWarrior?.name === warrior.name ? 'ring-2 ring-amber-500' : ''}`}
-                >
-                  <div className={`absolute top-4 right-4 p-2 rounded-full ${warrior.bg}`}>
-                    {warrior.icon}
-                  </div>
-                  <div className="mt-4">
-                    <h3 className={`text-2xl font-bold ${warrior.color}`}>{warrior.name}</h3>
-                    <p className="text-slate-400 text-sm font-medium uppercase tracking-widest mb-4">{warrior.title}</p>
-                    <div className="h-1 w-12 bg-slate-700 rounded mb-4 group-hover:w-full transition-all duration-300"></div>
-                    <p className="text-slate-300 text-sm line-clamp-3">{warrior.desc}</p>
-                  </div>
-                  <div className="mt-6 flex gap-2 text-xs font-mono text-slate-500">
-                    <span className="bg-slate-950 px-2 py-1 rounded border border-slate-800">{warrior.role}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {selectedWarrior && (
-              <div className="bg-slate-900 rounded-2xl p-8 border border-slate-700 animate-in fade-in zoom-in duration-300 shadow-2xl">
-                <div className="flex flex-col md:flex-row gap-8 items-start">
-                  <div className={`p-6 rounded-2xl ${selectedWarrior.bg} inline-block`}>
-                    <div className={`w-24 h-24 ${selectedWarrior.color}`}>
-                      {React.cloneElement(selectedWarrior.icon, { className: "w-full h-full" })}
-                    </div>
-                  </div>
-                  <div className="flex-1 space-y-4">
-                    <h2 className={`text-3xl font-bold ${selectedWarrior.color}`}>{selectedWarrior.name} <span className="text-slate-500 text-lg font-normal">/ {selectedWarrior.title}</span></h2>
-                    <p className="text-lg text-slate-300 leading-relaxed">{selectedWarrior.desc}</p>
-                    
-                    <div className="grid grid-cols-3 gap-4 mt-6">
-                      <div className="bg-slate-950 p-4 rounded-lg text-center">
-                        <div className="text-slate-500 text-xs uppercase mb-1">Strength</div>
-                        <div className="text-red-400 font-bold text-xl">{selectedWarrior.stats.str}</div>
-                        <div className="w-full bg-slate-800 h-1 mt-2 rounded overflow-hidden">
-                          <div className="bg-red-500 h-full" style={{ width: `${selectedWarrior.stats.str}%` }}></div>
-                        </div>
-                      </div>
-                      <div className="bg-slate-950 p-4 rounded-lg text-center">
-                        <div className="text-slate-500 text-xs uppercase mb-1">Agility</div>
-                        <div className="text-green-400 font-bold text-xl">{selectedWarrior.stats.agi}</div>
-                        <div className="w-full bg-slate-800 h-1 mt-2 rounded overflow-hidden">
-                          <div className="bg-green-500 h-full" style={{ width: `${selectedWarrior.stats.agi}%` }}></div>
-                        </div>
-                      </div>
-                      <div className="bg-slate-950 p-4 rounded-lg text-center">
-                        <div className="text-slate-500 text-xs uppercase mb-1">Intellect</div>
-                        <div className="text-blue-400 font-bold text-xl">{selectedWarrior.stats.int}</div>
-                        <div className="w-full bg-slate-800 h-1 mt-2 rounded overflow-hidden">
-                          <div className="bg-blue-500 h-full" style={{ width: `${selectedWarrior.stats.int}%` }}></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* AFTERMATH & RITUAL SECTION */}
-        {activeTab === 'aftermath' && (
-          <div className="space-y-16 animate-in fade-in duration-700">
-            
-            <div className="text-center space-y-4">
-              <h2 className="text-4xl font-bold text-slate-100">Pablo's Madness & The New Order</h2>
-              <p className="text-slate-400 max-w-2xl mx-auto">
-                To ensure balance through eternal struggle, the archipelago was shattered into three domains.
-              </p>
-            </div>
-
-            {/* The Islands */}
-            <div className="grid md:grid-cols-3 gap-0 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl">
-              {islands.map((island, idx) => (
-                <div key={idx} className="relative group bg-slate-900 p-8 hover:bg-slate-800 transition-colors border-b md:border-b-0 md:border-r border-slate-700 last:border-0">
-                  <Map className={`w-10 h-10 mb-4 ${island.color} opacity-80`} />
-                  <h3 className={`text-2xl font-bold mb-2 ${island.color}`}>{island.name}</h3>
-                  <div className="text-xs uppercase tracking-widest text-slate-500 mb-4">{island.meaning}</div>
-                  <p className="text-slate-300 text-sm leading-relaxed">{island.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* The Dota Analogy Section */}
-            <div className="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-500/30 rounded-3xl p-8 md:p-12 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-32 bg-indigo-500/10 blur-3xl rounded-full pointer-events-none"></div>
-              
-              <div className="relative z-10 grid md:grid-cols-2 gap-12 items-center">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-3">
-                    <Scroll className="w-8 h-8 text-indigo-400" />
-                    <h3 className="text-3xl font-bold text-indigo-100">The Mahalima Challenge</h3>
-                  </div>
-                  <p className="text-indigo-200/80 leading-relaxed text-lg">
-                    On the sacred neutral ground of Mahalima, Pablo decreed a ritual. Every year, champions are summoned to re-enact the Great War.
-                  </p>
-                  <ul className="space-y-3">
-                    <li className="flex items-start gap-3 text-slate-300">
-                      <Skull className="w-5 h-5 text-red-400 mt-1 shrink-0" />
-                      <span><strong>5v5 Combat:</strong> Five champions from Simula (Radiant) vs Five from Wakas (Dire).</span>
-                    </li>
-                    <li className="flex items-start gap-3 text-slate-300">
-                      <Shield className="w-5 h-5 text-green-400 mt-1 shrink-0" />
-                      <span><strong>Class Based:</strong> Warriors must embody the roles of Tank, Healer, Scout, Marksman, and Leader.</span>
-                    </li>
-                    <li className="flex items-start gap-3 text-slate-300">
-                      <Crown className="w-5 h-5 text-amber-400 mt-1 shrink-0" />
-                      <span><strong>The Prize:</strong> The victors rule the archipelago for one year, ensuring power is earned, not inherited.</span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <div className="bg-slate-950/50 p-6 rounded-xl border border-indigo-500/20">
-                  <h4 className="text-center text-indigo-300 font-mono text-sm mb-4">TACTICAL OVERVIEW</h4>
-                  <div className="aspect-video bg-slate-900 rounded border border-slate-700 relative p-4 flex items-center justify-between">
-                    {/* Mock Map */}
-                    <div className="absolute inset-0 opacity-20">
-                      <svg viewBox="0 0 100 100" className="w-full h-full stroke-slate-500 stroke-[0.5] fill-none">
-                        <path d="M10,90 Q50,50 90,10" /> {/* Mid */}
-                        <path d="M10,90 Q10,10 90,10" /> {/* Top */}
-                        <path d="M10,90 Q90,90 90,10" /> {/* Bot */}
-                      </svg>
-                    </div>
-                    
-                    <div className="text-center z-10">
-                      <div className="w-12 h-12 bg-cyan-900 rounded-full border-2 border-cyan-400 flex items-center justify-center mx-auto mb-2 shadow-[0_0_15px_rgba(34,211,238,0.5)]">
-                        <span className="font-bold text-cyan-400 text-xs">SIMULA</span>
-                      </div>
-                      <span className="text-[10px] text-cyan-200/70">ANCIENT</span>
-                    </div>
-
-                    <div className="h-px w-24 bg-gradient-to-r from-transparent via-slate-500 to-transparent"></div>
-                    <div className="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/50 flex flex-col items-center justify-center animate-pulse">
-                      <SwordsIcon />
-                      <span className="text-[8px] text-amber-500 mt-1">CLASH</span>
-                    </div>
-                    <div className="h-px w-24 bg-gradient-to-r from-transparent via-slate-500 to-transparent"></div>
-
-                    <div className="text-center z-10">
-                      <div className="w-12 h-12 bg-rose-900 rounded-full border-2 border-rose-400 flex items-center justify-center mx-auto mb-2 shadow-[0_0_15px_rgba(251,113,133,0.5)]">
-                        <span className="font-bold text-rose-400 text-xs">WAKAS</span>
-                      </div>
-                      <span className="text-[10px] text-rose-200/70">ANCIENT</span>
-                    </div>
-                  </div>
-                  <p className="text-center text-xs text-slate-500 mt-4 italic">"The River of Souls divides the map."</p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-800 py-12 bg-slate-900 text-center">
-        <div className="flex items-center justify-center gap-2 mb-4 text-amber-500 opacity-80">
-          <BookOpen className="w-5 h-5" />
-          <span className="font-bold tracking-widest uppercase text-sm">Chronicles of the Archipelago</span>
         </div>
-        <p className="text-slate-500 text-sm max-w-md mx-auto">
-          The story is told in whispers by the sea and sung by the winds. The legacy of Josh, Justin, Ken, Stell, and Pablo remains eternal.
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-24 px-4 max-w-6xl mx-auto">
+        
+        <!-- SECTION: LEGEND -->
+        <div id="view-legend" class="space-y-12 animate-fade-in hidden">
+            <div class="text-center space-y-6 py-10">
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-500 to-amber-700">
+                    THE WARRIORS OF SULU-BASI
+                </h1>
+                <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">
+                    They were not kings nor nobles, but chosen by destiny. Five guardians rose to defend the archipelago against the tides of conquest, leaving a legacy written in blood and fire.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-6 bg-slate-900 p-8 rounded-2xl border border-slate-800 shadow-2xl">
+                    <h3 class="text-2xl font-bold flex items-center gap-2 text-red-400">
+                        <!-- Sword Icon -->
+                        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><line x1="16" y1="16" x2="23" y2="23"/><line x1="19" y1="21" x2="21" y2="19"/></svg>
+                        The Wars Against Europe
+                    </h3>
+                    <div class="space-y-4 relative border-l-2 border-slate-700 ml-3 pl-8 pb-4">
+                        <div class="relative">
+                            <span class="absolute -left-[41px] top-1 w-5 h-5 bg-slate-600 rounded-full border-4 border-slate-900"></span>
+                            <h4 class="font-bold text-slate-200">The German Invasion</h4>
+                            <p class="text-slate-400 text-sm">Crushed by unity. Pablo's tactics and Josh's shield proved impenetrable.</p>
+                        </div>
+                        <div class="relative pt-6">
+                            <span class="absolute -left-[41px] top-7 w-5 h-5 bg-slate-600 rounded-full border-4 border-slate-900"></span>
+                            <h4 class="font-bold text-slate-200">The March of France</h4>
+                            <p class="text-slate-400 text-sm">Broken fleets carried away by the waves. The people sang of triumph.</p>
+                        </div>
+                        <div class="relative pt-6">
+                            <span class="absolute -left-[41px] top-7 w-5 h-5 bg-red-600 rounded-full border-4 border-slate-900 animate-pulse"></span>
+                            <h4 class="font-bold text-red-400">The Spanish Armada</h4>
+                            <p class="text-slate-400 text-sm">An army ten times greater. The battle was brutal. Four guardians fell, leaving only Pablo to end the war in fury.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-br from-amber-900/20 to-slate-900 p-8 rounded-2xl border border-amber-900/30 flex flex-col justify-center items-center text-center space-y-6">
+                    <!-- Flame Icon -->
+                    <svg class="w-16 h-16 text-amber-500 animate-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.1.2-2.2.5-3.3.3-1.09.8-2.12 1.5-3.03.7-1.16 2.05-1.92 3-1.67C9.33 7.8 8.5 10 8.5 14.5z"/></svg>
+                    <h3 class="text-3xl font-bold text-amber-100">"Only Pablo Remained"</h3>
+                    <p class="text-amber-200/70 italic">
+                        "Victory brought no peace. Consumed by grief, the Strategist declared a new world order."
+                    </p>
+                    <button onclick="switchTab('aftermath')" class="px-6 py-2 bg-amber-700 hover:bg-amber-600 text-white rounded-lg font-medium transition-colors">
+                        Explore the Aftermath
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION: WARRIORS -->
+        <div id="view-warriors" class="animate-slide-up hidden">
+            <h2 class="text-4xl font-bold text-center mb-12 text-slate-100">The Fallen & The Survivor</h2>
+            
+            <!-- Warriors Grid -->
+            <div id="warriors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <!-- Javascript will populate this -->
+            </div>
+
+            <!-- Selected Warrior Detail View -->
+            <div id="warrior-detail" class="hidden bg-slate-900 rounded-2xl p-8 border border-slate-700 animate-zoom-in shadow-2xl">
+                <!-- Javascript will populate this -->
+            </div>
+        </div>
+
+        <!-- SECTION: AFTERMATH / RITUAL -->
+        <div id="view-aftermath" class="space-y-16 animate-fade-in hidden">
+            <div class="text-center space-y-4">
+                <h2 class="text-4xl font-bold text-slate-100">Pablo's Madness & The New Order</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    To ensure balance through eternal struggle, the archipelago was shattered into three domains.
+                </p>
+            </div>
+
+            <!-- The Islands -->
+            <div id="islands-grid" class="grid md:grid-cols-3 gap-0 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl">
+                <!-- Javascript will populate this -->
+            </div>
+
+            <!-- The Dota Analogy Section -->
+            <div class="bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-500/30 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-32 bg-indigo-500/10 blur-3xl rounded-full pointer-events-none"></div>
+                
+                <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-3">
+                            <!-- Scroll Icon -->
+                            <svg class="w-8 h-8 text-indigo-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 17.92A7 7 0 1 0 5.41 5"/><path d="M15 6h.01"/><path d="M19 6h.01"/><path d="M15 11h.01"/><path d="M19 11h.01"/><path d="M9 9h.01"/><path d="M9 17h.01"/><path d="M13 17h.01"/></svg>
+                            <h3 class="text-3xl font-bold text-indigo-100">The Mahalima Challenge</h3>
+                        </div>
+                        <p class="text-indigo-200/80 leading-relaxed text-lg">
+                            On the sacred neutral ground of Mahalima, Pablo decreed a ritual. Every year, champions are summoned to re-enact the Great War.
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 text-slate-300">
+                                <!-- Skull Icon -->
+                                <svg class="w-5 h-5 text-red-400 mt-1 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><path d="M8 20v2h8v-2"/><path d="m12.5 17-.5-1-.5 1h1z"/><path d="M16 20a2 2 0 0 0 1.56-3.25 8 8 0 1 0-11.12 0A2 2 0 0 0 8 20"/></svg>
+                                <span><strong>5v5 Combat:</strong> Five champions from Simula (Radiant) vs Five from Wakas (Dire).</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-slate-300">
+                                <!-- Shield Icon -->
+                                <svg class="w-5 h-5 text-green-400 mt-1 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                <span><strong>Class Based:</strong> Warriors must embody the roles of Tank, Healer, Scout, Marksman, and Leader.</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-slate-300">
+                                <!-- Crown Icon -->
+                                <svg class="w-5 h-5 text-amber-400 mt-1 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>
+                                <span><strong>The Prize:</strong> The victors rule the archipelago for one year, ensuring power is earned, not inherited.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-slate-950/50 p-6 rounded-xl border border-indigo-500/20">
+                        <h4 class="text-center text-indigo-300 font-mono text-sm mb-4">TACTICAL OVERVIEW</h4>
+                        <div class="aspect-video bg-slate-900 rounded border border-slate-700 relative p-4 flex items-center justify-between">
+                            <!-- Mock Map -->
+                            <div class="absolute inset-0 opacity-20">
+                                <svg viewBox="0 0 100 100" class="w-full h-full stroke-slate-500 stroke-[0.5] fill-none">
+                                    <path d="M10,90 Q50,50 90,10" /> <!-- Mid -->
+                                    <path d="M10,90 Q10,10 90,10" /> <!-- Top -->
+                                    <path d="M10,90 Q90,90 90,10" /> <!-- Bot -->
+                                </svg>
+                            </div>
+                            
+                            <div class="text-center z-10">
+                                <div class="w-12 h-12 bg-cyan-900 rounded-full border-2 border-cyan-400 flex items-center justify-center mx-auto mb-2 shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+                                    <span class="font-bold text-cyan-400 text-xs">SIMULA</span>
+                                </div>
+                                <span class="text-[10px] text-cyan-200/70">ANCIENT</span>
+                            </div>
+
+                            <div class="h-px w-24 bg-gradient-to-r from-transparent via-slate-500 to-transparent"></div>
+                            <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/50 flex flex-col items-center justify-center animate-pulse">
+                                <!-- Swords Icon -->
+                                <svg class="text-amber-500 w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 17.5L3 6V3h3l11.5 11.5" /><path d="m13 19 6-6" /><path d="M16 16 7 7" /><path d="m21 21-4.3-4.3" /></svg>
+                                <span class="text-[8px] text-amber-500 mt-1">CLASH</span>
+                            </div>
+                            <div class="h-px w-24 bg-gradient-to-r from-transparent via-slate-500 to-transparent"></div>
+
+                            <div class="text-center z-10">
+                                <div class="w-12 h-12 bg-rose-900 rounded-full border-2 border-rose-400 flex items-center justify-center mx-auto mb-2 shadow-[0_0_15px_rgba(251,113,133,0.5)]">
+                                    <span class="font-bold text-rose-400 text-xs">WAKAS</span>
+                                </div>
+                                <span class="text-[10px] text-rose-200/70">ANCIENT</span>
+                            </div>
+                        </div>
+                        <p class="text-center text-xs text-slate-500 mt-4 italic">"The River of Souls divides the map."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-12 bg-slate-900 text-center fixed bottom-0 w-full hidden md:block relative">
+        <div class="flex items-center justify-center gap-2 mb-4 text-amber-500 opacity-80">
+            <!-- BookOpen Icon -->
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            <span class="font-bold tracking-widest uppercase text-sm">Chronicles of the Archipelago</span>
+        </div>
+        <p class="text-slate-500 text-sm max-w-md mx-auto">
+            The story is told in whispers by the sea and sung by the winds. The legacy of Josh, Justin, Ken, Stell, and Pablo remains eternal.
         </p>
-      </footer>
-    </div>
-  );
-};
+    </footer>
 
-// Helper component for the map icon
-const SwordsIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-amber-500 w-6 h-6">
-    <path d="M14.5 17.5L3 6V3h3l11.5 11.5" />
-    <path d="m13 19 6-6" />
-    <path d="M16 16 7 7" />
-    <path d="m21 21-4.3-4.3" />
-  </svg>
-);
+    <script>
+        // --- Data ---
+        const icons = {
+            crown: `<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14"/></svg>`,
+            shield: `<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+            heart: `<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`,
+            wind: `<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg>`,
+            crosshair: `<svg class="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg>`,
+            map: `<svg class="w-10 h-10 mb-4 opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/></svg>`
+        };
 
-export default App;
+        const warriors = [
+            {
+                name: "Pablo",
+                title: "The Strategist",
+                role: "Leader / Mage",
+                iconKey: "crown",
+                color: "text-blue-400",
+                bg: "bg-blue-900/30",
+                barColor: "bg-blue-500",
+                desc: "A strategist with fire in his heart. He guided his brothers with wisdom and fury, ending the Great War with unbound rage.",
+                stats: { str: 40, agi: 50, int: 95 }
+            },
+            {
+                name: "Josh",
+                title: "The Iron Wall",
+                role: "Tank / Guardian",
+                iconKey: "shield",
+                color: "text-red-400",
+                bg: "bg-red-900/30",
+                barColor: "bg-red-500",
+                desc: "A wall of muscle and courage. His shield was unbreakable, his body a fortress. He fell protecting his brothers against Spain.",
+                stats: { str: 95, agi: 30, int: 40 }
+            },
+            {
+                name: "Justin",
+                title: "The Mender",
+                role: "Healer / Support",
+                iconKey: "heart",
+                color: "text-green-400",
+                bg: "bg-green-900/30",
+                barColor: "bg-green-500",
+                desc: "Gentle yet unyielding. His touch mended wounds and restored hope until his very last breath on the battlefield.",
+                stats: { str: 30, agi: 45, int: 90 }
+            },
+            {
+                name: "Ken",
+                title: "The Wind Walker",
+                role: "Scout / Jungler",
+                iconKey: "wind",
+                color: "text-yellow-400",
+                bg: "bg-yellow-900/30",
+                barColor: "bg-yellow-500",
+                desc: "Swift as the wind, master of the land. A farmer and hunter who fought until the land itself wept for him.",
+                stats: { str: 60, agi: 90, int: 50 }
+            },
+            {
+                name: "Stell",
+                title: "The Silent Arrow",
+                role: "Marksman / Carry",
+                iconKey: "crosshair",
+                color: "text-purple-400",
+                bg: "bg-purple-900/30",
+                barColor: "bg-purple-500",
+                desc: "Silent and precise. His arrows struck like lightning from the shadows until the silence claimed him.",
+                stats: { str: 45, agi: 95, int: 40 }
+            }
+        ];
+
+        const islands = [
+            { name: "Simula", meaning: "The Beginning", desc: "A land of hope and renewal. Champions from here fight for the future.", color: "text-cyan-300" },
+            { name: "Wakas", meaning: "The End", desc: "A land of endings and remembrance. Champions from here fight for the past.", color: "text-rose-300" },
+            { name: "Mahalima", meaning: "The Center", desc: "The sacred battleground forged to honor the fallen five. The seat of power.", color: "text-amber-300" }
+        ];
+
+        let selectedWarriorName = null;
+
+        // --- Logic ---
+
+        function init() {
+            renderWarriors();
+            renderIslands();
+            switchTab('legend');
+        }
+
+        function switchTab(tabId) {
+            // Hide all views
+            ['legend', 'warriors', 'aftermath'].forEach(id => {
+                document.getElementById(`view-${id}`).classList.add('hidden');
+                
+                // Reset button styles
+                const btn = document.getElementById(`btn-${id}`);
+                btn.className = "px-3 py-1 rounded-full transition-all hover:text-amber-400"; // default style
+            });
+
+            // Show selected view
+            document.getElementById(`view-${tabId}`).classList.remove('hidden');
+
+            // Set active button style
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.className = "px-3 py-1 rounded-full transition-all bg-amber-600 text-white";
+        }
+
+        function renderWarriors() {
+            const grid = document.getElementById('warriors-grid');
+            grid.innerHTML = warriors.map(w => `
+                <div onclick="selectWarrior('${w.name}')" 
+                     class="group relative p-6 rounded-xl border border-slate-800 hover:border-slate-600 bg-slate-900 hover:bg-slate-800 transition-all cursor-pointer ${selectedWarriorName === w.name ? 'ring-2 ring-amber-500' : ''}"
+                     id="card-${w.name}">
+                    <div class="absolute top-4 right-4 p-2 rounded-full ${w.bg} w-12 h-12 ${w.color}">
+                        ${icons[w.iconKey]}
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="text-2xl font-bold ${w.color}">${w.name}</h3>
+                        <p class="text-slate-400 text-sm font-medium uppercase tracking-widest mb-4">${w.title}</p>
+                        <div class="h-1 w-12 bg-slate-700 rounded mb-4 group-hover:w-full transition-all duration-300"></div>
+                        <p class="text-slate-300 text-sm line-clamp-3">${w.desc}</p>
+                    </div>
+                    <div class="mt-6 flex gap-2 text-xs font-mono text-slate-500">
+                        <span class="bg-slate-950 px-2 py-1 rounded border border-slate-800">${w.role}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectWarrior(name) {
+            selectedWarriorName = name;
+            const w = warriors.find(w => w.name === name);
+            
+            // Update cards selection state
+            warriors.forEach(warrior => {
+                const card = document.getElementById(`card-${warrior.name}`);
+                if (warrior.name === name) {
+                    card.classList.add('ring-2', 'ring-amber-500');
+                } else {
+                    card.classList.remove('ring-2', 'ring-amber-500');
+                }
+            });
+
+            // Render Detail View
+            const detailContainer = document.getElementById('warrior-detail');
+            detailContainer.classList.remove('hidden');
+            detailContainer.innerHTML = `
+                <div class="flex flex-col md:flex-row gap-8 items-start">
+                    <div class="p-6 rounded-2xl ${w.bg} inline-block">
+                        <div class="w-24 h-24 ${w.color}">
+                            ${icons[w.iconKey]}
+                        </div>
+                    </div>
+                    <div class="flex-1 space-y-4 w-full">
+                        <h2 class="text-3xl font-bold ${w.color}">${w.name} <span class="text-slate-500 text-lg font-normal">/ ${w.title}</span></h2>
+                        <p class="text-lg text-slate-300 leading-relaxed">${w.desc}</p>
+                        
+                        <div class="grid grid-cols-3 gap-4 mt-6">
+                            <div class="bg-slate-950 p-4 rounded-lg text-center">
+                                <div class="text-slate-500 text-xs uppercase mb-1">Strength</div>
+                                <div class="text-red-400 font-bold text-xl">${w.stats.str}</div>
+                                <div class="w-full bg-slate-800 h-1 mt-2 rounded overflow-hidden">
+                                    <div class="bg-red-500 h-full" style="width: ${w.stats.str}%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-950 p-4 rounded-lg text-center">
+                                <div class="text-slate-500 text-xs uppercase mb-1">Agility</div>
+                                <div class="text-green-400 font-bold text-xl">${w.stats.agi}</div>
+                                <div class="w-full bg-slate-800 h-1 mt-2 rounded overflow-hidden">
+                                    <div class="bg-green-500 h-full" style="width: ${w.stats.agi}%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-950 p-4 rounded-lg text-center">
+                                <div class="text-slate-500 text-xs uppercase mb-1">Intellect</div>
+                                <div class="text-blue-400 font-bold text-xl">${w.stats.int}</div>
+                                <div class="w-full bg-slate-800 h-1 mt-2 rounded overflow-hidden">
+                                    <div class="bg-blue-500 h-full" style="width: ${w.stats.int}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Scroll to detail on mobile
+            if (window.innerWidth < 768) {
+                detailContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function renderIslands() {
+            const grid = document.getElementById('islands-grid');
+            grid.innerHTML = islands.map((island, idx) => `
+                <div class="relative group bg-slate-900 p-8 hover:bg-slate-800 transition-colors border-b md:border-b-0 md:border-r border-slate-700 last:border-0">
+                    <div class="${island.color}">
+                         ${icons.map.replace('opacity-80', `opacity-80 ${island.color}`)}
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 ${island.color}">${island.name}</h3>
+                    <div class="text-xs uppercase tracking-widest text-slate-500 mb-4">${island.meaning}</div>
+                    <p class="text-slate-300 text-sm leading-relaxed">${island.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        // Initialize App
+        window.onload = init;
+    </script>
+</body>
+</html>
