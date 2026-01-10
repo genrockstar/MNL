@@ -250,12 +250,23 @@
         </div>
     </footer>
 
-    <div id="map-modal" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center p-4 md:p-10 cursor-zoom-out animate-fade-in" onclick="closeMapZoom()">
-        <button class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors z-50 p-2">
-            <svg class="w-8 h-8 md:w-12 md:h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <div id="map-modal" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm hidden flex items-center justify-center p-4 md:p-10 cursor-zoom-out animate-fade-in" onclick="closeMapZoom()">
+        
+        <button class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors z-50 p-2 bg-slate-800/50 rounded-full">
+            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         
-        <img src="Gemini_Generated_Image_maa3l4maa3l4maa3.jpg" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl scale-100" onclick="event.stopPropagation()">
+        <div id="img-error" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500 z-0 hidden">
+            <svg class="w-16 h-16 mb-4 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p class="text-xl font-bold text-slate-300">Image Not Found</p>
+            <p class="text-sm mt-2">Ensure file is named:</p>
+            <code class="bg-slate-800 px-2 py-1 rounded mt-2 text-amber-500 font-mono text-xs">Gemini_Generated_Image_maa3l4maa3l4maa3.png</code>
+        </div>
+
+        <img src="Gemini_Generated_Image_maa3l4maa3l4maa3.png" 
+             class="max-w-full max-h-full object-contain rounded-lg shadow-2xl relative z-10" 
+             onclick="event.stopPropagation()"
+             onerror="document.getElementById('img-error').classList.remove('hidden'); this.style.display='none';">
     </div>
 
     <script>
@@ -471,4 +482,3 @@
     </script>
 </body>
 </html>
-
