@@ -13,35 +13,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .font-mario { font-family: 'Luckiest Guy', cursive; letter-spacing: 2px; text-shadow: 3px 3px 0px #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; }
-        
-        /* Reading Mode Styles */
-        .story-mode { font-family: 'Merriweather', serif; line-height: 1.9; font-size: 1.125rem; color: #cbd5e1; }
-        .story-mode p { margin-bottom: 1.5em; }
-        .drop-cap { float: left; font-size: 3.5rem; line-height: 0.8; margin-right: 0.15em; font-family: 'Luckiest Guy', cursive; }
-        
-        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+        .font-mario { font-family: 'Luckiest Guy', cursive; letter-spacing: 2px; text-shadow: 2px 2px 0px #000; }
         
         .animate-fade-in { animation: fadeIn 0.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         
-        .animate-zoom-in { animation: zoomIn 0.3s ease-out forwards; }
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-        audio::-webkit-media-controls-panel { background-color: #cbd5e1; }
         .custom-scrollbar::-webkit-scrollbar { width: 8px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #0f172a; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; border: 2px solid #0f172a; }
         
         .dropdown:hover .dropdown-menu { display: block; }
 
-        .item-slot { background: radial-gradient(circle, #1e293b 0%, #020617 100%); border: 1px solid #475569; transition: all 0.2s; }
+        .item-slot { 
+            background: radial-gradient(circle, #1e293b 0%, #020617 100%); 
+            border: 1px solid #334155; 
+            transition: all 0.2s; 
+            position: relative;
+            overflow: hidden;
+        }
         .item-slot:hover { border-color: #f59e0b; box-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+        .item-shine {
+            position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-25deg); transition: 0.5s;
+        }
+        .item-slot:hover .item-shine { left: 150%; transition: 0.7s; }
+
+        .talent-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; position: relative; }
+        .talent-node { width: 40px; height: 40px; background: #0f172a; border: 2px solid #475569; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #94a3b8; z-index: 10; }
+        .talent-choice { flex: 1; text-align: center; font-size: 0.75rem; color: #cbd5e1; padding: 4px 8px; background: rgba(15, 23, 42, 0.6); border-radius: 4px; margin: 0 8px; transition: all 0.3s; cursor: default; }
+        .talent-choice:hover { color: #f59e0b; background: rgba(245, 158, 11, 0.1); }
         
-        .skill-icon-q { background: linear-gradient(135deg, #ef4444, #991b1b); border: 2px solid #fca5a5; }
-        .skill-icon-w { background: linear-gradient(135deg, #3b82f6, #1e40af); border: 2px solid #93c5fd; }
-        .skill-icon-e { background: linear-gradient(135deg, #10b981, #065f46); border: 2px solid #6ee7b7; }
-        .skill-icon-r { background: linear-gradient(135deg, #a855f7, #6b21a8); border: 2px solid #d8b4fe; }
+        .ability-card { background: rgba(15, 23, 42, 0.9); border-left: 4px solid; padding: 1rem; margin-bottom: 1rem; border-radius: 0 0.5rem 0.5rem 0; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-200 min-h-screen selection:bg-amber-500/30 pb-40 overflow-x-hidden">
@@ -49,16 +52,12 @@
     <nav class="fixed top-0 w-full bg-slate-900/95 backdrop-blur-md border-b border-slate-800 z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3 font-bold text-2xl text-amber-500 cursor-pointer" onclick="switchTab('home')">
-                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
-                <span class="hidden md:inline font-mario text-3xl">CASHUAL LEGENDS</span>
-                <span class="md:hidden font-mario">CASHUAL</span>
+                <span class="font-mario text-3xl">CASHUAL LEGENDS</span>
             </div>
-            
             <div class="flex gap-1 md:gap-4 text-[10px] md:text-sm font-medium items-center">
-                <button onclick="switchTab('home')" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white">Home</button>
-                
+                <button onclick="switchTab('home')" class="px-4 py-2 hover:text-white transition">Home</button>
                 <div class="relative dropdown group">
-                    <button class="flex items-center gap-1 px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white">
+                    <button class="flex items-center gap-1 px-4 py-2 hover:text-white transition">
                         Warriors <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
                     <div class="dropdown-menu absolute hidden pt-4 top-full left-0 z-50 min-w-[160px]">
@@ -69,9 +68,8 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="relative dropdown group">
-                    <button onclick="switchTab('history')" class="flex items-center gap-1 px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white">
+                    <button onclick="switchTab('history')" class="flex items-center gap-1 px-4 py-2 hover:text-white transition">
                         History <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
                     </button>
                     <div class="dropdown-menu absolute hidden pt-4 top-full left-0 z-50 min-w-[160px]">
@@ -84,39 +82,26 @@
                         </div>
                     </div>
                 </div>
-
-                <button onclick="switchTab('aftermath')" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white">Ritual</button>
-                <button onclick="switchTab('social')" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white">Community</button>
+                <button onclick="switchTab('aftermath')" class="px-4 py-2 hover:text-white transition">Ritual</button>
+                <button onclick="switchTab('social')" class="px-4 py-2 hover:text-white transition">Community</button>
             </div>
         </div>
     </nav>
 
     <main class="pt-28 px-6 max-w-7xl mx-auto min-h-[80vh]">
-        
         <div id="view-home" class="space-y-16 animate-fade-in">
             <div class="text-center space-y-6 py-12">
-                <h1 class="font-mario text-6xl md:text-8xl lg:text-9xl text-white tracking-widest drop-shadow-[5px_5px_0_rgba(245,158,11,0.8)]">CASHUAL LEGENDS</h1>
-                <div class="flex items-center justify-center gap-4">
-                    <div class="h-1 w-12 md:w-24 bg-amber-500 rounded-full"></div>
-                    <p class="text-xl md:text-3xl text-amber-500 font-bold uppercase tracking-[0.2em] font-mario">The New Age</p>
-                    <div class="h-1 w-12 md:w-24 bg-amber-500 rounded-full"></div>
-                </div>
+                <h1 class="font-mario text-6xl md:text-9xl text-white tracking-widest drop-shadow-lg">CASHUAL LEGENDS</h1>
+                <p class="text-2xl text-amber-500 font-bold uppercase tracking-widest">Sulu-Basi Server</p>
             </div>
-            <div class="rounded-3xl overflow-hidden border-4 border-slate-800 shadow-[0_0_60px_rgba(0,0,0,0.6)] relative group max-w-6xl mx-auto cursor-default">
-                <div class="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 relative flex items-center justify-center overflow-hidden">
-                    <img src="1767948987926.jpg" alt="Casual Legends" class="absolute inset-0 w-full h-full object-cover z-10" onerror="this.style.display='none'">
-                    <div class="text-slate-700 font-black text-6xl z-0 opacity-20">CL</div>
+            <div class="rounded-3xl overflow-hidden border-4 border-slate-800 shadow-2xl relative group max-w-6xl mx-auto">
+                <div class="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 relative flex items-center justify-center">
+                    <img src="1767948987926.jpg" class="absolute inset-0 w-full h-full object-cover opacity-80" onerror="this.style.opacity='0'">
+                    <div class="text-slate-700 font-black text-6xl z-0 absolute">CL</div>
                 </div>
-                <div class="absolute bottom-0 left-0 right-0 p-8 md:p-16 text-center lg:text-left flex flex-col lg:flex-row items-end justify-between gap-8 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent z-20">
-                    <div class="text-left space-y-4 max-w-2xl">
-                        <span class="bg-amber-600 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider shadow-lg animate-pulse font-mario">Live Season</span>
-                        <h3 class="text-3xl md:text-5xl font-bold text-white drop-shadow-2xl">Guardians of the Modern Arena</h3>
-                        <p class="text-slate-200 text-base md:text-lg drop-shadow-md leading-relaxed">Choose your allegiance: The Tech-Druids of Simula or the Shadow-Walkers of Wakas.</p>
-                    </div>
-                    <div class="flex gap-4">
-                        <button onclick="switchTab('simula')" class="px-8 py-3 bg-cyan-700 hover:bg-cyan-600 text-white font-bold rounded-full shadow-lg font-mario">Team Simula</button>
-                        <button onclick="switchTab('wakas')" class="px-8 py-3 bg-rose-700 hover:bg-rose-600 text-white font-bold rounded-full shadow-lg font-mario">Team Wakas</button>
-                    </div>
+                <div class="absolute bottom-0 w-full p-8 md:p-12 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent flex justify-center gap-6">
+                    <button onclick="switchTab('simula')" class="px-8 py-4 bg-cyan-700 hover:bg-cyan-600 text-white font-bold rounded-full font-mario text-xl shadow-lg border-2 border-cyan-500/30">SIMULA</button>
+                    <button onclick="switchTab('wakas')" class="px-8 py-4 bg-rose-700 hover:bg-rose-600 text-white font-bold rounded-full font-mario text-xl shadow-lg border-2 border-rose-500/30">WAKAS</button>
                 </div>
             </div>
         </div>
@@ -138,135 +123,363 @@
             <h2 class="text-5xl font-bold text-center mb-6 text-amber-500 font-mario" id="history-title">History Archives</h2>
             <div class="max-w-4xl mx-auto bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden shadow-2xl min-h-[600px]">
                 <div id="history-content-area" class="w-full h-full flex items-center justify-center p-10 text-slate-500">
-                    <div class="text-center">
-                        <svg class="w-16 h-16 mx-auto mb-4 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                        <p>Select a Chapter from the menu to begin reading.</p>
-                    </div>
+                    <p>Select a Chapter from the menu.</p>
                 </div>
             </div>
         </div>
 
-        <div id="view-aftermath" class="hidden space-y-10">
-            <div class="text-center"><h2 class="text-5xl font-bold text-white font-mario">Battle for the Aegis</h2></div>
-            <div onclick="openMapZoom()" class="cursor-pointer max-w-6xl mx-auto rounded-3xl overflow-hidden border-2 border-slate-700 shadow-2xl relative group">
-                <img src="" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-1000">
-            </div>
-            <div class="max-w-6xl mx-auto bg-slate-900 rounded-3xl border border-orange-900/50 overflow-hidden flex flex-col md:flex-row">
-                <div class="md:w-1/2 relative min-h-[400px]"><img src="https://placehold.co/600x800/7c2d12/fed7aa?text=Leviathan" class="absolute inset-0 w-full h-full object-cover"></div>
-                <div class="md:w-1/2 p-12 flex flex-col justify-center">
-                    <h2 class="text-6xl font-mario text-orange-500 mb-4">THE LEVIATHAN</h2>
-                    <p class="text-slate-300 text-lg leading-relaxed">Guardian of the Breach. Like Roshan in ancient texts, this immortal beast guards the path between dimensions.</p>
-                </div>
+        <div id="view-aftermath" class="hidden">
+            <h2 class="text-5xl font-bold text-center text-white font-mario mb-8">Battle Map</h2>
+            <div class="max-w-5xl mx-auto border-2 border-slate-700 rounded-3xl overflow-hidden cursor-zoom-in" onclick="openMapZoom()">
+                <img src="https://placehold.co/1200x600/1e293b/cbd5e1?text=Click+to+View+Map" class="w-full">
             </div>
         </div>
 
         <div id="view-social" class="hidden">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl max-w-4xl mx-auto mt-10">
-                <div class="p-8 border-b border-slate-800"><h3 class="text-2xl font-bold text-white font-mario">Traveler's Log</h3></div>
-                <div class="grid md:grid-cols-3">
-                    <div class="p-8 border-r border-slate-800">
-                        <form id="comment-form" onsubmit="addComment(event)" class="space-y-4">
-                            <input type="text" id="username" placeholder="Name" class="w-full bg-slate-800 p-3 rounded text-white" required>
-                            <textarea id="user-message" rows="4" placeholder="Message" class="w-full bg-slate-800 p-3 rounded text-white" required></textarea>
-                            <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-2 rounded">Post</button>
-                        </form>
-                    </div>
-                    <div class="md:col-span-2 p-8 max-h-[400px] overflow-y-auto" id="comments-container">
-                        <div id="comments-list"></div>
-                    </div>
-                </div>
+            <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl max-w-4xl mx-auto mt-10 p-8">
+                <h3 class="text-2xl font-bold text-white font-mario mb-6">Traveler's Log</h3>
+                <form id="comment-form" onsubmit="addComment(event)" class="space-y-4 mb-8">
+                    <input type="text" id="username" placeholder="Name" class="w-full bg-slate-800 p-3 rounded text-white border border-slate-700" required>
+                    <textarea id="user-message" rows="3" placeholder="Message" class="w-full bg-slate-800 p-3 rounded text-white border border-slate-700" required></textarea>
+                    <button type="submit" class="bg-amber-600 hover:bg-amber-500 text-white font-bold py-2 px-6 rounded">Post</button>
+                </form>
+                <div id="comments-list" class="space-y-4"></div>
             </div>
         </div>
-
     </main>
 
-    <div id="hero-interface" class="fixed inset-0 bg-black/95 z-[100] hidden flex-col overflow-y-auto">
-        <div class="w-full max-w-7xl mx-auto p-6 flex-1 flex flex-col min-h-screen relative">
-            <button onclick="closeHeroInterface()" class="absolute top-6 right-6 text-white bg-slate-800 p-3 rounded-full hover:bg-red-600 z-50">✕</button>
-            <div id="hero-content" class="flex-1 flex flex-col justify-center"></div>
+    <div id="hero-interface" class="fixed inset-0 bg-slate-950/95 z-[100] hidden flex-col overflow-y-auto backdrop-blur-sm">
+        <div class="w-full max-w-7xl mx-auto p-4 md:p-8 flex-1 flex flex-col min-h-screen relative">
+            <button onclick="closeHeroInterface()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white bg-slate-800 hover:bg-red-600 w-10 h-10 rounded-full flex items-center justify-center z-50 shadow-lg font-bold text-xl">✕</button>
+            <div id="hero-content" class="flex-1"></div>
         </div>
     </div>
 
-    <div id="map-modal" class="fixed inset-0 bg-black/95 z-[100] hidden flex-col items-center justify-center p-10 cursor-zoom-out" onclick="closeMapZoom()">
-        <img src="map.png" class="max-w-full max-h-full object-contain">
+    <div id="map-modal" class="fixed inset-0 bg-black/95 z-[100] hidden flex-col items-center justify-center p-4 cursor-zoom-out" onclick="closeMapZoom()">
+        <img src="map.png" class="max-w-full max-h-full object-contain shadow-2xl shadow-amber-500/20">
     </div>
 
     <script>
-        // --- DATA WITH LOCAL FILE SUPPORT ---
+        // --- ITEM DATA ---
+        const commonInventory = {
+            mage: ["Arcane Boots", "Aether Lens", "Blink Dagger", "Scythe of Vyse", "Refresher Orb", "Black King Bar"],
+            tank: ["Guardian Greaves", "Crimson Guard", "Heart of Tarrasque", "Blade Mail", "Assault Cuirass", "Pipe of Insight"],
+            carry: ["Power Treads", "Butterfly", "Daedalus", "Satanic", "Manta Style", "Swift Blink"],
+            supp: ["Tranquil Boots", "Glimmer Cape", "Force Staff", "Solar Crest", "Lotus Orb", "Observer Ward"]
+        };
+
+        // --- THE FIVE (Warriors) ---
         const warriors = [
-            { name: "Pablo", title: "The Strategist", role: "Leader / Mage", src: "image_3.png", color: "text-blue-400", stats: { str: 40, agi: 50, int: 95 } },
-            { name: "Josh", title: "The Iron Wall", role: "Tank / Guardian", src: "image_4.png", color: "text-red-400", stats: { str: 95, agi: 30, int: 40 } },
-            { name: "Justin", title: "The Mender", role: "Healer / Support", src: "image_2.png", color: "text-green-400", stats: { str: 30, agi: 45, int: 90 } },
-            { name: "Ken", title: "The Wind Walker", role: "Scout / Jungler", src: "image_0.png", color: "text-yellow-400", stats: { str: 60, agi: 90, int: 50 } },
-            { name: "Stell", title: "The Silent Arrow", role: "Marksman / Carry", src: "image_1.png", color: "text-purple-400", stats: { str: 45, agi: 95, int: 40 } }
+            { 
+                name: "Pablo", title: "The Strategist", role: "Leader / Mage", src: "image_3.png", color: "text-blue-400", stats: { str: 40, agi: 50, int: 95 },
+                abilities: {
+                    q: { name: "Logic Bomb", desc: "Hurls a compressed sphere of pure data at a target area. After 1.5s delay, it explodes, dealing massive magic damage and silencing enemies for 3 seconds." },
+                    w: { name: "Firewall Protocol", desc: "Erects a digital barrier. Allies passing through gain movement speed; enemies are slowed by 60% and take burn damage over time." },
+                    e: { name: "Overclock Aura", desc: "PASSIVE: Reduces cooldowns of all nearby allies by 15% and increases mana regeneration." },
+                    r: { name: "System Override", desc: "ULTIMATE: Pablo hacks reality itself. All enemies on the map are revealed and stunned for 2 seconds. Global cast range." }
+                },
+                talents: [{ left: "+200 Health", right: "+150 Mana" }, { left: "+15% Spell Amp", right: "-10% Mana Cost" }, { left: "Firewall roots enemies", right: "+2s Logic Bomb Silence" }, { left: "System Override pierces Spell Immunity", right: "+30% Cooldown Reduction" }],
+                inventory: commonInventory.mage
+            },
+            { 
+                name: "Josh", title: "The Iron Wall", role: "Tank / Guardian", src: "image_4.png", color: "text-red-400", stats: { str: 95, agi: 30, int: 40 },
+                abilities: {
+                    q: { name: "Seismic Slam", desc: "Slams the ground, creating a fissure that blocks movement and stuns enemies in a line for 2.5 seconds." },
+                    w: { name: "Titan's Roar", desc: "Forces all nearby enemies to attack Josh for 3.5 seconds. During this time, he gains +40 armor." },
+                    e: { name: "Reactive Armor", desc: "PASSIVE: Each time Josh is attacked, he gains 2 HP regen and 1 armor. Stacks up to 25 times." },
+                    r: { name: "Indestructible", desc: "ULTIMATE: Josh becomes immune to death for 6 seconds. Any damage taken heals him instead at the end of the duration." }
+                },
+                talents: [{ left: "+8 Armor", right: "+15 Movement Speed" }, { left: "+300 Health", right: "+4 Mana Regen" }, { left: "Titan's Roar reflects 30% Damage", right: "-4s Seismic Slam CD" }, { left: "Indestructible Duration +2s", right: "Reactive Armor x2 Stacks" }],
+                inventory: commonInventory.tank
+            },
+            { 
+                name: "Justin", title: "The Mender", role: "Healer / Support", src: "image_2.png", color: "text-green-400", stats: { str: 30, agi: 45, int: 90 },
+                abilities: {
+                    q: { name: "Healing Wave", desc: "Sends a wave of light that bounces between allies, healing them for 300 HP and dealing 200 damage to enemies caught in the path." },
+                    w: { name: "Divine Shield", desc: "Places a shield on an ally that absorbs 500 physical damage and prevents all disable effects for 4 seconds." },
+                    e: { name: "Essence Aura", desc: "PASSIVE: Nearby allies gain life steal on attacks and increased health regeneration." },
+                    r: { name: "Resurrection", desc: "ULTIMATE: Brings a fallen ally back to life with 60% HP and Mana at the location of their death. 180s Cooldown." }
+                },
+                talents: [{ left: "+20% XP Gain", right: "+75 Cast Range" }, { left: "+300 Healing Wave Heal", right: "-3s Divine Shield CD" }, { left: "+20% Magic Resistance Aura", right: "+150 Gold/Min" }, { left: "Resurrection grants Spell Immunity (3s)", right: "Healing Wave no bounce limit" }],
+                inventory: commonInventory.supp
+            },
+            { 
+                name: "Ken", title: "The Wind Walker", role: "Scout / Jungler", src: "image_0.png", color: "text-yellow-400", stats: { str: 60, agi: 90, int: 50 },
+                abilities: {
+                    q: { name: "Gale Dash", desc: "Dashes through enemies, dealing damage and slowing them. Holds 2 charges." },
+                    w: { name: "Wind Veil", desc: "Enters a state of invisibility. Breaking invisibility with an attack deals bonus critical damage." },
+                    e: { name: "Evasion", desc: "PASSIVE: Grants a 35% chance to dodge incoming physical attacks and spells." },
+                    r: { name: "Cyclone Fury", desc: "ULTIMATE: Spins rapidly, becoming magic immune and dealing damage to all nearby enemies every 0.2 seconds for 5 seconds." }
+                },
+                talents: [{ left: "+20 Attack Speed", right: "+8 Agility" }, { left: "+15% Evasion", right: "+200 Health" }, { left: "Gale Dash applies Break", right: "+50 Damage" }, { left: "Cyclone Fury Pure Damage", right: "Wind Veil 0s Fade Time" }],
+                inventory: ["Phase Boots", "Desolator", "BKB", "Basher", "Butterfly", "Aegis"]
+            },
+            { 
+                name: "Stell", title: "The Silent Arrow", role: "Marksman / Carry", src: "image_1.png", color: "text-purple-400", stats: { str: 45, agi: 95, int: 40 },
+                abilities: {
+                    q: { name: "Piercing Shot", desc: "Fires an arrow that passes through units, dealing less damage with each enemy hit. Range: 1200." },
+                    w: { name: "Vocal Burst", desc: "Releases a sonic wave that knocks back enemies and silences them for 2 seconds." },
+                    e: { name: "Eagle Eye", desc: "PASSIVE: Increases attack range by 200 and grants a 20% chance to deal 250% critical damage." },
+                    r: { name: "Grand Performance", desc: "ULTIMATE: Channels for 1s, then unleashes a barrage of 20 arrows over 3 seconds in a cone. Each arrow deals 80% attack damage." }
+                },
+                talents: [{ left: "+15 Damage", right: "+200 Mana" }, { left: "+250 Health", right: "-4s Vocal Burst CD" }, { left: "+25% Lifesteal", right: "+100 Attack Range" }, { left: "Piercing Shot Pure Damage", right: "+30 Agility" }],
+                inventory: commonInventory.carry
+            }
         ];
 
-        const simulaTeam = [
-            { name: "BB Panda", title: "Gentle Giant", role: "Tank / Initiator", src: "Gemini_Generated_Image_ldaq34ldaq34ldaq.png", color: "text-slate-200", stats: { str: 90, agi: 60, int: 50 } },
-            { name: "Jai", title: "Field Medic", role: "Healer / Support", src: "Gemini_Generated_Image_8izyq08izyq08izy.png", color: "text-teal-400", stats: { str: 60, agi: 40, int: 85 } },
-            { name: "Missy", title: "The Architect", role: "Nuker / Disabler", src: "Gemini_Generated_Image_va4x2va4x2va4x2v.png", color: "text-indigo-400", stats: { str: 40, agi: 50, int: 95 } },
-            { name: "Rus", title: "Jade Sentinel", role: "Tank / Durability", src: "Gemini_Generated_Image_yr6mxuyr6mxuyr6m.png", color: "text-emerald-400", stats: { str: 95, agi: 30, int: 40 } },
-            { name: "Maria", title: "Nature's Voice", role: "Support / Utility", src: "Gemini_Generated_Image_ojrzwiojrzwiojrz.png", color: "text-lime-400", stats: { str: 50, agi: 40, int: 80 } },
-            { name: "Frank", title: "Tidal Guardian", role: "Support / Tank", src: "Gemini_Generated_Image_x7yydpx7yydpx7yy.png", color: "text-cyan-400", stats: { str: 75, agi: 60, int: 50 } },
-            { name: "Denice", title: "Heritage Weaver", role: "Buffer / Magic", src: "Gemini_Generated_Image_fha8zgfha8zgfha8.png", color: "text-yellow-500", stats: { str: 50, agi: 50, int: 90 } },
-            { name: "GinoongRosas", title: "Floral Tempest", role: "Mage / Controller", src: "Gemini_Generated_Image_xyv8mpxyv8mpxyv8.png", color: "text-pink-400", stats: { str: 40, agi: 70, int: 70 } },
-            { name: "Jade", title: "Vibrant Striker", role: "Carry / Evasive", src: "Gemini_Generated_Image_734yo734yo734yo7.png", color: "text-fuchsia-400", stats: { str: 50, agi: 95, int: 40 } },
-            { name: "Charles", title: "Pathfinder", role: "Scout / Utility", src: "Gemini_Generated_Image_p0p8fop0p8fop0p8.png", color: "text-cyan-300", stats: { str: 50, agi: 85, int: 65 } }
+        // --- TEAM SIMULA (ALL DETAILED) ---
+        const fullSimula = [
+            { 
+                name: "BB Panda", title: "Gentle Giant", role: "Tank / Initiator", src: "Gemini_Generated_Image_ldaq34ldaq34ldaq.png", color: "text-cyan-200", 
+                stats: { str: 90, agi: 60, int: 50 },
+                abilities: {
+                    q: { name: "Belly Flop", desc: "Launches into the air and lands on target area, stunning enemies for 2s." },
+                    w: { name: "Bamboo Shield", desc: "Consumes a bamboo stack to gain a 600 HP shield." },
+                    e: { name: "Thick Fur", desc: "PASSIVE: Reduces all incoming damage by 12%." },
+                    r: { name: "Primal Rage", desc: "ULTIMATE: Grows in size, gaining 1000 HP and +100 Damage, but loses 20 movement speed." }
+                },
+                talents: [{left:"+10 Str", right:"+5 Armor"}, {left:"+20 Move Spd", right:"+15% Res"}, {left:"CDR", right:"Dmg"}, {left:"Ult x2", right:"Immunity"}],
+                inventory: commonInventory.tank
+            },
+            {
+                name: "Jai", title: "Field Medic", role: "Healer / Support", src: "Gemini_Generated_Image_8izyq08izyq08izy.png", color: "text-teal-400", 
+                stats: {str:60, agi:40, int:85},
+                abilities: {
+                    q: { name: "Triage Beam", desc: "Channels a healing beam on an ally, restoring 50 HP/sec. If the ally is full HP, it grants mana instead." },
+                    w: { name: "Defibrillate", desc: "Purges debuffs from an ally and gives them a short burst of extreme movement speed (550 ms)." },
+                    e: { name: "Sterile Field", desc: "Creates a zone on the ground. Enemies inside take pure damage; allies inside gain armor." },
+                    r: { name: "Guardian Drone", desc: "ULTIMATE: Deploys a drone that follows the lowest HP ally globally, healing them and blocking one instance of lethal damage." }
+                },
+                talents: [{left:"+200 Health", right:"+75 Cast Range"}, {left:"+3 Mana Regen", right:"-2s Defibrillate CD"}, {left:"Triage Beam Multitarget", right:"+400 Health Save"}, {left:"Drone has 2 charges", right:"Sterile Field Silences"}],
+                inventory: ["Guardian Greaves", "Holy Locket", "Aether Lens", "Force Staff", "Ghost Scepter", "Aeon Disk"]
+            },
+            {
+                name: "Missy", title: "The Architect", role: "Nuker / Disabler", src: "Gemini_Generated_Image_va4x2va4x2va4x2v.png", color: "text-indigo-400", 
+                stats: {str:40, agi:50, int:95},
+                abilities: {
+                    q: { name: "Construct Wall", desc: "Summons a digital wall that blocks movement. Reactivating the skill detonates the wall for AoE damage." },
+                    w: { name: "Blueprint Blast", desc: "Fires a geometric projectile that bounces off walls (including her own) to hit enemies multiple times." },
+                    e: { name: "Structural Integrity", desc: "PASSIVE: Nearby towers and structures gain +10 armor and regenerate health." },
+                    r: { name: "City Scape", desc: "ULTIMATE: Traps enemies in a large maze of holographic buildings for 6 seconds. Enemies inside are slowed and take DOT." }
+                },
+                talents: [{left:"+10% Spell Amp", right:"+150 Mana"}, {left:"+1.5s Wall Duration", right:"+300 Health"}, {left:"Blueprint Blast Stuns", right:"Structure Heal x2"}, {left:"City Scape True Sight", right:"2 Charges of Wall"}],
+                inventory: ["Aether Lens", "Octarine Core", "Eul's Scepter", "Blink Dagger", "Kaya and Sange", "Shiva's Guard"]
+            },
+            {
+                name: "Rus", title: "Jade Sentinel", role: "Tank / Durability", src: "Gemini_Generated_Image_yr6mxuyr6mxuyr6m.png", color: "text-emerald-400", 
+                stats: {str:95, agi:30, int:40},
+                abilities: {
+                    q: { name: "Stone Form", desc: "Rus turns to solid jade, becoming immobile but immune to physical damage for 4 seconds. Heals 5% max HP per sec." },
+                    w: { name: "Jade Smash", desc: "A heavy melee strike that shatters armor, reducing enemy armor by 7 for 5 seconds." },
+                    e: { name: "Reflective Polish", desc: "PASSIVE: Spells cast on Rus have a 20% chance to be reflected back to the caster." },
+                    r: { name: "Terracotta Army", desc: "ULTIMATE: Summons 4 stone soldiers that surround a target. They attack and block movement." }
+                },
+                talents: [{left:"+5 Health Regen", right:"+15 Damage"}, {left:"+20% Magic Res", right:"+300 Mana"}, {left:"Stone Form affects allies", right:"Jade Smash Stuns"}, {left:"+3 Soldiers", right:"Reflect Chance 40%"}],
+                inventory: commonInventory.tank
+            },
+            {
+                name: "Maria", title: "Nature's Voice", role: "Support / Utility", src: "Gemini_Generated_Image_ojrzwiojrzwiojrz.png", color: "text-lime-400", 
+                stats: {str:50, agi:40, int:80},
+                abilities: {
+                    q: { name: "Vine Trap", desc: "Roots an enemy in place for 2.5s. The vines deal damage over time." },
+                    w: { name: "Lullaby", desc: "Sings a song that puts enemies in a radius to sleep. Attacks wake them up but deal bonus damage." },
+                    e: { name: "Photosynthesis", desc: "PASSIVE: Maria and nearby allies gain health regeneration during the daytime." },
+                    r: { name: "Overgrowth", desc: "ULTIMATE: Global cast. Vines erupt from the ground, rooting all enemy heroes on the map for 3 seconds." }
+                },
+                talents: [{left:"+200 Mana", right:"+60 Gold/Min"}, {left:"+1.5s Root Duration", right:"+15% XP Gain"}, {left:"Lullaby works on Magic Immune", right:"Photosynthesis works at Night"}, {left:"Overgrowth deals 400 Dmg", right:"-30s Ult CD"}],
+                inventory: commonInventory.supp
+            },
+            {
+                name: "Frank", title: "Tidal Guardian", role: "Support / Tank", src: "Gemini_Generated_Image_x7yydpx7yydpx7yy.png", color: "text-cyan-400", 
+                stats: {str:75, agi:60, int:50},
+                abilities: {
+                    q: { name: "Hydro Pump", desc: "Blasts water at high pressure, knocking back enemies and dealing damage based on Frank's Strength." },
+                    w: { name: "Tide Shell", desc: "Surrounds an ally in a bubble that purges debuffs and reflects the next spell cast on them." },
+                    e: { name: "Wet Floor", desc: "Creates a slippery zone. Enemies inside slide uncontrollably and cannot stop moving." },
+                    r: { name: "Tsunami", desc: "ULTIMATE: Summons a massive wave that travels across the entire lane, damaging and stunning everything in its path." }
+                },
+                talents: [{left:"+10 Strength", right:"+4 Mana Regen"}, {left:"+300 Tide Shell HP", right:"+15 Move Speed"}, {left:"Wet Floor slows Atk Spd", right:"Hydro Pump Pure Dmg"}, {left:"Tsunami Global Width", right:"Refresher Shard"}],
+                inventory: ["Pipe of Insight", "Force Staff", "Lotus Orb", "Guardian Greaves", "Blink Dagger", "Shiva's Guard"]
+            },
+            {
+                name: "Denice", title: "Heritage Weaver", role: "Buffer / Magic", src: "Gemini_Generated_Image_fha8zgfha8zgfha8.png", color: "text-yellow-500", 
+                stats: {str:50, agi:50, int:90},
+                abilities: {
+                    q: { name: "Scroll Bind", desc: "Wraps an enemy in ancient text, silencing them and preventing them from attacking." },
+                    w: { name: "Ancestral Buff", desc: "Channels the spirits to increase an ally's damage and armor for 10 seconds." },
+                    e: { name: "Storyteller", desc: "PASSIVE: Every time Denice casts a spell, nearby allies gain a stack of 2% Spell Amplification (Max 10 stacks)." },
+                    r: { name: "Time Rewind", desc: "ULTIMATE: Rewinds an ally's status (HP/Mana/Position) to where it was 4 seconds ago." }
+                },
+                talents: [{left:"+150 Cast Range", right:"+200 Health"}, {left:"Scroll Bind Disarms", right:"+15 Int"}, {left:"Time Rewind 6s", right:"Ancestral Buff +50 Dmg"}, {left:"Storyteller Global Aura", right:"2 Ult Charges"}],
+                inventory: commonInventory.mage
+            },
+            {
+                name: "GinoongRosas", title: "Floral Tempest", role: "Mage / Controller", src: "Gemini_Generated_Image_xyv8mpxyv8mpxyv8.png", color: "text-pink-400", 
+                stats: {str:40, agi:70, int:70},
+                abilities: {
+                    q: { name: "Petal Storm", desc: "Summons a whirlwind of razor-sharp petals at a target location, dealing DPS." },
+                    w: { name: "Thorn Bind", desc: "Thorns explode from GinoongRosas, rooting all nearby enemies and causing them to bleed." },
+                    e: { name: "Rose Scent", desc: "PASSIVE: Enemies who attack you have their damage reduced by 15% due to the intoxicating scent." },
+                    r: { name: "Blooming Burst", desc: "ULTIMATE: Plants a giant rose that explodes after 3s, dealing massive True Damage in a large area." }
+                },
+                talents: [{left:"+30 Attack Speed", right:"+10% Spell Lifesteal"}, {left:"+75 Petal DPS", right:"+250 Health"}, {left:"Thorn Bind pierces BKB", right:"Rose Scent 30% Reduct"}, {left:"Blooming Burst Instant", right:"Petal Storm follows hero"}],
+                inventory: ["Veil of Discord", "Kaya", "Bloodstone", "BKB", "Octarine Core", "Travel Boots"]
+            },
+            {
+                name: "Jade", title: "Vibrant Striker", role: "Carry / Evasive", src: "Gemini_Generated_Image_734yo734yo734yo7.png", color: "text-fuchsia-400", 
+                stats: {str:50, agi:95, int:40},
+                abilities: {
+                    q: { name: "Neon Dash", desc: "A quick dash that leaves a trail of light. Enemies crossing the trail are slowed." },
+                    w: { name: "Flashbang", desc: "Blinds enemies in a cone, causing them to miss 100% of attacks for 3 seconds." },
+                    e: { name: "Prism Skin", desc: "PASSIVE: Jade changes color every 5s. Red = +Dmg, Blue = +Armor, Green = +Regen." },
+                    r: { name: "Spectrum Slash", desc: "ULTIMATE: Jade teleports behind a target and strikes 7 times instantly, applying all on-hit effects." }
+                },
+                talents: [{left:"+15 Agility", right:"+15 Strength"}, {left:"-3s Neon Dash CD", right:"+250 Mana"}, {left:"Spectrum Slash +3 hits", right:"Prism Skin all active"}, {left:"Flashbang Pure Dmg", right:"Neon Dash x2 distance"}],
+                inventory: commonInventory.carry
+            },
+            {
+                name: "Charles", title: "Pathfinder", role: "Scout / Utility", src: "Gemini_Generated_Image_p0p8fop0p8fop0p8.png", color: "text-cyan-300", 
+                stats: {str:50, agi:85, int:65},
+                abilities: {
+                    q: { name: "Signal Flare", desc: "Reveals a target area in fog of war and reduces enemy armor in that zone." },
+                    w: { name: "Tactical Sprint", desc: "Increases movement speed by 50% and allows phasing through units for 5 seconds." },
+                    e: { name: "Survivalist", desc: "PASSIVE: Gain health regen when out of combat and increased vision range at night." },
+                    r: { name: "Air Strike", desc: "ULTIMATE: Calls in a bombardment on a target vector. Deals heavy damage after a 1s delay." }
+                },
+                talents: [{left:"+20 Move Spd", right:"+175 Health"}, {left:"+2s Sprint Duration", right:"+10 Armor Reduction"}, {left:"Survivalist Camouflage", right:"Air Strike Stuns"}, {left:"-30s Ult CD", right:"Flare True Sight"}],
+                inventory: ["Desolator", "Shadow Blade", "Sange and Yasha", "Phase Boots", "Hurricane Pike", "Daedalus"]
+            }
         ];
 
-        const wakasTeam = [
-            { name: "Joy", title: "Graphic Burst", role: "Carry / Ranged", src: "Gemini_Generated_Image_grsgsfgrsgsfgrsg.png", color: "text-rose-400", stats: { str: 45, agi: 90, int: 55 } },
-            { name: "Vincent", title: "Bamboo Brawler", role: "Tank / Stealth", src: "Gemini_Generated_Image_cba8odcba8odcba8.png", color: "text-orange-400", stats: { str: 85, agi: 50, int: 45 } },
-            { name: "Rai", title: "Zen Master", role: "Support / Global", src: "Gemini_Generated_Image_pv4f4opv4f4opv4f.png", color: "text-amber-400", stats: { str: 50, agi: 60, int: 80 } },
-            { name: "Kenji", title: "Demon Slayer", role: "Carry / Melee", src: "Gemini_Generated_Image_gsn3rlgsn3rlgsn3.png", color: "text-purple-500", stats: { str: 60, agi: 95, int: 60 } },
-            { name: "Sylv", title: "Forest Phantom", role: "Scout / Evasive", src: "Gemini_Generated_Image_p6hw1ip6hw1ip6hw.png", color: "text-green-500", stats: { str: 40, agi: 85, int: 50 } },
-            { name: "Nhors", title: "Crystal Ward", role: "Support / Utility", src: "Gemini_Generated_Image_ifr51pifr51pifr5.png", color: "text-blue-400", stats: { str: 45, agi: 40, int: 90 } },
-            { name: "Jeff", title: "Spirit Guide", role: "Mage / Summoner", src: "Gemini_Generated_Image_4ovsov4ovsov4ovs.png", color: "text-yellow-200", stats: { str: 55, agi: 40, int: 95 } },
-            { name: "Geno", title: "Heavy Hitter", role: "Tank / Disabler", src: "Gemini_Generated_Image_7lkmvg7lkmvg7lkm.png", color: "text-red-500", stats: { str: 95, agi: 30, int: 35 } },
-            { name: "Berlyn", title: "Shutter Sniper", role: "Sniper / Support", src: "Gemini_Generated_Image_ip2oyiip2oyiip2o.png", color: "text-teal-300", stats: { str: 45, agi: 80, int: 70 } }
+        // --- TEAM WAKAS (ALL DETAILED) ---
+        const fullWakas = [
+            { 
+                name: "Joy", title: "Graphic Burst", role: "Carry / Ranged", src: "Gemini_Generated_Image_grsgsfgrsgsfgrsg.png", color: "text-rose-400", 
+                stats: { str: 45, agi: 90, int: 55 },
+                abilities: {
+                    q: { name: "Pixel Grenade", desc: "Throws a glitched grenade that stuns and deals random damage (100-600)." },
+                    w: { name: "Camouflage", desc: "Blends with the terrain, becoming invisible if near trees." },
+                    e: { name: "Headshot", desc: "PASSIVE: 40% chance to deal bonus damage on hit." },
+                    r: { name: "Render", desc: "ULTIMATE: Deletes the target's armor (sets to 0) for 6 seconds." }
+                },
+                talents: [{left:"+15 Agi", right:"+150 HP"}, {left:"+20 Atk Spd", right:"+10% Speed"}, {left:"True Strike", right:"+300 Range"}, {left:"Ult Global", right:"Crit x3"}],
+                inventory: commonInventory.carry
+            },
+            {
+                name: "Vincent", title: "Bamboo Brawler", role: "Tank / Stealth", src: "Gemini_Generated_Image_cba8odcba8odcba8.png", color: "text-orange-400", 
+                stats: {str:85, agi:50, int:45},
+                abilities: {
+                    q: { name: "Bamboo Stick", desc: "Extends a bamboo pole to strike enemies from a distance, stunning them." },
+                    w: { name: "Tactical Roll", desc: "Rolls in a direction, dodging projectiles and knocking back enemies hit." },
+                    e: { name: "Drunken Haze", desc: "Throws a jar of spirits, causing enemies to miss attacks and move unpredictably." },
+                    r: { name: "Panda Smash", desc: "ULTIMATE: Leaps into the air and crashes down, dealing AOE damage based on his max HP." }
+                },
+                talents: [{left:"+200 Health", right:"+15 Damage"}, {left:"-4s Roll CD", right:"+20% Magic Res"}, {left:"Drunken Haze Disarms", right:"+15 Armor"}, {left:"Panda Smash pierces BKB", right:"+800 HP"}],
+                inventory: ["Vanguard", "Blink Dagger", "Abyssal Blade", "Heart of Tarrasque", "Assault Cuirass", "Boots of Travel"]
+            },
+            {
+                name: "Rai", title: "Zen Master", role: "Support / Global", src: "Gemini_Generated_Image_pv4f4opv4f4opv4f.png", color: "text-amber-400", 
+                stats: {str:50, agi:60, int:80},
+                abilities: {
+                    q: { name: "Palm Strike", desc: "A melee strike that pushes the enemy back and heals Rai for the damage dealt." },
+                    w: { name: "Meditate", desc: "Rai floats in place, becoming invulnerable and creating a healing aura for allies." },
+                    e: { name: "Inner Peace", desc: "PASSIVE: Nearby enemies have their attack speed slowed by 25%." },
+                    r: { name: "Nirvana", desc: "ULTIMATE: Swaps health percentages with a target ally or enemy." }
+                },
+                talents: [{left:"+90 Gold/Min", right:"+15% XP Gain"}, {left:"+2s Meditate", right:"Palm Strike Silences"}, {left:"Inner Peace -50% Atk Spd", right:"+300 Cast Range"}, {left:"Nirvana No Mana Cost", right:"Ult affects 2 targets"}],
+                inventory: commonInventory.supp
+            },
+            {
+                name: "Kenji", title: "Demon Slayer", role: "Carry / Melee", src: "Gemini_Generated_Image_gsn3rlgsn3rlgsn3.png", color: "text-purple-500", 
+                stats: {str:60, agi:95, int:60},
+                abilities: {
+                    q: { name: "Void Slash", desc: "Dashes through a target, dealing damage. If the target dies, cooldown is reset." },
+                    w: { name: "Shadow Step", desc: "Teleports to a shadow (any unit/tree) within 800 range instantly." },
+                    e: { name: "Blade Thirst", desc: "PASSIVE: Every 3rd attack deals True Damage and heals Kenji." },
+                    r: { name: "Oni Transformation", desc: "ULTIMATE: Transforms into a demon, gaining range, damage, and fear aura." }
+                },
+                talents: [{left:"+15 Agility", right:"+10 Strength"}, {left:"+25 Atk Spd", right:"+12% Lifesteal"}, {left:"Void Slash 2 charges", right:"Shadow Step Global"}, {left:"Infinite Transformation", right:"+100% Crit Dmg"}],
+                inventory: ["Battle Fury", "Manta Style", "Skull Basher", "Satanic", "Butterfly", "Swift Blink"]
+            },
+            {
+                name: "Sylv", title: "Forest Phantom", role: "Scout / Evasive", src: "Gemini_Generated_Image_p6hw1ip6hw1ip6hw.png", color: "text-green-500", 
+                stats: {str:40, agi:85, int:50},
+                abilities: {
+                    q: { name: "Spook", desc: "Terrifies an enemy, causing them to run towards their fountain for 2 seconds." },
+                    w: { name: "Phase Shift", desc: "Becomes untargetable for 0.75 seconds. Avoids all incoming projectiles." },
+                    e: { name: "Ectoplasm", desc: "PASSIVE: Attacks slow the enemy and reduce their vision radius." },
+                    r: { name: "Haunt", desc: "ULTIMATE: Creates a spectral illusion of Sylv next to every enemy hero on the map. She can swap places with any illusion." }
+                },
+                talents: [{left:"+15 Damage", right:"+150 HP"}, {left:"+1.5s Spook", right:"Phase Shift 2 charges"}, {left:"Ectoplasm Break", right:"Haunt Illusions +50% Dmg"}, {left:"Perma Invisibility", right:"+30 Agility"}],
+                inventory: ["Diffusal Blade", "Manta Style", "Radiance", "Heart of Tarrasque", "Butterfly", "Boots of Travel"]
+            },
+            {
+                name: "Nhors", title: "Crystal Ward", role: "Support / Utility", src: "Gemini_Generated_Image_ifr51pifr51pifr5.png", color: "text-blue-400", 
+                stats: {str:45, agi:40, int:90},
+                abilities: {
+                    q: { name: "Crystal Nova", desc: "Explodes ice at a location, slowing enemies and reducing their attack damage." },
+                    w: { name: "Ward Place", desc: "Places a permanent invisible ward that grants vision. Max 3." },
+                    e: { name: "Refraction", desc: "PASSIVE: Grants a shield that blocks 3 instances of damage completely every 15 seconds." },
+                    r: { name: "Diamond Prison", desc: "ULTIMATE: Encases an enemy in crystal. They cannot move, attack, or take damage for 5 seconds (Stasis)." }
+                },
+                talents: [{left:"+200 Mana", right:"+75 Cast Range"}, {left:"+2 Max Wards", right:"Refraction +2 instances"}, {left:"Nova Freezes (1s)", right:"+150 Gold/Min"}, {left:"Diamond Prison breaks passive", right:"AoE Refraction"}],
+                inventory: ["Glimmer Cape", "Force Staff", "Aether Lens", "Eul's Scepter", "Octarine Core", "Scythe of Vyse"]
+            },
+            {
+                name: "Jeff", title: "Spirit Guide", role: "Mage / Summoner", src: "Gemini_Generated_Image_4ovsov4ovsov4ovs.png", color: "text-yellow-200", 
+                stats: {str:55, agi:40, int:95},
+                abilities: {
+                    q: { name: "Summon Spirit Bear", desc: "Summons a bear companion that can carry items and attack enemies. If the bear dies, Jeff takes damage." },
+                    w: { name: "Spirit Link", desc: "Links Jeff and the Bear, sharing attack speed and healing each other on attack." },
+                    e: { name: "Ethereal Form", desc: "Turns Jeff or the Bear into a ghost, immune to physical damage but unable to attack." },
+                    r: { name: "Ancestral Call", desc: "ULTIMATE: Jeff and the Bear roar, terrifying enemies and gaining 100% Magic Resistance." }
+                },
+                talents: [{left:"+200 Bear HP", right:"+20 Move Speed"}, {left:"+30 Bear Dmg", right:"-20s Bear CD"}, {left:"Ethereal Form Heals", right:"Spirit Link +20% Lifesteal"}, {left:"Bear Spell Immunity", right:"2 Bears"}],
+                inventory: ["Radiance", "Assault Cuirass", "Skull Basher", "Phase Boots", "Vladmir's Offering", "Aghanim's Scepter"]
+            },
+            {
+                name: "Geno", title: "Heavy Hitter", role: "Tank / Disabler", src: "Gemini_Generated_Image_7lkmvg7lkmvg7lkm.png", color: "text-red-500", 
+                stats: {str:95, agi:30, int:35},
+                abilities: {
+                    q: { name: "Haymaker", desc: "A charged punch. The longer you charge, the more damage and stun duration (Max 3s)." },
+                    w: { name: "Bulk Up", desc: "Increases size and strength by 25% but lowers attack speed." },
+                    e: { name: "Counter Punch", desc: "PASSIVE: 20% chance to immediately counter-attack when hit by a melee attack." },
+                    r: { name: "Knockout", desc: "ULTIMATE: Uppercuts a target, sending them flying off the map for 3 seconds. They take fall damage upon landing." }
+                },
+                talents: [{left:"+15 Str", right:"+4 Mana Regen"}, {left:"+15% Magic Res", right:"Haymaker fast charge"}, {left:"Counter Punch 35%", right:"+300 Health"}, {left:"Knockout Instant Kill <20% HP", right:"Bulk Up Status Resist"}],
+                inventory: ["Armlet of Mordiggian", "Heart of Tarrasque", "Blade Mail", "Heaven's Halberd", "Black King Bar", "Phase Boots"]
+            },
+            {
+                name: "Berlyn", title: "Shutter Sniper", role: "Sniper / Support", src: "Gemini_Generated_Image_ip2oyiip2oyiip2o.png", color: "text-teal-300", 
+                stats: {str:45, agi:80, int:70},
+                abilities: {
+                    q: { name: "Flash Blind", desc: "Uses a camera flash to blind enemies in a cone and purge buffs." },
+                    w: { name: "Zoom In", desc: "Increases attack range by 400 for 10 seconds but reduces movement speed." },
+                    e: { name: "Steady Shot", desc: "PASSIVE: Standing still increases damage output by 10% per second (Max 50%)." },
+                    r: { name: "Final Photo", desc: "ULTIMATE: Locks onto a target. After 1.5s, deals massive magic damage. If it kills, the death timer is increased by 10s." }
+                },
+                talents: [{left:"+150 Mana", right:"+15 Atk Spd"}, {left:"+100 Cast Range", right:"Flash Blind Stuns"}, {left:"+20% Steady Shot Max", right:"Zoom In No Slow"}, {left:"Final Photo Pure Dmg", right:"+200 Final Photo Dmg"}],
+                inventory: ["Dragon Lance", "Desolator", "Silver Edge", "Daedalus", "Monkey King Bar", "Power Treads"]
+            }
         ];
 
-        // --- FUNCTIONS ---
+        // --- CORE FUNCTIONS ---
+
         function switchTab(tabId) {
-            // Hide all potential views
-            const allViews = document.querySelectorAll('[id^="view-"]');
-            allViews.forEach(view => {
-                view.classList.add('hidden');
-                view.style.display = 'none'; // Strong hide
-            });
-
-            // Show selected view
-            const selected = document.getElementById(`view-${tabId}`);
-            if(selected) {
-                selected.classList.remove('hidden');
-                selected.style.display = 'block'; // Strong show
+            document.querySelectorAll('[id^="view-"]').forEach(el => el.classList.add('hidden'));
+            const active = document.getElementById(`view-${tabId}`);
+            if(active) {
+                active.classList.remove('hidden');
                 window.scrollTo(0,0);
             }
-            closeHeroInterface();
-            closeMapZoom();
-        }
-
-        // New function to handle loading chapters
-        function loadChapter(fileName, chapterTitle) {
-            switchTab('history');
-            if(chapterTitle) document.getElementById('history-title').innerText = chapterTitle;
-            
-            // Using iframe to load the external html file into the view
-            const container = document.getElementById('history-content-area');
-            container.innerHTML = `
-                <iframe src="${fileName}" class="w-full h-[800px] border-none rounded-xl" title="${chapterTitle}">
-                    <p>Your browser does not support iframes. <a href="${fileName}" target="_blank">Click here to read.</a></p>
-                </iframe>
-            `;
         }
 
         function createCardHTML(w) {
             return `
-                <div onclick="selectWarrior('${w.name}')" class="group relative p-6 rounded-3xl border border-slate-800 hover:border-slate-600 bg-slate-900 cursor-pointer shadow-lg transform hover:-translate-y-2 transition-all">
-                    <div class="aspect-square rounded-2xl overflow-hidden mb-6 border-2 border-slate-700 relative bg-gradient-to-br from-slate-800 to-slate-900">
+                <div onclick="selectWarrior('${w.name}')" class="group relative p-6 rounded-3xl border border-slate-800 hover:border-amber-500/50 bg-slate-900 cursor-pointer shadow-lg transform hover:-translate-y-2 transition-all duration-300">
+                    <div class="aspect-square rounded-2xl overflow-hidden mb-6 border-2 border-slate-700 relative bg-gradient-to-br from-slate-800 to-slate-900 group-hover:border-amber-500 transition-colors">
                          <div class="absolute inset-0 flex items-center justify-center text-white/20 font-black text-6xl select-none">${w.name.charAt(0)}</div>
-                         <img src="${w.src}" alt="${w.name}" class="absolute inset-0 w-full h-full object-cover z-10" 
-                              onerror="this.style.display='none'">
+                         <img src="${w.src}" alt="${w.name}" class="absolute inset-0 w-full h-full object-cover z-10 transition-transform duration-500 group-hover:scale-110" onerror="this.style.display='none'">
                     </div>
                     <h3 class="text-2xl font-bold ${w.color}">${w.name}</h3>
                     <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">${w.title}</p>
@@ -275,41 +488,86 @@
         }
 
         function selectWarrior(name) {
-            const hero = [...warriors, ...simulaTeam, ...wakasTeam].find(h => h.name === name);
+            const allHeroes = [...warriors, ...fullSimula, ...fullWakas];
+            const hero = allHeroes.find(h => h.name === name);
             if(!hero) return;
 
-            // Simplified Detail Generation
-            let q="Strike", w="Defend", e="Passive", r="Ultimate";
-            if(hero.role.includes("Tank")) { q="Fortify"; w="Taunt"; }
-            
+            // Generate HTML for abilities
+            const abilitiesHTML = ['q','w','e','r'].map(key => {
+                const ab = hero.abilities[key];
+                const colorMap = { q: 'border-red-500', w: 'border-blue-500', e: 'border-green-500', r: 'border-purple-500' };
+                const textMap = { q: 'text-red-400', w: 'text-blue-400', e: 'text-green-400', r: 'text-purple-400' };
+                return `
+                    <div class="ability-card ${colorMap[key]}">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-bold text-white text-lg">${ab.name}</span>
+                            <span class="font-bold ${textMap[key]} uppercase text-xs border border-white/20 px-2 py-0.5 rounded">${key.toUpperCase()}</span>
+                        </div>
+                        <p class="text-slate-400 text-sm leading-relaxed">${ab.desc}</p>
+                    </div>
+                `;
+            }).join('');
+
+            // Generate Inventory Grid
+            const inventoryHTML = hero.inventory.map(item => `
+                <div class="item-slot w-14 h-14 rounded-lg flex items-center justify-center bg-slate-800 relative group/item">
+                    <div class="text-[10px] text-center leading-tight text-slate-300 font-medium px-1">${item}</div>
+                    <div class="item-shine"></div>
+                </div>
+            `).join('');
+
+            // Generate Talents
+            const talentsHTML = hero.talents.slice().reverse().map((t, i) => {
+                const level = 25 - (i * 5);
+                return `
+                    <div class="talent-row">
+                        <div class="talent-choice hover:text-amber-400 cursor-default">${t.left}</div>
+                        <div class="talent-node text-xs">${level}</div>
+                        <div class="talent-choice hover:text-amber-400 cursor-default">${t.right}</div>
+                    </div>
+                `;
+            }).join('');
+
             const content = `
-                <div class="flex flex-col lg:flex-row gap-10 items-center h-full">
-                    <div class="lg:w-1/2 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 animate-zoom-in">
+                    <div class="lg:col-span-4 space-y-6">
                         <div class="aspect-[3/4] rounded-3xl overflow-hidden border-4 border-slate-800 bg-slate-900 relative shadow-2xl">
-                            <div class="absolute inset-0 flex items-center justify-center text-white/10 font-black text-9xl">${hero.name.charAt(0)}</div>
-                            <img src="${hero.src}" class="absolute inset-0 w-full h-full object-cover z-10" onerror="this.style.display='none'">
-                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent p-8 z-20">
-                                <h1 class="text-5xl font-mario text-white mb-2 drop-shadow-lg">${hero.name}</h1>
-                                <p class="text-xl ${hero.color} font-bold uppercase tracking-widest">${hero.title}</p>
+                            <img src="${hero.src}" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
+                            <div class="absolute bottom-0 w-full bg-gradient-to-t from-black via-black/80 to-transparent p-6 pt-20">
+                                <h1 class="text-4xl md:text-5xl font-mario text-white mb-2 drop-shadow-lg">${hero.name}</h1>
+                                <p class="text-lg ${hero.color} font-bold uppercase tracking-widest">${hero.title}</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                            <h3 class="text-amber-500 font-bold uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">Attributes</h3>
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div><div class="text-red-500 font-black text-2xl">${hero.stats.str}</div><div class="text-xs text-slate-500 font-bold">STR</div></div>
+                                <div><div class="text-green-500 font-black text-2xl">${hero.stats.agi}</div><div class="text-xs text-slate-500 font-bold">AGI</div></div>
+                                <div><div class="text-blue-500 font-black text-2xl">${hero.stats.int}</div><div class="text-xs text-slate-500 font-bold">INT</div></div>
+                            </div>
+                        </div>
+                         <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                            <h3 class="text-amber-500 font-bold uppercase tracking-widest mb-4 border-b border-slate-800 pb-2">Recommended Build</h3>
+                            <div class="flex flex-wrap gap-3 justify-center">
+                                ${inventoryHTML}
                             </div>
                         </div>
                     </div>
-                    <div class="lg:w-1/2 w-full space-y-8 text-white">
+                    <div class="lg:col-span-8 space-y-8 custom-scrollbar h-full overflow-y-auto pr-2">
                         <div>
-                            <h3 class="text-2xl font-bold border-b border-slate-700 pb-2 mb-4 text-amber-500 font-mario tracking-wide">Abilities</h3>
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="p-4 bg-slate-900/80 rounded-xl border border-slate-700"><span class="font-bold text-red-400 block text-sm uppercase mb-1">Q - Active</span>${q}</div>
-                                <div class="p-4 bg-slate-900/80 rounded-xl border border-slate-700"><span class="font-bold text-blue-400 block text-sm uppercase mb-1">W - Utility</span>${w}</div>
-                                <div class="p-4 bg-slate-900/80 rounded-xl border border-slate-700"><span class="font-bold text-green-400 block text-sm uppercase mb-1">E - Passive</span>${e}</div>
-                                <div class="p-4 bg-slate-900/80 rounded-xl border border-slate-700"><span class="font-bold text-purple-400 block text-sm uppercase mb-1">R - Ultimate</span>${r}</div>
+                            <h3 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+                                <span class="bg-amber-500 w-2 h-8 rounded-full"></span> Abilities
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                ${abilitiesHTML}
                             </div>
                         </div>
-                        <div>
-                            <h3 class="text-2xl font-bold border-b border-slate-700 pb-2 mb-4 text-amber-500 font-mario tracking-wide">Stats</h3>
-                            <div class="flex gap-8">
-                                <div class="text-center"><span class="text-slate-500 text-xs font-bold uppercase tracking-widest block">STR</span><span class="text-3xl font-bold text-red-500">${hero.stats.str}</span></div>
-                                <div class="text-center"><span class="text-slate-500 text-xs font-bold uppercase tracking-widest block">AGI</span><span class="text-3xl font-bold text-green-500">${hero.stats.agi}</span></div>
-                                <div class="text-center"><span class="text-slate-500 text-xs font-bold uppercase tracking-widest block">INT</span><span class="text-3xl font-bold text-blue-500">${hero.stats.int}</span></div>
+                        <div class="bg-slate-900/50 rounded-2xl p-6 border border-slate-800">
+                            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-2">
+                                <span class="bg-amber-500 w-2 h-8 rounded-full"></span> Talent Tree
+                            </h3>
+                            <div class="max-w-2xl mx-auto">
+                                ${talentsHTML}
                             </div>
                         </div>
                     </div>
@@ -330,26 +588,26 @@
             document.body.style.overflow = '';
         }
 
-        function openMapZoom() {
-            const m = document.getElementById('map-modal');
-            m.classList.remove('hidden');
-            m.style.display = 'flex';
+        function loadChapter(fileName, chapterTitle) {
+            switchTab('history');
+            document.getElementById('history-title').innerText = chapterTitle;
+            const container = document.getElementById('history-content-area');
+            container.innerHTML = `
+                <iframe src="${fileName}" class="w-full h-[800px] border-none rounded-xl bg-slate-900" title="${chapterTitle}">
+                    <p>Loading... <a href="${fileName}" target="_blank">Click to read</a></p>
+                </iframe>
+            `;
         }
-        function closeMapZoom() {
-            const m = document.getElementById('map-modal');
-            m.classList.add('hidden');
-            m.style.display = 'none';
-        }
+        
+        function openMapZoom() { document.getElementById('map-modal').classList.remove('hidden'); document.getElementById('map-modal').style.display = 'flex'; }
+        function closeMapZoom() { document.getElementById('map-modal').classList.add('hidden'); document.getElementById('map-modal').style.display = 'none'; }
 
         function loadComments() {
             const comments = JSON.parse(localStorage.getItem('clashComments')) || [];
             document.getElementById('comments-list').innerHTML = comments.map(c => `
-                <div class="bg-slate-800/50 p-4 rounded-xl border border-slate-700 mb-4">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="font-bold text-amber-500">${c.user}</span>
-                        <span class="text-xs text-slate-500">${c.time}</span>
-                    </div>
-                    <p class="text-slate-300">${c.msg}</p>
+                <div class="bg-slate-800 p-4 rounded-xl border-l-4 border-amber-500">
+                    <div class="flex justify-between mb-2"><span class="font-bold text-white">${c.user}</span><span class="text-xs text-slate-500">${c.time}</span></div>
+                    <p class="text-slate-300 text-sm">${c.msg}</p>
                 </div>
             `).join('');
         }
@@ -365,16 +623,13 @@
             document.getElementById('comment-form').reset();
         }
 
-        // INIT
         window.onload = function() {
             document.getElementById('warriors-grid').innerHTML = warriors.map(w => createCardHTML(w)).join('');
-            document.getElementById('simula-grid').innerHTML = simulaTeam.map(w => createCardHTML(w)).join('');
-            document.getElementById('wakas-grid').innerHTML = wakasTeam.map(w => createCardHTML(w)).join('');
+            document.getElementById('simula-grid').innerHTML = fullSimula.map(w => createCardHTML(w)).join('');
+            document.getElementById('wakas-grid').innerHTML = fullWakas.map(w => createCardHTML(w)).join('');
             loadComments();
-            switchTab('home');
+            if(!window.location.hash) switchTab('home');
         };
     </script>
 </body>
 </html>
-
-
