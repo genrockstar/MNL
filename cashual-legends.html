@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cashual Legends - Sulu-Basi</title>
-    <link rel="icon" href="1767948987926.jpg" type="image/jpeg">
+    <title>Cashual Legends</title>
+    <link rel="icon" href="favicon.png" type="image/jpeg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,13 +36,14 @@
                 <span class="md:hidden font-mario">CASHUAL</span>
             </div>
             
-            <div class="flex gap-1 md:gap-4 text-[10px] md:text-sm font-medium">
-                <button onclick="switchTab('home')" id="btn-home" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white">Home</button>
-                <button onclick="switchTab('warriors')" id="btn-warriors" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white">The Five</button>
-                <button onclick="switchTab('simula')" id="btn-simula" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-cyan-400 hover:text-cyan-200">Simula</button>
-                <button onclick="switchTab('wakas')" id="btn-wakas" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-rose-400 hover:text-rose-200">Wakas</button>
-                <button onclick="switchTab('aftermath')" id="btn-aftermath" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white">Ritual</button>
-                <button onclick="switchTab('history')" id="btn-history" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white">History</button>
+            <div class="flex gap-1 md:gap-4 text-[10px] md:text-sm font-medium overflow-x-auto no-scrollbar">
+                <button onclick="switchTab('home')" id="btn-home" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">Home</button>
+                <button onclick="switchTab('warriors')" id="btn-warriors" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">The Five</button>
+                <button onclick="switchTab('simula')" id="btn-simula" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-cyan-400 hover:text-cyan-200 shrink-0">Simula</button>
+                <button onclick="switchTab('wakas')" id="btn-wakas" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-rose-400 hover:text-rose-200 shrink-0">Wakas</button>
+                <button onclick="switchTab('aftermath')" id="btn-aftermath" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">Ritual</button>
+                <button onclick="switchTab('history')" id="btn-history" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">History</button>
+                <button onclick="switchTab('social')" id="btn-social" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">Community</button>
             </div>
         </div>
     </nav>
@@ -427,6 +428,7 @@
             renderWarriors();
             renderSimula();
             renderWakas(); 
+            loadComments();
             switchTab('home'); 
         }
 
@@ -560,25 +562,40 @@
         function openMapZoom() { document.getElementById('map-modal').classList.remove('hidden'); }
         function closeMapZoom() { document.getElementById('map-modal').classList.add('hidden'); }
 
+        // --- COMMUNITY FEATURES ---
+        function loadComments() {
+            const comments = JSON.parse(localStorage.getItem('clashComments')) || [];
+            const list = document.getElementById('comments-list');
+            list.innerHTML = comments.map(c => `
+                <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50 animate-slide-up">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-slate-300 font-bold text-xs">${c.user.charAt(0).toUpperCase()}</div>
+                            <span class="font-bold text-amber-500">${c.user}</span>
+                        </div>
+                        <span class="text-xs text-slate-500">${c.time}</span>
+                    </div>
+                    <p class="text-slate-300 leading-relaxed">${c.msg}</p>
+                </div>
+            `).join('');
+        }
+
         function addComment(e) {
             e.preventDefault();
             const user = document.getElementById('username').value;
             const msg = document.getElementById('user-message').value;
             
-            const newCommentHTML = `
-                <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50 animate-slide-up">
-                    <div class="flex justify-between items-start mb-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-slate-300 font-bold text-xs">${user.charAt(0).toUpperCase()}</div>
-                            <span class="font-bold text-amber-500">${user}</span>
-                        </div>
-                        <span class="text-xs text-slate-500">Just now</span>
-                    </div>
-                    <p class="text-slate-300 leading-relaxed">${msg}</p>
-                </div>
-            `;
-            const list = document.getElementById('comments-list');
-            list.insertAdjacentHTML('afterbegin', newCommentHTML);
+            const newComment = {
+                user: user,
+                msg: msg,
+                time: new Date().toLocaleDateString()
+            };
+
+            const comments = JSON.parse(localStorage.getItem('clashComments')) || [];
+            comments.unshift(newComment);
+            localStorage.setItem('clashComments', JSON.stringify(comments));
+            
+            loadComments();
             document.getElementById('comment-form').reset();
         }
 
