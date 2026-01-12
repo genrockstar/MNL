@@ -23,7 +23,11 @@
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; border: 2px solid #0f172a; }
         
         .story-text { line-height: 1.8; }
+        .story-text p { margin-bottom: 1.5rem; }
         .chapter-card:hover { transform: translateY(-5px); }
+        
+        /* Dropdown specific styles */
+        .dropdown:hover .dropdown-menu { display: block; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-200 min-h-screen selection:bg-amber-500/30 pb-40 overflow-x-hidden">
@@ -36,11 +40,23 @@
                 <span class="md:hidden font-mario">CASHUAL</span>
             </div>
             
-            <div class="flex gap-1 md:gap-4 text-[10px] md:text-sm font-medium overflow-x-auto no-scrollbar">
+            <div class="flex gap-1 md:gap-4 text-[10px] md:text-sm font-medium items-center">
                 <button onclick="switchTab('home')" id="btn-home" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">Home</button>
-                <button onclick="switchTab('warriors')" id="btn-warriors" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">The Five</button>
-                <button onclick="switchTab('simula')" id="btn-simula" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-cyan-400 hover:text-cyan-200 shrink-0">Simula</button>
-                <button onclick="switchTab('wakas')" id="btn-wakas" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-rose-400 hover:text-rose-200 shrink-0">Wakas</button>
+                
+                <div class="relative dropdown group">
+                    <button id="btn-warriors-main" class="flex items-center gap-1 px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">
+                        Warriors 
+                        <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    </button>
+                    <div class="dropdown-menu absolute hidden pt-4 top-full left-0 z-50 min-w-[160px]">
+                        <div class="bg-slate-900 border border-slate-700 rounded-xl shadow-xl overflow-hidden flex flex-col p-1">
+                            <button onclick="switchTab('warriors')" id="btn-warriors" class="text-left px-4 py-3 hover:bg-slate-800 rounded-lg text-slate-300 hover:text-white transition-colors">The Five</button>
+                            <button onclick="switchTab('simula')" id="btn-simula" class="text-left px-4 py-3 hover:bg-slate-800 rounded-lg text-cyan-400 hover:text-cyan-200 transition-colors">Simula</button>
+                            <button onclick="switchTab('wakas')" id="btn-wakas" class="text-left px-4 py-3 hover:bg-slate-800 rounded-lg text-rose-400 hover:text-rose-200 transition-colors">Wakas</button>
+                        </div>
+                    </div>
+                </div>
+
                 <button onclick="switchTab('aftermath')" id="btn-aftermath" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">Ritual</button>
                 <button onclick="switchTab('history')" id="btn-history" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">History</button>
                 <button onclick="switchTab('social')" id="btn-social" class="group relative px-2 py-1 md:px-4 md:py-2 rounded-full transition-all text-slate-400 hover:text-white shrink-0">Community</button>
@@ -146,25 +162,51 @@
             </div>
         </div>
 
-        <div id="view-history-ch1" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto">
+        <div id="view-history-ch1" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto pb-10">
             <button onclick="switchTab('history')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-4"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Contents</button>
             
-            <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-6 mb-6">
-                    <h2 class="text-4xl font-bold text-amber-500 font-mario">I. Salt & Steel</h2>
-                    <audio controls class="h-8 w-40 md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
+            <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
+                    <div>
+                        <span class="text-amber-500 font-bold text-xs uppercase tracking-widest block mb-2">Chapter I</span>
+                        <h2 class="text-4xl lg:text-5xl font-bold text-white font-mario">Salt & Steel</h2>
+                    </div>
+                    <audio controls class="h-10 w-full md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
                         <source src="The Eternal Five Sacrifice and The Wolf.mp3" type="audio/mpeg">
                     </audio>
                 </div>
-                <div class="story-text text-slate-300 space-y-6">
-                    <p>Long before the arena was built, in the Golden Age of the Sulubasi, there lived five brothers. They were not bound by blood, but by something stronger: salt in their veins and steel in their spines. They were the Eternal Five: <strong class="text-blue-400">Pablo</strong>, <strong class="text-red-400">Josh</strong>, <strong class="text-green-400">Justin</strong>, <strong class="text-yellow-400">Ken</strong>, and <strong class="text-purple-400">Stell</strong>.</p>
-                    <p>Their paradise was shattered not by magic, but by iron. Invaders arrived in iron-clad ships from Germania, bringing only brute force.</p>
-                    <h3 class="text-xl font-bold text-white mt-4">The Wall and The Soul</h3>
-                    <p>First, there was <strong class="text-red-400">Josh</strong>. When the brute force of the iron ships crashed against the shore, Josh did not strike back. He stood without a weapon, holding only a shield. He became <strong>The Wall</strong>. Behind him stood <strong class="text-green-400">Justin</strong>, the Gentle Soul, pouring his own life force into his kin.</p>
-                    <h3 class="text-xl font-bold text-white mt-4">The Arrow and The Ghost</h3>
-                    <p><strong class="text-purple-400">Stell</strong> climbed to the high cliffs. He became <strong>The Arrow</strong>. Below in the jungle, <strong class="text-yellow-400">Ken</strong> became <strong>The Ghost</strong>.</p>
-                    <h3 class="text-xl font-bold text-white mt-4">The Wolf</h3>
-                    <p>The defense was coordinated by <strong class="text-blue-400">Pablo</strong>. But as his brothers fell, something broken within Pablo. The man of intellect died, and a monster was born. He became <strong>The Wolf</strong>.</p>
+                <div class="story-text text-slate-300 text-lg">
+                    <p>Long before the arena was built, in the Golden Age of the Sulubasi, there lived five brothers. They were not bound by blood, but by something stronger: salt in their veins and steel in their spines. They were the Eternal Five: Pablo, Josh, Justin, Ken, and Stell.</p>
+                    <p>Their paradise was shattered not by magic, but by iron. Invaders arrived in iron-clad ships from Germania, bringing only brute force. The brothers knew that to save their home, they could not just be warriors; they had to become aspects of war itself.</p>
+                    
+                    <h3 class="text-2xl font-bold text-white mt-8 mb-4">Chapter II: The Wall and The Soul</h3>
+                    <p>First, there was Josh. When the brute force of the iron ships crashed against the shore, Josh did not strike back. He stood without a weapon, holding only a shield. He became The Wall. He held the pass alone, taking a thousand blows so his brothers would not have to take one. He was the definition of the Tank—ultimate sacrifice through raw endurance.</p>
+                    <p>Behind him stood Justin, the Gentle Soul. Amidst the fire and blood, Justin refused to carry a weapon. Instead, he possessed a lost magic, pouring his own life force into his kin. He knitted his kin back together, healing their broken bodies by unraveling his own spirit. When he fell, the legend says he died with a smile on his face, believing he had saved them all.</p>
+
+                    <h3 class="text-2xl font-bold text-white mt-8 mb-4">Chapter III: The Arrow and The Ghost</h3>
+                    <p>As the invasion shifted from brute force to the disciplined fleets of the French, the brothers changed their tactics.</p>
+                    <p>Stell climbed to the high cliffs. He became The Arrow. He did not aim to sink the hulls; he aimed to create terror. Using lightning-bolt arrows, he would pin a captain’s sleeve to the mast, immobilizing the command and crippling their will before they even made landfall. He ran out of arrows eventually, but he fought on, becoming a weapon himself.</p>
+                    <p>Below in the jungle, Ken became The Ghost. He was the silent hunter, the counter-assassin who ensured the soil itself was protected. While Stell rained terror from above, Ken moved unseen through the trees, guarding the land with silence and blood.</p>
+
+                    <h3 class="text-2xl font-bold text-white mt-8 mb-4">Chapter IV: The Wolf</h3>
+                    <p>The defense was coordinated by Pablo, the strategist. At first, he used his intellect, turning the tides and reefs into weapons against the ships. But as his brothers fell—Josh the Wall, Justin the Soul, Stell the Arrow, and Ken the Ghost—something broke within Pablo.</p>
+                    <p>The man of intellect died, and a monster was born. He became The Wolf.</p>
+                    <p>He did not drive back the final Spanish commander with strategy; he drove him back with pure, terrifying rage. It was madness, born of grief, that finally cleared the seas.</p>
+
+                    <h3 class="text-2xl font-bold text-white mt-8 mb-4">Epilogue: The Arena of Grief</h3>
+                    <p>Victory came, but Pablo hated the silence that followed. He believed the peace was too costly; he believed that peace made them weak and dishonored the memory of his brothers.</p>
+                    <p>To ensure the world never forgot their sacrifice, Pablo carved his rage into the islands. He built the arena on Mahalima, right on his brothers' grave. He set the ancient rules: Lane against Lane, Ancient against Ancient.</p>
+                    <p>This is why the Mahalima Challenge exists. It is not a game. It is a ritual designed by the Wolf to ensure that eternal conflict can truly honor the fallen.</p>
+
+                    <h3 class="text-2xl font-bold text-white mt-8 mb-4">Final Chronicle: The Division of the Islands</h3>
+                    <p>Victory brought no peace. Pablo, consumed by grief and fury, lost his mind. He declared that the archipelago must be divided:</p>
+                    <ul class="list-disc pl-5 space-y-2 mb-4">
+                        <li><strong>Simula Island:</strong> The beginning, a land of hope and renewal.</li>
+                        <li><strong>Wakas Island:</strong> The end, a land of endings and remembrance.</li>
+                        <li><strong>Mahalima Island:</strong> Created in the center of the archipelago, where Simula and Wakas would clash to honor the Eternal Five and their armies.</li>
+                    </ul>
+                    <p>On Mahalima, Pablo decreed a ritual: every year, five champions from Simula and five champions from Wakas would battle under rules like the great game of Dota 2. The victors would rule the archipelago for one year, ensuring balance through eternal struggle.</p>
+                    <p>Thus, the Wolf ensured that grief would never fade, and that conflict itself would become the eternal monument to his fallen brothers.</p>
                 </div>
             </div>
             
@@ -173,23 +215,38 @@
             </div>
         </div>
 
-        <div id="view-history-ch2" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto">
+        <div id="view-history-ch2" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto pb-10">
             <button onclick="switchTab('history')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-4"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Contents</button>
             
-            <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-6 mb-6">
-                    <h2 class="text-4xl font-bold text-cyan-500 font-mario">II. Child of the Wolf</h2>
-                    <audio controls class="h-8 w-40 md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
+            <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
+                    <div>
+                        <span class="text-cyan-500 font-bold text-xs uppercase tracking-widest block mb-2">Chapter II</span>
+                        <h2 class="text-4xl lg:text-5xl font-bold text-white font-mario">Child of the Wolf</h2>
+                    </div>
+                    <audio controls class="h-10 w-full md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
                         <source src="Wolf_Warrior_Becomes_Quiet_Guardian_Father.m4a" type="audio/mpeg">
                     </audio>
                 </div>
-                <div class="story-text text-slate-300 space-y-6">
-                    <p>When the wars were finished and the seas grew quiet, <strong class="text-blue-400">Pablo</strong> returned to the <strong>Mahalima Sanctuary</strong>. It was here, among the stones and salt air, that he found a child left upon his doorstep.</p>
-                    <blockquote class="border-l-4 border-slate-600 pl-4 py-2 italic text-slate-400 bg-black/20 rounded-r">“I will get him back in the near future.”</blockquote>
-                    <p>Pablo searched the sanctuary, but no clue revealed itself. The Wolf, once consumed by rage, now faced a different battle: the duty of a father.</p>
-                    <div class="bg-slate-950 p-6 rounded-xl border border-cyan-500/30">
-                        <p class="text-lg text-slate-200 text-center">The child who had been left at the sanctuary’s door... His name was <strong class="text-cyan-400 text-2xl font-mario uppercase tracking-widest ml-2">KARLE</strong>.</p>
-                    </div>
+                <div class="story-text text-slate-300 text-lg">
+                    <h3 class="text-2xl font-bold text-cyan-400 mb-4">The Sanctuary</h3>
+                    <p>When the wars were finished and the seas grew quiet, Pablo returned to the Mahalima Sanctuary, the sacred home where the Eternal Five once gathered. It was here, among the stones and salt air, that he found a child left upon his doorstep.</p>
+                    <p>No name, no family—only a letter: <em class="text-white">“I will get him back in the near future.”</em></p>
+                    <p>Pablo searched the sanctuary, but no clue revealed itself. The Wolf, once consumed by rage, now faced a different battle: the duty of a father. He took the child in, gave him food, gave him shelter, and raised him as his own.</p>
+
+                    <h3 class="text-2xl font-bold text-cyan-400 mt-8 mb-4">The Bond</h3>
+                    <p>Years passed, and the boy grew under Pablo’s care. The Wolf, who had once carved arenas from grief, now carved a life of quiet guardianship. He gave the boy warmth, guidance, and the strength of discipline.</p>
+                    <p>On the child’s seventh year, Pablo bestowed upon him a gift: a bracelet from the Cave of Moonlight, where the Eternal Five had once sworn their brotherhood beneath silver waters. The boy wore it, unaware of the blood and sacrifice that had forged its meaning.</p>
+                    <p>Pablo never spoke of his past, nor of the ritual battles between Simula and Wakas. Yet he began to teach the boy—first the art of fighting, then the art of thinking. He told him only one truth: “One day, I will not be here. You must protect yourself.”</p>
+
+                    <h3 class="text-2xl font-bold text-cyan-400 mt-8 mb-4">The Legacy</h3>
+                    <p>From seven to twelve, the boy learned blade and mind, endurance and wisdom. He was shaped by Pablo’s grief, but also by his love. Though the child did not yet know the full story of the Eternal Five, nor the ritual battles of the archipelago, destiny was already being written upon him.</p>
+                    <p>The people saw only a father and son, bound not by blood but by choice. Yet in the silence of the sanctuary, Pablo knew the boy carried the future of conflict and remembrance.</p>
+
+                    <h3 class="text-2xl font-bold text-cyan-400 mt-8 mb-4">The Revelation</h3>
+                    <p>And so the tale of the Wolf did not end with rage—it continued with legacy.</p>
+                    <p>The child who had been left at the sanctuary’s door, the boy raised in shadow and moonlight, the heir to Pablo’s wisdom and sorrow…</p>
+                    <p class="text-2xl text-white font-bold">His name was Karle.</p>
                 </div>
             </div>
 
@@ -198,21 +255,42 @@
             </div>
         </div>
 
-        <div id="view-history-ch3" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto">
+        <div id="view-history-ch3" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto pb-10">
             <button onclick="switchTab('history')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-4"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Contents</button>
             
-            <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-6 mb-6">
-                    <h2 class="text-4xl font-bold text-teal-500 font-mario">III. School of Simula</h2>
-                    <audio controls class="h-8 w-40 md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
+            <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
+                    <div>
+                        <span class="text-teal-500 font-bold text-xs uppercase tracking-widest block mb-2">Chapter III</span>
+                        <h2 class="text-4xl lg:text-5xl font-bold text-white font-mario">School of Simula</h2>
+                    </div>
+                    <audio controls class="h-10 w-full md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
                         <source src="The_Wolf’s_Secret_Training_For_Karle.m4a" type="audio/x-m4a">
                     </audio>
                 </div>
-                <div class="story-text text-slate-300 space-y-6">
-                    <p>When Karle reached twelve years of age, <strong class="text-blue-400">Pablo</strong> spoke to him with gravity.</p>
-                    <p class="italic text-slate-400 pl-4 border-l-2 border-teal-500">"You must go to my brother Josue on Simula Island. You must connect with the people, for strength is not only in arms but in understanding."</p>
-                    <p>Time passed. From twelve to sixteen, Karle lived among the Simulayans. He grew close to Josue’s family. He made two friends, <strong class="text-teal-300">Rus</strong> and <strong class="text-teal-300">Jai</strong>, who became his companions in study and play. Yet Karle kept his secret.</p>
-                    <p>On Karle’s sixteenth year, Pablo’s voice grew solemn: "It is time. The battle of the Mahalima Challenge approaches."</p>
+                <div class="story-text text-slate-300 text-lg">
+                    <p>When Karle reached twelve years of age, Pablo spoke to him with gravity.</p>
+                    <p>"I have another obligation to attend," the Wolf said. "You must go to my brother Josue, who owns land on Simula Island. There, you will attend the school of the Simulayans, meet their children, and learn their ways. You must connect with the people, for strength is not only in arms but in understanding."</p>
+                    <p>Karle frowned. "Why? I don’t need to be in school. I am already ready for anything. I am brawns with brains, you know."</p>
+                    <p>Pablo laughed, his white hair flowing like a banner of age and endurance. "You are still a child. There are many things to learn in this life and in this world."</p>
+                    <p>Karle sighed, but obeyed.</p>
+
+                    <h3 class="text-2xl font-bold text-teal-400 mt-8 mb-4">Four Years in Simula</h3>
+                    <p>Time passed. From twelve to sixteen, Karle lived among the Simulayans. He grew close to Josue’s family, playing with his cousins, sharing meals, and walking to school with them. To the people, he was just an ordinary boy—average, quiet, wearing glasses, blending into the rhythm of village life.</p>
+                    <p>He made two friends, Rus and Jai, who became his companions in study and play. Yet Karle kept his secret. When asked about his father, he only said, “He is very busy, so my uncle takes care of me.” He wanted a low-key life, far from the shadow of legends.</p>
+                    <p>Every Christmas, he sent gifts to Pablo by delivery, a quiet thread of connection between the sanctuary and the island.</p>
+
+                    <h3 class="text-2xl font-bold text-teal-400 mt-8 mb-4">The Hidden Truth</h3>
+                    <p>Karle knew of the Eternal Five, for their story was carved in stone. But the carvings showed faces of heroes, not the aged man with white hair and a body still carved like stone who trained him. He did not connect the myth to Pablo.</p>
+                    <p>The people of Simula spoke of Mahalima Island as a place of mystery, ruled by a powerful unknown figure. None knew it was Pablo. None knew of the Mahalima Sanctuary, save for Pablo and Karle. Pablo told him:</p>
+                    <p>"This is a secret place. Only you and I know it. Guard it well."</p>
+                    <p>Karle understood its weight and never spoke of it.</p>
+
+                    <h3 class="text-2xl font-bold text-teal-400 mt-8 mb-4">The Challenge Revealed</h3>
+                    <p>On Karle’s sixteenth year, Pablo’s voice grew solemn.</p>
+                    <p>"It is time. You must be ready. The battle of the Mahalima Challenge approaches. Each year, five champions rise from Simula and five from Wakas. They fight upon Mahalima Island, and the victors rule the archipelago for one year. Who will step forward this time? Who will form the five-man team?"</p>
+                    <p>Karle’s eyes widened. "What is that? The Mahalima Challenge… in Mahalima Island?"</p>
+                    <p>And so, the boy who had lived quietly among the Simulayans, the child raised in secrecy, now stood at the threshold of destiny. The world of ritual conflict, hidden legacy, and eternal remembrance was opening before him.</p>
                 </div>
             </div>
 
@@ -221,30 +299,64 @@
             </div>
         </div>
 
-        <div id="view-history-ch4" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto">
+        <div id="view-history-ch4" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto pb-10">
             <button onclick="switchTab('history')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-4"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Contents</button>
             
-            <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-6 mb-6">
-                    <h2 class="text-4xl font-bold text-indigo-500 font-mario">IV. The Trial of Youth</h2>
-                    <audio controls class="h-8 w-40 md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
+            <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
+                    <div>
+                        <span class="text-indigo-500 font-bold text-xs uppercase tracking-widest block mb-2">Chapter IV</span>
+                        <h2 class="text-4xl lg:text-5xl font-bold text-white font-mario">The Trial of Youth</h2>
+                    </div>
+                    <audio controls class="h-10 w-full md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
                         <source src="The_Mahalima_Challenge_Rules_and_The_Wolf.m4a" type="audio/x-m4a">
                     </audio>
                 </div>
-                <div class="story-text text-slate-300 space-y-6">
-                    <p>At sixteen, Karle’s quiet life in Simula shifted. His teacher, <strong>Ms. Ramos</strong>, a former battlefield medic, guided the youth. "To teach is to heal," she often said.</p>
-                    <div class="bg-indigo-900/20 p-4 rounded-lg border border-indigo-500/30 my-4">
-                        <h4 class="font-bold text-indigo-300 uppercase mb-2">The Five Villages</h4>
-                        <ul class="list-disc list-inside text-sm text-slate-400 space-y-1">
-                            <li>Aplaya Cove (The Gateway)</li>
-                            <li>Terrasol (The Breadbasket)</li>
-                            <li>Ironwood Grove (The Makers)</li>
-                            <li>The Apex Sanctum (The Keepers)</li>
-                            <li>Mire’s Edge (The Survivors)</li>
-                        </ul>
-                    </div>
-                    <p>As the crowd settled in the great stone coliseum, a shadow moved across the top. The figure stepped into the light. <strong>The Wolf</strong> stood in the center. Half-human, half-beast, his face hidden behind a mask. His attire was solemn: a Barong Tagalog.</p>
-                    <p class="text-slate-400 italic">Karle’s heart pounded. "Why does this figure feel familiar?"</p>
+                <div class="story-text text-slate-300 text-lg">
+                    <h3 class="text-2xl font-bold text-indigo-400 mb-4">The Teacher’s Call</h3>
+                    <p>At sixteen, Karle’s quiet life in Simula shifted. He sat in class, half-listening, half-drifting into memory. In his mind, he heard Pablo’s voice: "You must prepare. The time has come. At sixteen, you are no longer a child. You must learn not by hearsay, but by trial. For the Mahalima Challenge waits, and the archipelago needs its champions."</p>
+                    <p>Karle blinked, startled. He thought it was Pablo speaking to him, guiding him once more. But when he looked up, he realized the words were coming from Ms. Ramos, his teacher. He had been daydreaming, and Pablo’s lessons had bled into reality.</p>
+
+                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">Ms. Ramos</h3>
+                    <p>Ms. Ramos was no ordinary teacher. At fifty years old, she carried the quiet dignity of a woman who had lived through war and healing. In another country, she had been a renowned medic, saving countless lives on battlefields scarred by fire. But here, in Simula, she chose a different path.</p>
+                    <p>"To teach is to heal," she often said. For her, guiding the youth of Simula was the best way to serve the archipelago. She wanted to give them strength, wisdom, and unity—so that when the time came, they could save their people.</p>
+                    <p>Though single and without children of her own, she poured her heart into her students. To Karle, Rus, and Jai, she was more than a teacher—she was a guardian of their future.</p>
+
+                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">The Five Villages of Simula</h3>
+                    <p>The archipelago was divided into five villages, each with its own soul and strength:</p>
+                    <ul class="list-disc pl-5 space-y-2 mb-4">
+                        <li><strong>Aplaya Cove (The Gateway):</strong> Bustling harbor of trade, diplomacy, and shipbuilding.</li>
+                        <li><strong>Terrasol (The Breadbasket):</strong> Fertile plains of agriculture and livestock, feeding the island.</li>
+                        <li><strong>Ironwood Grove (The Makers):</strong> Dense rainforest of artisans, hunters, and medicine.</li>
+                        <li><strong>The Apex Sanctum (The Keepers):</strong> Ascetic scholars and spiritual leaders on the volcano slopes.</li>
+                        <li><strong>Mire’s Edge (The Survivors):</strong> Foggy swamps of poisons, shadows, and resilience.</li>
+                    </ul>
+                    <p>Each village would send contenders to the coliseum, where one-on-one duels would determine who earned points. Victory came when an opponent was struck down or forced to yield. The five highest scorers would form the team to represent Simula in the Mahalima Challenge.</p>
+
+                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">The Contenders</h3>
+                    <p>From across the villages, 25 young warriors gathered—five from each village. Among them were Karle, Rus, and Jai:</p>
+                    <ul class="list-disc pl-5 space-y-2 mb-4">
+                        <li><strong>Karle of Ironwood Grove:</strong> the agile tactician with strange gadgets and clever improvisation.</li>
+                        <li><strong>Rus of Mire’s Edge:</strong> the immovable shield, rooted in strength and resilience.</li>
+                        <li><strong>Jai of Terrasol:</strong> the healer, calm and radiant, carrying the spirit of endurance.</li>
+                    </ul>
+                    <p>They stood among their peers, each preparing to prove themselves worthy of the five-man team.</p>
+
+                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">The Coliseum</h3>
+                    <p>The tournaments would be held in the great coliseum of Simula, a stone arena carved into the heart of the island. The roar of villagers filled the air as contenders gathered, their weapons and skills gleaming under the sun. The fights had not yet begun, but the tension was palpable.</p>
+
+                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">The Shadow Above</h3>
+                    <p>As the crowd settled, a shadow moved across the top of the coliseum, climbing toward the high platform reserved for the leaders of Simula.</p>
+                    <p>The figure stepped into the light.</p>
+                    <p><strong>The Wolf stood in the center.</strong></p>
+                    <p>Half-human, half-beast, his face hidden behind a mask. His attire was solemn: a barong tagalog, black pants, and polished black shoes. The predator cloaked in tradition.</p>
+                    <p>The people gasped in awe. To them, he was not Pablo. He was only The Wolf, the mysterious guardian of the ritual, the architect of eternal conflict. His name was forgotten, buried beneath legend.</p>
+
+                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">Karle’s Question</h3>
+                    <p>Karle’s heart pounded. He looked up at the figure, his hand tightening around the bracelet of moonlight. The crowd saw only a myth. But Karle felt something more. Something in the Wolf’s stance, in the way his masked eyes lingered, struck him deeply.</p>
+                    <p>He tilted his head, confusion clouding his thoughts. <em>Why does this figure feel familiar? Why does he stir something inside me?</em></p>
+                    <p>Karle did not know the Wolf was Pablo. Not yet. To him, the figure was only a legend, a shadow of power. But the feeling pressed into him, heavy and unshakable, as if destiny itself was whispering a secret he could not yet hear.</p>
+                    <p>And so, beneath the gaze of the Wolf, the 25 contenders stood ready. The battles had not yet begun, but destiny was already unfolding. The people cheered for the Wolf. Karle stared in silence, his mind caught between awe and unease. The coliseum was about to ignite.</p>
                 </div>
             </div>
 
@@ -253,30 +365,74 @@
             </div>
         </div>
 
-        <div id="view-history-ch5" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto">
+        <div id="view-history-ch5" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto pb-10">
             <button onclick="switchTab('history')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-4"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Contents</button>
             
-            <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl relative overflow-hidden">
-                <div class="flex items-center justify-between border-b border-slate-800 pb-6 mb-6">
-                    <h2 class="text-4xl font-bold text-rose-500 font-mario">V. The Coliseum Battles</h2>
-                    <audio controls class="h-8 w-40 md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
+            <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
+                    <div>
+                        <span class="text-rose-500 font-bold text-xs uppercase tracking-widest block mb-2">Chapter V</span>
+                        <h2 class="text-4xl lg:text-5xl font-bold text-white font-mario">The Coliseum Battles</h2>
+                    </div>
+                    <audio controls class="h-10 w-full md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
                         <source src="Wolf_Revelation_and_Coliseum_Strategy_Breakdown.m4a" type="audio/x-m4a">
                     </audio>
                 </div>
-                <div class="story-text text-slate-300 space-y-8">
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><strong class="text-cyan-400">Karle</strong> vs Ernel: <span class="text-slate-400 text-sm">Tech gadgetry overcomes ancient magic.</span></div>
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800"><strong class="text-amber-400">Jai</strong> vs Missy: <span class="text-slate-400 text-sm">Patience and reflection defeat organized chaos.</span></div>
-                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 md:col-span-2"><strong class="text-emerald-400">Rus</strong> vs Denice: <span class="text-slate-400 text-sm">Jade defense withstands the Heritage Fan.</span></div>
-                    </div>
-                    
-                    <div class="border-t border-slate-800 pt-6">
-                        <h3 class="text-2xl font-bold text-white mb-4">The Revelation</h3>
-                        <p>Karle sat alone in the preparation chamber. Behind him, a voice broke the silence. "Hey."</p>
-                        <p>The Wolf stood there, tall and imposing, mask in hand. With deliberate slowness, he lifted it away. The face beneath was one Karle knew.</p>
-                        <p class="text-2xl font-bold text-center py-4 text-white">"Pablo..."</p>
-                        <p>Fueled by the shocking truth of Pablo’s identity, Karle fought the semi-final against Karlos with renewed clarity. Brain beat brawn. Winner: Karle.</p>
-                    </div>
+                <div class="story-text text-slate-300 text-lg">
+                    <h3 class="text-2xl font-bold text-rose-400 mb-4">Karle vs. Ernel</h3>
+                    <p>The moon cast long shadows across the ancient, overgrown ruins that served as their arena. The air crackled with anticipation. On one side stood Ernel, the mystic mage, his hands already aglow with arcane energy, a confident smile on his face. Opposite him was Karle, adjusting his glasses and checking the straps of his utility bag.</p>
+                    <p>"Your gadgets are no match for the ancient arts, Karle," Ernel declared, slamming his staff onto the ground. A complex blue runic circle flared to life beneath his feet – the Mystic Shadow Warp.</p>
+                    <p>Karle smirked. "We’ll see about that."</p>
+                    <p>The duel unfolded in a storm of magic and movement—Ernel’s Spirit Bloom shield and Solar Blossom bolts against Karle’s Urban Dash, Parkour Mastery, and clever use of his Utility Bag. The decisive moment came when Karle hurled his Smartphone Strike, blasting Ernel into defeat.</p>
+                    <p>Karle rushed to check on him, and Ernel, scratched but smiling, admitted: "You’re good."</p>
+
+                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">Jai vs. Missy</h3>
+                    <p>The battle began instantly. Missy blurred forward with Deadline Rush, shouting, "Time is money, Jai!" She unleashed Master Plan and Organized Chaos, trying to overwhelm him.</p>
+                    <p>But Jai remained calm. His Vitality Ward countered the storm, and when Missy hurled her Document Blast, Jai’s Lotus Orb reflected it back.</p>
+                    <p>THWACK! Missy was struck by her own attack. Jai followed with Guardian Angel, a wave of golden light that healed him and knocked her down.</p>
+                    <p>Missy, defeated, thanked him: "I am here if you need anything." Jai simply gave an ok hand gesture, his health bar full.</p>
+
+                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">Rus vs. Denice</h3>
+                    <p>Denice danced across the arena, unleashing Wika’s Echo and her Heritage Fan to silence and blind Rus.</p>
+                    <p>Rus shook it off. His Jade Carapace reflected her damage, and his Verdant Slam slowed her retreat.</p>
+                    <p>"Nowhere left to run!" Rus roared, unleashing Emerald Overgrowth. Roots and vines erupted, binding Denice completely. She raised her hand in defeat: "I can’t move! I give up!"</p>
+                    <p>Rus helped her free herself from the vines, showing strength and compassion.</p>
+
+                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">Toward the Finals</h3>
+                    <p>The battles had thinned the contenders to ten. The semi-finals loomed, and the coliseum trembled with anticipation.</p>
+                    <p>Karle sat alone in the preparation chamber, packing his things carefully. He tightened the straps of his utility bag, adjusted his glasses, and took a long drink of water. His hands shook slightly, though he tried to hide it even from himself. This was it—the last match before Mahalima Island.</p>
+                    <p>Behind him, a voice broke the silence.</p>
+                    <p>"Hey."</p>
+                    <p>Karle froze. Slowly, he turned.</p>
+                    <p>The Wolf stood there, tall and imposing, mask in hand. With deliberate slowness, he lifted it away.</p>
+                    <p>The crowd outside roared, but in that small space, time seemed to stop.</p>
+                    <p>The face beneath was one Karle knew.</p>
+                    <p>"Pablo…" he whispered, his voice cracking.</p>
+                    <p>A storm of emotions surged through him—joy, shock, anger, longing. He wanted to cry, but no tears came. He didn’t even know what to feel. His chest tightened, his breath caught, and his mind spun.</p>
+                    <p>He carried that confusion, that raw surge of feeling, with him as he stepped into the center of the arena. The cheers of the crowd blurred into a distant hum. All he could think of was the face he had just seen—the father he thought lost, revealed as the Wolf.</p>
+
+                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">Karle vs. Karlos</h3>
+                    <p>The arena for the semi-finals hummed with tension. On one side, the crowd roared for the Gymnastic Dynamo, Karlos, who stretched his limbs, his Gold Medalist aura shimmering. On the other stood Karle, adjusting his glasses, his mind still reeling from the revelation. His father was the Wolf. His father was an Eternal.</p>
+                    <p>"Begin!"</p>
+                    <p>Karlos exploded from his starting position. His passive, Perfect Form, allowed him to accelerate instantly, stacking movement speed with every step. He launched a Tumble Assault, spinning like a buzzsaw towards Karle.</p>
+                    <p>But Karle didn’t panic. He analyzed the trajectory. Just as Karlos was about to connect, Karle triggered Urban Dash, phasing through the attack and sliding behind a crumbling pillar.</p>
+                    <p>"Running won’t save you!" Karlos shouted. He leaped high into the air, activating Gravity Defy. For several seconds, he became untargetable, a golden comet hovering above the battlefield, immune to all crowd control.</p>
+                    <p>Karle’s mind raced. He’s immune while airborne. But he has to land. And when he lands, he’ll try to burst me down.</p>
+                    <p>Fueled by the shocking truth of Pablo’s identity, Karle fought with renewed clarity. He used Manta Style illusions, baited Karlos’s Championship Routine, and struck back with Diffusal Blade and Utility Bag silence. Finally, his Smartphone Strike landed true, stunning the gymnast and ending the match.</p>
+                    <p>Brain beat brawn.</p>
+                    <p>Winner: Karle.</p>
+
+                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">The Circle of Friends</h3>
+                    <p>As the ovation continued, Rus and Jai rushed forward, their voices rising above the crowd: “Karle! Karle!” They clapped him on the back, proud and exhilarated.</p>
+                    <p>Behind them, Missy, Denice, and Ernel joined in, smiling and cheering—not for themselves, but for him. Their respect was clear: Karle had earned this moment.</p>
+                    <p>"You fought brilliantly," Ernel said, his earlier arrogance gone.<br>
+                    "You stood your ground," Missy added, nodding with admiration.<br>
+                    Denice grinned. "That was genius, Karle. You outsmarted him completely."</p>
+                    <p>The six of them stood together, but the celebration belonged to Karle alone. The arena’s chant carried his name, echoing into the night.</p>
+
+                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">The Last Scene</h3>
+                    <p>Karle lifted his gaze once more. On the platform above, Pablo—the Wolf—watched him. No words were spoken. Only a smile, and the weight of truth.</p>
+                    <p>The chapter closed not with dialogue, but with silence—an unspoken bond between father and son, waiting to be revealed.</p>
                 </div>
             </div>
 
@@ -459,6 +615,16 @@
             // Hide warrior detail panel when switching tabs
             const detail = document.getElementById('warrior-detail');
             if(detail) detail.classList.add('hidden');
+
+            // Handle the dropdown button activation visually
+            const btnWarriorsMain = document.getElementById('btn-warriors-main');
+            if (['warriors', 'simula', 'wakas'].includes(tabId)) {
+                btnWarriorsMain.classList.remove('text-slate-400');
+                btnWarriorsMain.classList.add('text-white');
+            } else {
+                btnWarriorsMain.classList.remove('text-white');
+                btnWarriorsMain.classList.add('text-slate-400');
+            }
 
             // If the tabId is a history chapter, we also need to visually activate the 'history' button
             let activeBtnId = tabId;
