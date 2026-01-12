@@ -93,10 +93,12 @@
         <div id="view-home" class="space-y-16 animate-fade-in">
             <div class="text-center space-y-6 py-12">
                 <h1 class="font-mario text-6xl md:text-9xl text-white tracking-widest drop-shadow-lg">CASHUAL LEGENDS</h1>
+                <p class="text-2xl text-amber-500 font-bold uppercase tracking-widest">Sulu-Basi Server</p>
             </div>
             <div class="rounded-3xl overflow-hidden border-4 border-slate-800 shadow-2xl relative group max-w-6xl mx-auto">
-                <div class="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 relative flex items-center justify-center">
-                    <img src="clhype.jpg" class="absolute inset-0 w-full h-full object-cover opacity-80" onerror="this.style.opacity='0'">
+                <div class="aspect-[21/9] bg-gradient-to-br from-slate-800 to-slate-900 relative flex items-center justify-center">
+                    <img src="cltop.jpg" class="absolute inset-0 w-full h-full object-cover opacity-80" onerror="this.style.opacity='0'">
+                    <div class="text-slate-700 font-black text-6xl z-0 absolute">CL</div>
                 </div>
                 <div class="absolute bottom-0 w-full p-8 md:p-12 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent flex justify-center gap-6">
                     <button onclick="switchTab('simula')" class="px-8 py-4 bg-cyan-700 hover:bg-cyan-600 text-white font-bold rounded-full font-mario text-xl shadow-lg border-2 border-cyan-500/30">SIMULA</button>
@@ -134,7 +136,7 @@
         <div id="view-aftermath" class="hidden">
             <h2 class="text-5xl font-bold text-center text-white font-mario mb-8">Battle Map</h2>
             <div class="max-w-5xl mx-auto border-2 border-slate-700 rounded-3xl overflow-hidden cursor-zoom-in" onclick="openMapZoom()">
-                <img src="map.png" class="w-full">
+                <img src="https://placehold.co/1200x600/1e293b/cbd5e1?text=Click+to+View+Map" class="w-full">
             </div>
             <div onclick="selectWarrior('The Leviathan')" class="cursor-pointer max-w-5xl mx-auto mt-12 bg-slate-900 rounded-3xl border border-orange-900/50 overflow-hidden flex flex-col md:flex-row hover:border-orange-500 transition-colors group">
                 <div class="md:w-1/2 relative min-h-[300px]">
@@ -168,7 +170,7 @@
     </div>
 
     <div id="map-modal" class="fixed inset-0 bg-black/95 z-[100] hidden flex-col items-center justify-center p-4 cursor-zoom-out" onclick="closeMapZoom()">
-        <img src="map.png" class="max-w-full max-h-full object-contain shadow-2xl shadow-amber-500/20">
+         <img src="map.png" class="max-w-full max-h-full object-contain shadow-2xl shadow-amber-500/20">
     </div>
 
     <script>
@@ -218,69 +220,75 @@
         // --- TEAM SIMULA ---
         const fullSimula = [
             { 
-                name: "BB Panda", title: "Gentle Giant", role: "Tank / Initiator", src: "Gemini_Generated_Image_ldaq34ldaq34ldaq.png", color: "text-cyan-200", 
-                stats: { str: 90, agi: 60, int: 50 },
+                name: "BB Panda", title: "Gentle Giant", role: "Strength / Initiator", src: "Gemini_Generated_Image_ldaq34ldaq34ldaq.png", color: "text-cyan-200", 
+                stats: { str: "24 +3.0", agi: "18 +2.5", int: "20 +2.2" },
                 videoSrc: "BB_Panda_Showcases_Fantasy_Skills.mp4",
-                abilities: { q: { name: "Belly Flop", desc: "Launches into the air and lands on target area, stunning enemies for 2s." }, w: { name: "Bamboo Shield", desc: "Consumes a bamboo stack to gain a 600 HP shield." }, e: { name: "Thick Fur", desc: "PASSIVE: Reduces all incoming damage by 12%." }, r: { name: "Primal Rage", desc: "ULTIMATE: Grows in size, gaining 1000 HP and +100 Damage." } },
-                talents: [{left:"+10 Str", right:"+5 Armor"}, {left:"+20 Move Spd", right:"+15% Res"}, {left:"CDR", right:"Dmg"}, {left:"Ult x2", right:"Immunity"}],
-                inventory: commonInventory.tank
+                abilities: { q: { name: "Bamboo Strike", desc: "Melee stun and damage in a line." }, w: { name: "Rolling Thunder", desc: "Dashes forward, damaging enemies." }, e: { name: "Gentle Giant", desc: "PASSIVE: Bonus armor and HP regen." }, r: { name: "Panda Pandemonium", desc: "ULTIMATE: Channels a large AOE nuke and slow." } },
+                talents: [{left:"+10 Armor", right:"+15% Magic Res"}, {left:"-3s Bamboo Strike CD", right:"+20 Move Speed"}, {left:"+25% Cleave", right:"+400 Health"}, {left:"+50% Pandemonium Dmg", right:"Spell Immunity during Ult"}],
+                inventory: ["Heart of Tarrasque", "Assault Cuirass", "Butterfly", "Eye of Skadi", "Abyssal Blade", "Boots of Travel"]
             },
             {
-                name: "Jai", title: "Field Medic", role: "Healer / Support", src: "Gemini_Generated_Image_8izyq08izyq08izy.png", color: "text-teal-400", 
-                stats: {str:60, agi:40, int:85},
+                name: "Jai", title: "Field Medic", role: "Int / Healer", src: "Gemini_Generated_Image_8izyq08izyq08izy.png", color: "text-teal-400", 
+                stats: {str:"24 +2.8", agi:"18 +1.9", int:"26 +3.2"},
                 videoSrc: "Jai_s_Fantasy_Skill_Showcase_Video.mp4",
-                abilities: { q: { name: "Triage Beam", desc: "Channels a healing beam (50 HP/sec). Full HP allies gain mana." }, w: { name: "Defibrillate", desc: "Purges debuffs and gives burst speed (550 ms)." }, e: { name: "Sterile Field", desc: "Zone deals pure damage to enemies, gives armor to allies." }, r: { name: "Guardian Drone", desc: "ULTIMATE: Drone follows lowest HP ally, healing and blocking lethal dmg." } },
-                talents: [{left:"+200 Health", right:"+75 Cast Range"}, {left:"+3 Mana Regen", right:"-2s Defibrillate CD"}, {left:"Triage Beam Multitarget", right:"+400 Health Save"}, {left:"Drone has 2 charges", right:"Sterile Field Silences"}],
-                inventory: ["Guardian Greaves", "Holy Locket", "Aether Lens", "Force Staff", "Ghost Scepter", "Aeon Disk"]
+                abilities: { q: { name: "Healing Touch", desc: "Restores health and gives armor buff." }, w: { name: "Vitality Ward", desc: "Healing ward that boosts regen." }, e: { name: "Medical Shield", desc: "Shield absorbs dmg and removes debuffs." }, r: { name: "Guardian Angel", desc: "ULTIMATE: Massive healing wave to all allies." } },
+                talents: [{left:"+200 Health", right:"+150 Cast Range"}, {left:"Healing Touch Dispels", right:"Vitality Ward +250 Radius"}, {left:"+3s Shield Duration", right:"+20% Magic Res"}, {left:"Guardian Angel Global", right:"Shield grants Immunity"}],
+                inventory: ["Guardian Greaves", "Mekansm", "Aghanim's Scepter", "Glimmer Cape", "Force Staff", "Lotus Orb"]
             },
             {
-                name: "Missy", title: "The Architect", role: "Nuker / Disabler", src: "Gemini_Generated_Image_va4x2va4x2va4x2v.png", color: "text-indigo-400", stats: {str:40, agi:50, int:95},
-                abilities: { q: { name: "Construct Wall", desc: "Summons a wall. Reactivate to detonate." }, w: { name: "Blueprint Blast", desc: "Geometric projectile bounces off walls." }, e: { name: "Structural Integrity", desc: "PASSIVE: Nearby towers gain armor and regen." }, r: { name: "City Scape", desc: "ULTIMATE: Maze of holographic buildings slows and damages enemies." } },
-                talents: [{left:"+10% Spell Amp", right:"+150 Mana"}, {left:"+1.5s Wall Duration", right:"+300 Health"}, {left:"Blueprint Blast Stuns", right:"Structure Heal x2"}, {left:"City Scape True Sight", right:"2 Charges of Wall"}],
-                inventory: ["Aether Lens", "Octarine Core", "Eul's Scepter", "Blink Dagger", "Kaya and Sange", "Shiva's Guard"]
+                name: "Missy", title: "The Architect", role: "Int / Nuker", src: "Gemini_Generated_Image_va4x2va4x2va4x2v.png", color: "text-indigo-400", 
+                stats: {str:"20 +2.2", agi:"16 +1.8", int:"28 +3.5"},
+                abilities: { q: { name: "Document Blast", desc: "Throws enchanted docs, stunning target." }, w: { name: "Organized Chaos", desc: "Zone slows and disarms enemies." }, e: { name: "Deadline Rush", desc: "Increases move/cast speed for team." }, r: { name: "Master Plan", desc: "ULTIMATE: Global reveal + damage buff." } },
+                talents: [{left:"-4s Deadline CD", right:"+12% Spell Amp"}, {left:"+200 Chaos Radius", right:"+300 Health"}, {left:"Blast Pierces BKB", right:"+150 Cast Range"}, {left:"Master Plan True Sight", right:"2 Charges of Blast"}],
+                inventory: ["Scythe of Vyse", "Black King Bar", "Refresher Orb", "Octarine Core", "Shiva's Guard", "Force Staff"]
             },
             {
-                name: "Rus", title: "Jade Sentinel", role: "Tank / Durability", src: "Gemini_Generated_Image_yr6mxuyr6mxuyr6m.png", color: "text-emerald-400", stats: {str:95, agi:30, int:40},
-                abilities: { q: { name: "Stone Form", desc: "Immobile but immune to physical dmg. Heals 5% max HP/sec." }, w: { name: "Jade Smash", desc: "Heavy strike reduces armor by 7." }, e: { name: "Reflective Polish", desc: "PASSIVE: 20% chance to reflect spells." }, r: { name: "Terracotta Army", desc: "ULTIMATE: Summons 4 stone soldiers to trap target." } },
-                talents: [{left:"+5 Health Regen", right:"+15 Damage"}, {left:"+20% Magic Res", right:"+300 Mana"}, {left:"Stone Form affects allies", right:"Jade Smash Stuns"}, {left:"+3 Soldiers", right:"Reflect Chance 40%"}],
-                inventory: commonInventory.tank
+                name: "Rus", title: "Jade Sentinel", role: "Strength / Tank", src: "Gemini_Generated_Image_yr6mxuyr6mxuyr6m.png", color: "text-emerald-400", 
+                stats: {str:"28 +3.2", agi:"18 +1.9", int:"16 +1.7"},
+                abilities: { q: { name: "Verdant Slam", desc: "Ground slam damages and slows." }, w: { name: "Jade Carapace", desc: "Emerald armor reflects damage." }, e: { name: "Mountain's Call", desc: "Summons rock projectile to stun." }, r: { name: "Emerald Overgrowth", desc: "ULTIMATE: Roots and damages large area." } },
+                talents: [{left:"+5 Armor", right:"+15 Strength"}, {left:"Carapace +20% Reflect", right:"+300 Mana"}, {left:"Verdant Slam Double Hit", right:"Mountain's Call Blinds"}, {left:"Overgrowth Pierces BKB", right:"+3s Root Duration"}],
+                inventory: ["Assault Cuirass", "Heart of Tarrasque", "Blink Dagger", "Black King Bar", "Shiva's Guard", "Aghanim's Scepter"]
             },
             {
-                name: "Maria", title: "Nature's Voice", role: "Support / Utility", src: "Gemini_Generated_Image_ojrzwiojrzwiojrz.png", color: "text-lime-400", stats: {str:50, agi:40, int:80},
-                abilities: { q: { name: "Vine Trap", desc: "Roots enemy for 2.5s. Deals DOT." }, w: { name: "Lullaby", desc: "Sleeps enemies in radius. Attacks wake them with bonus dmg." }, e: { name: "Photosynthesis", desc: "PASSIVE: Regen for allies during day." }, r: { name: "Overgrowth", desc: "ULTIMATE: Global root on all enemy heroes." } },
-                talents: [{left:"+200 Mana", right:"+60 Gold/Min"}, {left:"+1.5s Root Duration", right:"+15% XP Gain"}, {left:"Lullaby works on Magic Immune", right:"Photosynthesis works at Night"}, {left:"Overgrowth deals 400 Dmg", right:"-30s Ult CD"}],
-                inventory: commonInventory.supp
+                name: "Maria", title: "Nature's Voice", role: "Int / Support", src: "Gemini_Generated_Image_ojrzwiojrzwiojrz.png", color: "text-lime-400", 
+                stats: {str:"20 +2.2", agi:"16 +1.8", int:"24 +3.0"},
+                abilities: { q: { name: "Nature's Embrace", desc: "Shield ally with armor/regen." }, w: { name: "Verdant Path", desc: "Create vine path for speed/phasing." }, e: { name: "Mountain Breeze", desc: "Gust slows and silences in line." }, r: { name: "Vista of Life", desc: "ULTIMATE: Huge AOE heal and vision." } },
+                talents: [{left:"+15% Magic Res", right:"+60 Gold/Min"}, {left:"Path Slows Enemies", right:"+200 Health"}, {left:"Breeze reduces Armor", right:"Embrace +300 Shield"}, {left:"Vista Global Cast", right:"-30s Ult CD"}],
+                inventory: ["Guardian Greaves", "Spirit Vessel", "Aghanim's Scepter", "Glimmer Cape", "Force Staff", "Aeon Disk"]
             },
             {
-                name: "Frank", title: "Tidal Guardian", role: "Support / Tank", src: "Gemini_Generated_Image_x7yydpx7yydpx7yy.png", color: "text-cyan-400", stats: {str:75, agi:60, int:50},
-                abilities: { q: { name: "Hydro Pump", desc: "Blasts water, knocking back enemies." }, w: { name: "Tide Shell", desc: "Purges debuffs and reflects next spell." }, e: { name: "Wet Floor", desc: "Slippery zone, enemies slide." }, r: { name: "Tsunami", desc: "ULTIMATE: Massive wave across lane, stuns everything." } },
-                talents: [{left:"+10 Strength", right:"+4 Mana Regen"}, {left:"+300 Tide Shell HP", right:"+15 Move Speed"}, {left:"Wet Floor slows Atk Spd", right:"Hydro Pump Pure Dmg"}, {left:"Tsunami Global Width", right:"Refresher Shard"}],
-                inventory: ["Pipe of Insight", "Force Staff", "Lotus Orb", "Guardian Greaves", "Blink Dagger", "Shiva's Guard"]
+                name: "Frank", title: "Tidal Guardian", role: "Agility / Carry", src: "Gemini_Generated_Image_x7yydpx7yydpx7yy.png", color: "text-cyan-400", 
+                stats: {str:"22 +3.5", agi:"26 +4.2", int:"20 +2.8"},
+                abilities: { q: { name: "Seaside Serenity", desc: "Channels healing mist." }, w: { name: "Ocean's Embrace", desc: "Tidal wave slows and damages." }, e: { name: "Tidal Wave", desc: "Knocks back and stuns enemies." }, r: { name: "Coastal Guardian", desc: "ULTIMATE: Summons spirits for armor/defense." } },
+                talents: [{left:"+20% Heal Amp", right:"+15 Agility"}, {left:"+2s Guardian Duration", right:"+250 Mana"}, {left:"-4s Wave CD", right:"Ocean Embrace Silences"}, {left:"Guardian Spirits Attack", right:"+50 Damage"}],
+                inventory: ["Black King Bar", "Manta Style", "Butterfly", "Satanic", "Eye of Skadi", "Boots of Travel 2"]
             },
             {
-                name: "Denice", title: "Heritage Weaver", role: "Buffer / Magic", src: "Gemini_Generated_Image_fha8zgfha8zgfha8.png", color: "text-yellow-500", 
-                stats: {str:50, agi:50, int:90},
+                name: "Denice", title: "Heritage Weaver", role: "Int / Support", src: "Gemini_Generated_Image_fha8zgfha8zgfha8.png", color: "text-yellow-500", 
+                stats: {str:"24 +3.2", agi:"21 +2.8", int:"28 +4.0"},
                 videoSrc: "Denice_s_Fantasy_Skill_Showcase_Video.mp4",
-                abilities: { q: { name: "Scroll Bind", desc: "Silences enemy and prevents attacks." }, w: { name: "Ancestral Buff", desc: "Increases ally damage and armor." }, e: { name: "Storyteller", desc: "PASSIVE: Casting spells gives Spell Amp aura." }, r: { name: "Time Rewind", desc: "ULTIMATE: Rewinds ally HP/Mana/Position 4s back." } },
-                talents: [{left:"+150 Cast Range", right:"+200 Health"}, {left:"Scroll Bind Disarms", right:"+15 Int"}, {left:"Time Rewind 6s", right:"Ancestral Buff +50 Dmg"}, {left:"Storyteller Global Aura", right:"2 Ult Charges"}],
-                inventory: commonInventory.mage
+                abilities: { q: { name: "Cultural Weave", desc: "Barrier slows enemies, buffs ally armor." }, w: { name: "Wika's Echo", desc: "Sound wave silences/damages cone." }, e: { name: "Heritage Fan", desc: "Fan bounces and blinds enemies." }, r: { name: "Kasaysayan's Call", desc: "ULTIMATE: Spirits buff dmg and speed." } },
+                talents: [{left:"+4 Armor Aura", right:"+150 Cast Range"}, {left:"+1.5s Echo Silence", right:"+20 Intelligence"}, {left:"Fan 2 Charges", right:"Weave Roots"}, {left:"Global Ult", right:"Ult grants Invisibility"}],
+                inventory: ["Guardian Greaves", "Pipe of Insight", "Scythe of Vyse", "Lotus Orb", "Force Staff", "Gem of True Sight"]
             },
             {
-                name: "GinoongRosas", title: "Floral Tempest", role: "Mage / Controller", src: "Gemini_Generated_Image_xyv8mpxyv8mpxyv8.png", color: "text-pink-400", stats: {str:40, agi:70, int:70},
-                abilities: { q: { name: "Petal Storm", desc: "Whirlwind of petals deals DPS." }, w: { name: "Thorn Bind", desc: "Explodes thorns, rooting enemies and bleeding them." }, e: { name: "Rose Scent", desc: "PASSIVE: Attackers have reduced damage." }, r: { name: "Blooming Burst", desc: "ULTIMATE: Giant rose explodes for massive True Damage." } },
-                talents: [{left:"+30 Attack Speed", right:"+10% Spell Lifesteal"}, {left:"+75 Petal DPS", right:"+250 Health"}, {left:"Thorn Bind pierces BKB", right:"Rose Scent 30% Reduct"}, {left:"Blooming Burst Instant", right:"Petal Storm follows hero"}],
-                inventory: ["Veil of Discord", "Kaya", "Bloodstone", "BKB", "Octarine Core", "Travel Boots"]
+                name: "GinoongRosas", title: "Floral Tempest", role: "Agility / Caster", src: "Gemini_Generated_Image_xyv8mpxyv8mpxyv8.png", color: "text-pink-400", 
+                stats: {str:"20 +2.0", agi:"24 +3.2", int:"19 +1.9"},
+                abilities: { q: { name: "Floral Breeze", desc: "Wind/petals slow and damage." }, w: { name: "Lily Ward", desc: "Healing flower ward." }, e: { name: "Petal Shield", desc: "Reduces incoming damage." }, r: { name: "Blooming Dominion", desc: "ULTIMATE: Large area root and damage." } },
+                talents: [{left:"+5 Armor Aura", right:"+10% Spell Lifesteal"}, {left:"+200 Breeze Range", right:"+250 Health"}, {left:"Ult Stuns", right:"Shield Reflects"}, {left:"Ward Invulnerable", right:"Breeze Pure Dmg"}],
+                inventory: ["Scythe of Vyse", "Shiva's Guard", "Black King Bar", "Blink Dagger", "Refresher Orb", "Octarine Core"]
             },
             {
-                name: "Jade", title: "Vibrant Striker", role: "Carry / Evasive", src: "Gemini_Generated_Image_734yo734yo734yo7.png", color: "text-fuchsia-400", 
-                stats: {str:50, agi:95, int:40},
+                name: "Jade", title: "Vibrant Striker", role: "Agility / Carry", src: "Gemini_Generated_Image_734yo734yo734yo7.png", color: "text-fuchsia-400", 
+                stats: {str:"22 +2.5", agi:"25 +3.0", int:"18 +1.8"},
                 videoSrc: "Jade_s_Fantasy_Skill_Showcase_Video.mp4",
-                abilities: { q: { name: "Neon Dash", desc: "Dash leaves light trail, slowing enemies." }, w: { name: "Flashbang", desc: "Blinds enemies (100% miss chance)." }, e: { name: "Prism Skin", desc: "PASSIVE: Changes color. Red=Dmg, Blue=Armor, Green=Regen." }, r: { name: "Spectrum Slash", desc: "ULTIMATE: Teleports behind target, strikes 7 times." } },
-                talents: [{left:"+15 Agility", right:"+15 Strength"}, {left:"-3s Neon Dash CD", right:"+250 Mana"}, {left:"Spectrum Slash +3 hits", right:"Prism Skin all active"}, {left:"Flashbang Pure Dmg", right:"Neon Dash x2 distance"}],
-                inventory: commonInventory.carry
+                abilities: { q: { name: "Vibrant Aura", desc: "Buffs ally speed/atk speed." }, w: { name: "Street Style", desc: "Evasion and speed trail." }, e: { name: "Comic Blast", desc: "Projectile damages and stuns." }, r: { name: "Rainbow Rush", desc: "ULTIMATE: Dash dmg + invulnerability." } },
+                talents: [{left:"+200 Aura Radius", right:"+15 Agility"}, {left:"+15% Evasion", right:"+20 Move Speed"}, {left:"+200 Rush Damage", right:"Blast Pierces BKB"}, {left:"Rush Global Cast", right:"+50 Attack Speed"}],
+                inventory: ["Hurricane Pike", "Black King Bar", "Daedalus", "Butterfly", "Monkey King Bar", "Boots of Travel II"]
             },
             {
-                name: "Charles", title: "Pathfinder", role: "Scout / Utility", src: "Gemini_Generated_Image_p0p8fop0p8fop0p8.png", color: "text-cyan-300", stats: {str:50, agi:85, int:65},
+                name: "Charles", title: "Pathfinder", role: "Scout / Utility", src: "Gemini_Generated_Image_p0p8fop0p8fop0p8.png", color: "text-cyan-300", 
+                stats: {str:"50", agi:"85", int:"65"},
                 abilities: { q: { name: "Signal Flare", desc: "Reveals area and reduces armor." }, w: { name: "Tactical Sprint", desc: "+50% speed, phase through units." }, e: { name: "Survivalist", desc: "PASSIVE: Health regen and night vision." }, r: { name: "Air Strike", desc: "ULTIMATE: Bombardment on vector." } },
                 talents: [{left:"+20 Move Spd", right:"+175 Health"}, {left:"+2s Sprint Duration", right:"+10 Armor Reduction"}, {left:"Survivalist Camouflage", right:"Air Strike Stuns"}, {left:"-30s Ult CD", right:"Flare True Sight"}],
                 inventory: ["Desolator", "Shadow Blade", "Sange and Yasha", "Phase Boots", "Hurricane Pike", "Daedalus"]
@@ -290,62 +298,71 @@
         // --- TEAM WAKAS ---
         const fullWakas = [
             { 
-                name: "Joy", title: "Graphic Burst", role: "Carry / Ranged", src: "Gemini_Generated_Image_grsgsfgrsgsfgrsg.png", color: "text-rose-400", stats: { str: 45, agi: 90, int: 55 },
-                abilities: { q: { name: "Pixel Grenade", desc: "Grenade stuns and deals random damage." }, w: { name: "Camouflage", desc: "Invisible near trees." }, e: { name: "Headshot", desc: "PASSIVE: 40% chance bonus dmg." }, r: { name: "Render", desc: "ULTIMATE: Sets target armor to 0." } },
-                talents: [{left:"+15 Agi", right:"+150 HP"}, {left:"+20 Atk Spd", right:"+10% Speed"}, {left:"True Strike", right:"+300 Range"}, {left:"Ult Global", right:"Crit x3"}],
-                inventory: commonInventory.carry
+                name: "Joy", title: "Graphic Burst", role: "Carry / Buffer", src: "Gemini_Generated_Image_grsgsfgrsgsfgrsg.png", color: "text-rose-400", 
+                stats: { str: "19 +2.4", agi: "25 +3.2", int: "21 +2.1" },
+                abilities: { q: { name: "Challenge Accepted", desc: "Gain Dmg/Speed but silenced." }, w: { name: "Twin Strikes", desc: "Next attack hits twice + slow." }, e: { name: "Graphic Burst", desc: "Projectile explodes & reduces armor." }, r: { name: "Determination's Call", desc: "ULTIMATE: Buffs allies atk spd/regen/resist." } },
+                talents: [{left:"Challenge No Silence", right:"+10 Strength"}, {left:"Twin Strikes x3 Hits", right:"-2s Strike CD"}, {left:"Ult applies Dispel", right:"+3s Ult Duration"}, {left:"+10 Armor", right:"+100 Attack Range"}],
+                inventory: ["Power Treads", "Manta Style", "Butterfly", "Black King Bar", "Daedalus", "Satanic"]
             },
             {
-                name: "Vincent", title: "Bamboo Brawler", role: "Tank / Stealth", src: "Gemini_Generated_Image_cba8odcba8odcba8.png", color: "text-orange-400", stats: {str:85, agi:50, int:45},
-                abilities: { q: { name: "Bamboo Stick", desc: "Long range melee stun." }, w: { name: "Tactical Roll", desc: "Dodge projectiles, knockback enemies." }, e: { name: "Drunken Haze", desc: "Enemies miss attacks and move oddly." }, r: { name: "Panda Smash", desc: "ULTIMATE: AOE crash based on max HP." } },
-                talents: [{left:"+200 Health", right:"+15 Damage"}, {left:"-4s Roll CD", right:"+20% Magic Res"}, {left:"Drunken Haze Disarms", right:"+15 Armor"}, {left:"Panda Smash pierces BKB", right:"+800 HP"}],
-                inventory: ["Vanguard", "Blink Dagger", "Abyssal Blade", "Heart of Tarrasque", "Assault Cuirass", "Boots of Travel"]
+                name: "Vincent", title: "Bamboo Brawler", role: "Tank / Initiator", src: "Gemini_Generated_Image_cba8odcba8odcba8.png", color: "text-orange-400", 
+                stats: {str:"25 +3.8", agi:"20 +2.1", int:"18 +2.5"},
+                abilities: { q: { name: "Bamboo Ambush", desc: "Channel to invis + bonus dmg." }, w: { name: "Thatch Cocoon", desc: "Barrier absorbs dmg and heals." }, e: { name: "Sunlight Strike", desc: "Beam deals dmg and blinds." }, r: { name: "Bamboo Barage", desc: "ULTIMATE: Massive physical dmg & slow." } },
+                talents: [{left:"+20% Evasion", right:"+200 Mana"}, {left:"+2s Cocoon Duration", right:"+200 Cocoon Heal"}, {left:"+150 Sunlight AoE", right:"+100 Sunlight Dmg"}, {left:"Ambush 0s Fade Time", right:"+25 Strength"}],
+                inventory: ["Black King Bar", "Manta Style", "Scythe of Vyse", "Octarine Core", "Shiva's Guard", "Refresher Orb"]
             },
             {
-                name: "Rai", title: "Zen Master", role: "Support / Global", src: "Gemini_Generated_Image_pv4f4opv4f4opv4f.png", color: "text-amber-400", stats: {str:50, agi:60, int:80},
-                abilities: { q: { name: "Palm Strike", desc: "Pushback and lifesteal strike." }, w: { name: "Meditate", desc: "Invulnerable healing aura." }, e: { name: "Inner Peace", desc: "PASSIVE: Slows enemy attack speed." }, r: { name: "Nirvana", desc: "ULTIMATE: Swap HP % with target." } },
-                talents: [{left:"+90 Gold/Min", right:"+15% XP Gain"}, {left:"+2s Meditate", right:"Palm Strike Silences"}, {left:"Inner Peace -50% Atk Spd", right:"+300 Cast Range"}, {left:"Nirvana No Mana Cost", right:"Ult affects 2 targets"}],
-                inventory: commonInventory.supp
+                name: "Rai", title: "Zen Master", role: "Carry / Support", src: "Gemini_Generated_Image_pv4f4opv4f4opv4f.png", color: "text-amber-400", 
+                stats: {str:"22 +2.8", agi:"25 +3.5", int:"19 +2.1"},
+                abilities: { q: { name: "Pagoda Sunset", desc: "Channel energy to dmg/slow line." }, w: { name: "Zen Focus", desc: "Increase atk speed & evasion." }, e: { name: "Torii Gate", desc: "Gate blocks move & dmgs enemies." }, r: { name: "Golden Hour", desc: "ULTIMATE: Global heal & blind." } },
+                talents: [{left:"-2s Zen Focus CD", right:"+15 Intelligence"}, {left:"+300 Gate Damage", right:"+1.5s Gate Duration"}, {left:"Ult Grants +15 Armor", right:"+12% Spell Amp"}, {left:"Global Ult Blind", right:"Zen Focus gives Invisibility"}],
+                inventory: ["Manta Style", "Butterfly", "Daedalus", "Satanic", "Assault Cuirass", "Black King Bar"]
             },
             {
-                name: "Kenji", title: "Demon Slayer", role: "Carry / Melee", src: "Gemini_Generated_Image_gsn3rlgsn3rlgsn3.png", color: "text-purple-500", stats: {str:60, agi:95, int:60},
-                abilities: { q: { name: "Void Slash", desc: "Dash damage. Reset on kill." }, w: { name: "Shadow Step", desc: "Teleport to shadow." }, e: { name: "Blade Thirst", desc: "PASSIVE: 3rd hit True Dmg + Heal." }, r: { name: "Oni Transformation", desc: "ULTIMATE: Demon form (Range/Dmg/Fear)." } },
-                talents: [{left:"+15 Agility", right:"+10 Strength"}, {left:"+25 Atk Spd", right:"+12% Lifesteal"}, {left:"Void Slash 2 charges", right:"Shadow Step Global"}, {left:"Infinite Transformation", right:"+100% Crit Dmg"}],
-                inventory: ["Battle Fury", "Manta Style", "Skull Basher", "Satanic", "Butterfly", "Swift Blink"]
+                name: "Kenji", title: "Demon Slayer", role: "Carry / Assassin", src: "Gemini_Generated_Image_gsn3rlgsn3rlgsn3.png", color: "text-purple-500", 
+                stats: {str:"22 +3.5", agi:"26 +4.2", int:"20 +2.8"},
+                abilities: { q: { name: "Mystic Gaze", desc: "Stun/dmg target, reveals invis." }, w: { name: "Shadow Veil", desc: "Invis & move speed for team." }, e: { name: "Purple Haze", desc: "Mist slows & confuses enemies." }, r: { name: "Demon Slayer Slash", desc: "ULTIMATE: Wide slash bleed/dmg." } },
+                talents: [{left:"+1s Gaze Duration", right:"+15 Agility"}, {left:"+200 Haze Radius", right:"+20% Haze Slow"}, {left:"-20s Ult CD", right:"+50 Attack Speed"}, {left:"Shadow Veil Untargetable", right:"+100% Crit Damage"}],
+                inventory: ["Boots of Travel", "Black King Bar", "Abyssal Blade", "Manta Style", "Nullifier", "Refresher Orb"]
             },
             {
-                name: "Sylv", title: "Forest Phantom", role: "Scout / Evasive", src: "Gemini_Generated_Image_p6hw1ip6hw1ip6hw.png", color: "text-green-500", stats: {str:40, agi:85, int:50},
-                abilities: { q: { name: "Spook", desc: "Fear enemy for 2s." }, w: { name: "Phase Shift", desc: "Untargetable for 0.75s." }, e: { name: "Ectoplasm", desc: "PASSIVE: Attacks slow and reduce vision." }, r: { name: "Haunt", desc: "ULTIMATE: Illusion next to every enemy hero." } },
-                talents: [{left:"+15 Damage", right:"+150 HP"}, {left:"+1.5s Spook", right:"Phase Shift 2 charges"}, {left:"Ectoplasm Break", right:"Haunt Illusions +50% Dmg"}, {left:"Perma Invisibility", right:"+30 Agility"}],
-                inventory: ["Diffusal Blade", "Manta Style", "Radiance", "Heart of Tarrasque", "Butterfly", "Boots of Travel"]
+                name: "Sylv", title: "Forest Phantom", role: "Scout / Caster", src: "Gemini_Generated_Image_p6hw1ip6hw1ip6hw.png", color: "text-green-500", 
+                stats: {str:"20 +2.5", agi:"24 +3.2", int:"18 +1.9"},
+                abilities: { q: { name: "Forest Stride", desc: "Dash thru trees with phase." }, w: { name: "Pine Needle Volley", desc: "Barrage slows/dmgs in cone." }, e: { name: "Root Snare", desc: "Entangle & stun target." }, r: { name: "Canopy Burst", desc: "ULTIMATE: Area dmg & blind." } },
+                talents: [{left:"+2s Stride Duration", right:"+20 Movement Speed"}, {left:"-2s Needle CD", right:"+4 Needles"}, {left:"+1.5s Root Duration", right:"+50 Root DPS"}, {left:"Ult Pure Damage", right:"Forest Stride Free Pathing"}],
+                inventory: ["Manta Style", "Gleipnir", "Diffusal Blade", "Black King Bar", "Butterfly", "Boots of Travel"]
             },
             {
-                name: "Nhors", title: "Crystal Ward", role: "Support / Utility", src: "Gemini_Generated_Image_ifr51pifr51pifr5.png", color: "text-blue-400", stats: {str:45, agi:40, int:90},
-                abilities: { q: { name: "Crystal Nova", desc: "Ice explosion slows/reduces dmg." }, w: { name: "Ward Place", desc: "Places permanent invisible ward." }, e: { name: "Refraction", desc: "PASSIVE: Blocks 3 dmg instances." }, r: { name: "Diamond Prison", desc: "ULTIMATE: Stasis trap. No move/act/dmg." } },
-                talents: [{left:"+200 Mana", right:"+75 Cast Range"}, {left:"+2 Max Wards", right:"Refraction +2 instances"}, {left:"Nova Freezes (1s)", right:"+150 Gold/Min"}, {left:"Diamond Prison breaks passive", right:"AoE Refraction"}],
-                inventory: ["Glimmer Cape", "Force Staff", "Aether Lens", "Eul's Scepter", "Octarine Core", "Scythe of Vyse"]
+                name: "Nhors", title: "Crystal Ward", role: "Support / Healer", src: "Gemini_Generated_Image_ifr51pifr51pifr5.png", color: "text-blue-400", 
+                stats: {str:"20 +2.5", agi:"18 +1.9", int:"26 +3.2"},
+                abilities: { q: { name: "Reflective Ward", desc: "Shield reflects dmg & gives vision." }, w: { name: "Botanical Essence", desc: "Heals nearby allies over time." }, e: { name: "Shadow Veil", desc: "Grants invis & move speed." }, r: { name: "Arcane Flow", desc: "ULTIMATE: Energy beam slows/dmgs." } },
+                talents: [{left:"+20% Reflection", right:"+150 Health"}, {left:"+15 Heal/Sec", right:"+125 Cast Range"}, {left:"-5s Veil CD", right:"+15% Veil Move Speed"}, {left:"Arcane Flow Pure Dmg", right:"2 Charges Reflective Ward"}],
+                inventory: ["Scythe of Vyse", "Bloodstone", "Guardian Greaves", "Aether Lens", "Glimmer Cape", "Aeon Disk"]
             },
             {
-                name: "Jeff", title: "Spirit Guide", role: "Mage / Summoner", src: "Gemini_Generated_Image_4ovsov4ovsov4ovs.png", color: "text-yellow-200", stats: {str:55, agi:40, int:95},
-                abilities: { q: { name: "Summon Spirit Bear", desc: "Summons bear with inventory." }, w: { name: "Spirit Link", desc: "Share atk spd and heal." }, e: { name: "Ethereal Form", desc: "Ghost form (Phys immune)." }, r: { name: "Ancestral Call", desc: "ULTIMATE: Fear enemies, 100% Magic Res." } },
-                talents: [{left:"+200 Bear HP", right:"+20 Move Speed"}, {left:"+30 Bear Dmg", right:"-20s Bear CD"}, {left:"Ethereal Form Heals", right:"Spirit Link +20% Lifesteal"}, {left:"Bear Spell Immunity", right:"2 Bears"}],
-                inventory: ["Radiance", "Assault Cuirass", "Skull Basher", "Phase Boots", "Vladmir's Offering", "Aghanim's Scepter"]
+                name: "Jeff", title: "Spirit Guide", role: "Mage / Summoner", src: "Gemini_Generated_Image_4ovsov4ovsov4ovs.png", color: "text-yellow-200", 
+                stats: {str:"25 +3.2", agi:"16 +1.8", int:"28 +3.5"},
+                abilities: { q: { name: "Lantern's Gaze", desc: "Beam reveals & slows enemies." }, w: { name: "Crane's Flight", desc: "Bird form, speed & phasing." }, e: { name: "Spirited Barrier", desc: "Barrier absorbs/reflects spells." }, r: { name: "Shrine of Reflection", desc: "ULTIMATE: Duplicates ally abilities." } },
+                talents: [{left:"+200 Gaze Range", right:"+15 Intelligence"}, {left:"-4s Crane CD", right:"+15% Crane Speed"}, {left:"Shrine +5 Mana Regen", right:"Shrine +10 Armor"}, {left:"Shrine Reflects 50% Dmg", right:"2 Charges Barrier"}],
+                inventory: ["Scythe of Vyse", "Black King Bar", "Refresher Orb", "Octarine Core", "Shiva's Guard", "Ethereal Blade"]
             },
             {
-                name: "Geno", title: "Heavy Hitter", role: "Tank / Disabler", src: "Gemini_Generated_Image_7lkmvg7lkmvg7lkm.png", color: "text-red-500", stats: {str:95, agi:30, int:35},
-                abilities: { q: { name: "Haymaker", desc: "Charged punch (Stun)." }, w: { name: "Bulk Up", desc: "Size/Str up, Atk Spd down." }, e: { name: "Counter Punch", desc: "PASSIVE: 20% counter attack." }, r: { name: "Knockout", desc: "ULTIMATE: Uppercut off map + fall damage." } },
-                talents: [{left:"+15 Str", right:"+4 Mana Regen"}, {left:"+15% Magic Res", right:"Haymaker fast charge"}, {left:"Counter Punch 35%", right:"+300 Health"}, {left:"Knockout Instant Kill <20% HP", right:"Bulk Up Status Resist"}],
-                inventory: ["Armlet of Mordiggian", "Heart of Tarrasque", "Blade Mail", "Heaven's Halberd", "Black King Bar", "Phase Boots"]
+                name: "Geno", title: "Heavy Hitter", role: "Tank / Brawler", src: "Gemini_Generated_Image_7lkmvg7lkmvg7lkm.png", color: "text-red-500", 
+                stats: {str:"25 +3.2", agi:"18 +1.9", int:"16 +1.5"},
+                abilities: { q: { name: "Fist of Fury", desc: "Single target stun punch." }, w: { name: "Tummy Tremor", desc: "Belly slam AOE dmg & slow." }, e: { name: "Knockout Blow", desc: "PASSIVE: 4th hit crit & bash." }, r: { name: "Heavyweight Slam", desc: "ULTIMATE: Leap crash, massive stun." } },
+                talents: [{left:"+0.5s Fist Stun", right:"+20 Movement Speed"}, {left:"+150 Belly AoE", right:"+8 Armor"}, {left:"-30s Ult CD", right:"+15% Status Resistance"}, {left:"Bash Chance +10%", right:"+500 Health"}],
+                inventory: ["Boots of Travel", "Black King Bar", "Blink Dagger", "Aghanim's Scepter", "Heart of Tarrasque", "Shiva's Guard"]
             },
             {
-                name: "Berlyn", title: "Shutter Sniper", role: "Sniper / Support", src: "Gemini_Generated_Image_ip2oyiip2oyiip2o.png", color: "text-teal-300", stats: {str:45, agi:80, int:70},
-                abilities: { q: { name: "Flash Blind", desc: "Blinds cone and purges." }, w: { name: "Zoom In", desc: "+400 Range, -Speed." }, e: { name: "Steady Shot", desc: "PASSIVE: Dmg up when still." }, r: { name: "Final Photo", desc: "ULTIMATE: Lock-on nuke. Increases death timer." } },
-                talents: [{left:"+150 Mana", right:"+15 Atk Spd"}, {left:"+100 Cast Range", right:"Flash Blind Stuns"}, {left:"+20% Steady Shot Max", right:"Zoom In No Slow"}, {left:"Final Photo Pure Dmg", right:"+200 Final Photo Dmg"}],
-                inventory: ["Dragon Lance", "Desolator", "Silver Edge", "Daedalus", "Monkey King Bar", "Power Treads"]
+                name: "Berlyn", title: "Shutter Sniper", role: "Sniper / Scout", src: "Gemini_Generated_Image_ip2oyiip2oyiip2o.png", color: "text-teal-300", 
+                stats: {str:"22 +2.0", agi:"30 +2.5", int:"25 +3.0"},
+                abilities: { q: { name: "Camping Site Ward", desc: "Vision ward reveals invis." }, w: { name: "Instax Flash", desc: "Blind/stun cone in front." }, e: { name: "Nature's Embrace", desc: "Heal/camo near flora." }, r: { name: "Shutter Sniper", desc: "ULTIMATE: Long range shot/slow/mark." } },
+                talents: [{left:"+15% Heal Amp", right:"+2s Blind Duration"}, {left:"+20% Atk Spd Static", right:"+15 Agility"}, {left:"-3s Flash CD", right:"+200 Health"}, {left:"Shutter Sniper Pure Dmg", right:"+2 Max Wards"}],
+                inventory: ["Power Treads", "Black King Bar", "Daedalus", "Manta Style", "Butterfly", "Eye of Skadi"]
             }
         ];
 
-        // --- BOSSES ---
+        // --- BOSSES (UPDATED LEVIATHAN) ---
         const bossTeam = [
             {
                 name: "The Leviathan", title: "Guardian of the Breach", role: "Neutral / Boss", src: "Gemini_Generated_Image_mb1di8mb1di8m.png", color: "text-orange-500",
@@ -501,7 +518,6 @@
             modal.classList.add('hidden');
             modal.style.display = 'none';
             document.body.style.overflow = '';
-            // Stop video playback when closing
             const video = document.querySelector('video');
             if(video) video.pause();
         }
@@ -548,8 +564,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
