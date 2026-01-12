@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cashual Legends - Sulu-Basi</title>
-    <link rel="icon" href="favicon.jpg" type="image/jpeg">
+    <link rel="icon" href="favicon.png" type="image/jpeg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,12 +26,16 @@
         .story-text p { margin-bottom: 1.5rem; }
         .chapter-card:hover { transform: translateY(-5px); }
         
-        /* Dropdown specific styles */
         .dropdown:hover .dropdown-menu { display: block; }
 
-        /* Item Grid */
-        .item-slot { background: radial-gradient(circle, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; box-shadow: inset 0 0 10px #000; }
-        .ability-icon { background: linear-gradient(135deg, #334155, #0f172a); border: 2px solid #475569; }
+        /* Item & Skill Styling */
+        .item-slot { background: radial-gradient(circle, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; box-shadow: inset 0 0 10px #000; transition: all 0.2s; }
+        .item-slot:hover { border-color: #f59e0b; }
+        
+        .skill-icon-q { background: linear-gradient(135deg, #ef4444, #7f1d1d); border: 2px solid #f87171; }
+        .skill-icon-w { background: linear-gradient(135deg, #3b82f6, #1e3a8a); border: 2px solid #60a5fa; }
+        .skill-icon-e { background: linear-gradient(135deg, #10b981, #064e3b); border: 2px solid #34d399; }
+        .skill-icon-r { background: linear-gradient(135deg, #a855f7, #581c87); border: 2px solid #c084fc; box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-200 min-h-screen selection:bg-amber-500/30 pb-40 overflow-x-hidden">
@@ -98,27 +102,20 @@
         </div>
 
         <div id="view-history" class="space-y-12 animate-fade-in hidden">
-             <div class="text-center space-y-6 py-10">
+            <div class="text-center space-y-6 py-10">
                 <h1 class="text-5xl md:text-7xl font-mario text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-500 to-amber-700" style="text-shadow: 2px 2px 0 #000; -webkit-text-stroke: 1px black;">THE CHRONICLES</h1>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                <div onclick="switchTab('history-ch1')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-amber-500/50 transition-all duration-300 relative group overflow-hidden">
-                    <h3 class="text-2xl font-bold text-white font-mario">I. Salt & Steel</h3>
-                </div>
-                <div onclick="switchTab('history-ch2')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-cyan-500/50 transition-all duration-300 relative group overflow-hidden">
-                    <h3 class="text-2xl font-bold text-white font-mario">II. Child of the Wolf</h3>
-                </div>
-                <div onclick="switchTab('history-ch3')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-teal-500/50 transition-all duration-300 relative group overflow-hidden">
-                    <h3 class="text-2xl font-bold text-white font-mario">III. School of Simula</h3>
-                </div>
-                <div onclick="switchTab('history-ch4')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-indigo-500/50 transition-all duration-300 relative group overflow-hidden">
-                    <h3 class="text-2xl font-bold text-white font-mario">IV. Trial of Youth</h3>
-                </div>
-                <div onclick="switchTab('history-ch5')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-rose-500/50 transition-all duration-300 relative group overflow-hidden md:col-span-2 lg:col-span-2">
-                    <h3 class="text-2xl font-bold text-white font-mario">V. The Coliseum Battles</h3>
-                </div>
+                <div onclick="switchTab('history-ch1')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-amber-500/50 transition-all duration-300 relative group overflow-hidden"><h3 class="text-2xl font-bold text-white font-mario">I. Salt & Steel</h3></div>
+                <div onclick="switchTab('history-ch2')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-cyan-500/50 transition-all duration-300 relative group overflow-hidden"><h3 class="text-2xl font-bold text-white font-mario">II. Child of the Wolf</h3></div>
+                <div onclick="switchTab('history-ch3')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-teal-500/50 transition-all duration-300 relative group overflow-hidden"><h3 class="text-2xl font-bold text-white font-mario">III. School of Simula</h3></div>
+                <div onclick="switchTab('history-ch4')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-indigo-500/50 transition-all duration-300 relative group overflow-hidden"><h3 class="text-2xl font-bold text-white font-mario">IV. Trial of Youth</h3></div>
+                <div onclick="switchTab('history-ch5')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-rose-500/50 transition-all duration-300 relative group overflow-hidden md:col-span-2 lg:col-span-2"><h3 class="text-2xl font-bold text-white font-mario">V. The Coliseum Battles</h3></div>
             </div>
         </div>
+        
+        <div id="view-history-ch1" class="hidden">...</div><div id="view-history-ch2" class="hidden">...</div><div id="view-history-ch3" class="hidden">...</div><div id="view-history-ch4" class="hidden">...</div><div id="view-history-ch5" class="hidden">...</div>
+
         <div id="view-warriors" class="animate-slide-up hidden">
             <h2 class="text-5xl font-bold text-center mb-16 text-slate-100 font-mario mt-10" style="text-shadow: 2px 2px 0 #000;">The Eternal Five</h2>
             <div id="warriors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-16"></div>
@@ -134,12 +131,14 @@
             <div id="wakas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"></div>
         </div>
 
-        <div id="hero-interface" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl z-[60] hidden flex flex-col animate-fade-in overflow-y-auto">
-            <button onclick="closeHeroInterface()" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors z-50 p-2 bg-slate-800/50 rounded-full hover:bg-red-500/50">
-                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-            </button>
-            <div id="hero-content" class="w-full max-w-7xl mx-auto p-4 md:p-8 flex-1 flex flex-col justify-center">
-                </div>
+        <div id="hero-interface" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl z-[60] hidden flex flex-col animate-zoom-in overflow-y-auto">
+            <div class="w-full max-w-7xl mx-auto p-4 md:p-8 flex-1 flex flex-col relative min-h-screen">
+                <button onclick="closeHeroInterface()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-colors z-50 p-2 bg-slate-800/80 rounded-full hover:bg-red-500/80 border border-slate-600">
+                    <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+                <div id="hero-content" class="flex-1 flex flex-col justify-center">
+                    </div>
+            </div>
         </div>
 
         <div id="view-aftermath" class="hidden">...</div>
@@ -148,79 +147,149 @@
     </main>
 
     <script>
-        // --- DATA ---
+        // --- CHARACTER DATA ---
+        // 1. ANCIENT WARRIORS
         const warriors = [
-            { name: "Pablo", title: "The Strategist", role: "Leader / Mage", imageSrc: "image_3.png", color: "text-blue-400", bg: "bg-blue-900/30", desc: "A strategist with fire in his heart.", stats: { str: 40, agi: 50, int: 95 } },
-            { name: "Josh", title: "The Iron Wall", role: "Tank / Guardian", imageSrc: "image_4.png", color: "text-red-400", bg: "bg-red-900/30", desc: "A wall of muscle and courage.", stats: { str: 95, agi: 30, int: 40 } },
-            { name: "Justin", title: "The Mender", role: "Healer / Support", imageSrc: "image_2.png", color: "text-green-400", bg: "bg-green-900/30", desc: "Gentle yet unyielding.", stats: { str: 30, agi: 45, int: 90 } },
-            { name: "Ken", title: "The Wind Walker", role: "Scout / Jungler", imageSrc: "image_0.png", color: "text-yellow-400", bg: "bg-yellow-900/30", desc: "Swift as the wind, master of the land.", stats: { str: 60, agi: 90, int: 50 } },
-            { name: "Stell", title: "The Silent Arrow", role: "Marksman / Carry", imageSrc: "image_1.png", color: "text-purple-400", bg: "bg-purple-900/30", desc: "Silent and precise.", stats: { str: 45, agi: 95, int: 40 } }
+            { name: "Pablo", title: "The Strategist", role: "Leader / Mage", imageSrc: "image_3.png", color: "text-blue-400", bg: "bg-blue-900/30", stats: { str: 40, agi: 50, int: 95 } },
+            { name: "Josh", title: "The Iron Wall", role: "Tank / Guardian", imageSrc: "image_4.png", color: "text-red-400", bg: "bg-red-900/30", stats: { str: 95, agi: 30, int: 40 } },
+            { name: "Justin", title: "The Mender", role: "Healer / Support", imageSrc: "image_2.png", color: "text-green-400", bg: "bg-green-900/30", stats: { str: 30, agi: 45, int: 90 } },
+            { name: "Ken", title: "The Wind Walker", role: "Scout / Jungler", imageSrc: "image_0.png", color: "text-yellow-400", bg: "bg-yellow-900/30", stats: { str: 60, agi: 90, int: 50 } },
+            { name: "Stell", title: "The Silent Arrow", role: "Marksman / Carry", imageSrc: "image_1.png", color: "text-purple-400", bg: "bg-purple-900/30", stats: { str: 45, agi: 95, int: 40 } }
         ];
 
+        // 2. SIMULA TEAM
         const simulaTeam = [
-            { name: "BB Panda", title: "Gentle Giant", role: "Tank / Initiator", imageSrc: "Gemini_Generated_Image_ldaq34ldaq34ldaq.png", color: "text-slate-200", bg: "bg-slate-800/50", desc: "A modern warrior channeling the spirit of the bear.", stats: { str: 90, agi: 60, int: 50 } },
-            { name: "Jai", title: "Field Medic", role: "Healer / Support", imageSrc: "Gemini_Generated_Image_8izyq08izyq08izy.png", color: "text-teal-400", bg: "bg-teal-900/30", desc: "Bringing advanced medical tech to the battlefield.", stats: { str: 60, agi: 40, int: 85 } },
-            { name: "Missy", title: "The Architect", role: "Nuker / Disabler", imageSrc: "Gemini_Generated_Image_va4x2va4x2va4x2v.png", color: "text-indigo-400", bg: "bg-indigo-900/30", desc: "Organized chaos and calculated precision.", stats: { str: 40, agi: 50, int: 95 } },
-            { name: "Rus", title: "Jade Sentinel", role: "Tank / Durability", imageSrc: "Gemini_Generated_Image_yr6mxuyr6mxuyr6m.png", color: "text-emerald-400", bg: "bg-emerald-900/30", desc: "Armored in emerald, Rus reflects damage.", stats: { str: 95, agi: 30, int: 40 } },
-            { name: "Maria", title: "Nature's Voice", role: "Support / Utility", imageSrc: "Gemini_Generated_Image_ojrzwiojrzwiojrz.png", color: "text-lime-400", bg: "bg-lime-900/30", desc: "Connected to the island's flora and terrain.", stats: { str: 50, agi: 40, int: 80 } },
-            { name: "Frank", title: "Tidal Guardian", role: "Support / Tank", imageSrc: "Gemini_Generated_Image_x7yydpx7yydpx7yy.png", color: "text-cyan-400", bg: "bg-cyan-900/30", desc: "Master of the tides and seaside serenity.", stats: { str: 75, agi: 60, int: 50 } },
-            { name: "Denice", title: "Heritage Weaver", role: "Buffer / Magic", imageSrc: "Gemini_Generated_Image_fha8zgfha8zgfha8.png", color: "text-yellow-500", bg: "bg-yellow-900/30", desc: "Weaving history into power.", stats: { str: 50, agi: 50, int: 90 } },
-            { name: "GinoongRosas", title: "Floral Tempest", role: "Mage / Controller", imageSrc: "Gemini_Generated_Image_xyv8mpxyv8mpxyv8.png", color: "text-pink-400", bg: "bg-pink-900/30", desc: "Beauty and danger combined in floral breezes.", stats: { str: 40, agi: 70, int: 70 } },
-            { name: "Jade", title: "Vibrant Striker", role: "Carry / Evasive", imageSrc: "Gemini_Generated_Image_734yo734yo734yo7.png", color: "text-fuchsia-400", bg: "bg-fuchsia-900/30", desc: "Impossible to catch street-style fighter.", stats: { str: 50, agi: 95, int: 40 } },
-            { name: "Charles", title: "Pathfinder", role: "Scout / Utility", imageSrc: "Gemini_Generated_Image_p0p8fop0p8fop0p8.png", color: "text-cyan-300", bg: "bg-cyan-900/30", desc: "A skilled pathfinder utilizing ancient techniques alongside modern Simula gadgets.", stats: { str: 50, agi: 85, int: 65 } }
+            { name: "BB Panda", title: "Gentle Giant", role: "Tank / Initiator", imageSrc: "Gemini_Generated_Image_ldaq34ldaq34ldaq.png", color: "text-slate-200", bg: "bg-slate-800/50", stats: { str: 90, agi: 60, int: 50 } },
+            { name: "Jai", title: "Field Medic", role: "Healer / Support", imageSrc: "Gemini_Generated_Image_8izyq08izyq08izy.png", color: "text-teal-400", bg: "bg-teal-900/30", stats: { str: 60, agi: 40, int: 85 } },
+            { name: "Missy", title: "The Architect", role: "Nuker / Disabler", imageSrc: "Gemini_Generated_Image_va4x2va4x2va4x2v.png", color: "text-indigo-400", bg: "bg-indigo-900/30", stats: { str: 40, agi: 50, int: 95 } },
+            { name: "Rus", title: "Jade Sentinel", role: "Tank / Durability", imageSrc: "Gemini_Generated_Image_yr6mxuyr6mxuyr6m.png", color: "text-emerald-400", bg: "bg-emerald-900/30", stats: { str: 95, agi: 30, int: 40 } },
+            { name: "Maria", title: "Nature's Voice", role: "Support / Utility", imageSrc: "Gemini_Generated_Image_ojrzwiojrzwiojrz.png", color: "text-lime-400", bg: "bg-lime-900/30", stats: { str: 50, agi: 40, int: 80 } },
+            { name: "Frank", title: "Tidal Guardian", role: "Support / Tank", imageSrc: "Gemini_Generated_Image_x7yydpx7yydpx7yy.png", color: "text-cyan-400", bg: "bg-cyan-900/30", stats: { str: 75, agi: 60, int: 50 } },
+            { name: "Denice", title: "Heritage Weaver", role: "Buffer / Magic", imageSrc: "Gemini_Generated_Image_fha8zgfha8zgfha8.png", color: "text-yellow-500", bg: "bg-yellow-900/30", stats: { str: 50, agi: 50, int: 90 } },
+            { name: "GinoongRosas", title: "Floral Tempest", role: "Mage / Controller", imageSrc: "Gemini_Generated_Image_xyv8mpxyv8mpxyv8.png", color: "text-pink-400", bg: "bg-pink-900/30", stats: { str: 40, agi: 70, int: 70 } },
+            { name: "Jade", title: "Vibrant Striker", role: "Carry / Evasive", imageSrc: "Gemini_Generated_Image_734yo734yo734yo7.png", color: "text-fuchsia-400", bg: "bg-fuchsia-900/30", stats: { str: 50, agi: 95, int: 40 } },
+            { name: "Charles", title: "Pathfinder", role: "Scout / Utility", imageSrc: "Gemini_Generated_Image_p0p8fop0p8fop0p8.png", color: "text-cyan-300", bg: "bg-cyan-900/30", stats: { str: 50, agi: 85, int: 65 } }
         ];
 
+        // 3. WAKAS TEAM
         const wakasTeam = [
-            { name: "Joy", title: "Graphic Burst", role: "Carry / Ranged", imageSrc: "Gemini_Generated_Image_grsgsfgrsgsfgrsg.png", color: "text-rose-400", bg: "bg-rose-900/30", desc: "Armed with determination and twin strikes, she bursts enemies with graphic energy.", stats: { str: 45, agi: 90, int: 55 } },
-            { name: "Vincent", title: "Bamboo Brawler", role: "Tank / Stealth", imageSrc: "Gemini_Generated_Image_cba8odcba8odcba8.png", color: "text-orange-400", bg: "bg-orange-900/30", desc: "Hides in the trees and strikes with blinding sunlight and bamboo spears.", stats: { str: 85, agi: 50, int: 45 } },
-            { name: "Rai", title: "Zen Master", role: "Support / Global", imageSrc: "Gemini_Generated_Image_pv4f4opv4f4opv4f.png", color: "text-amber-400", bg: "bg-amber-900/30", desc: "Controls the flow of battle with serene focus and global healing light.", stats: { str: 50, agi: 60, int: 80 } },
-            { name: "Kenji", title: "Demon Slayer", role: "Carry / Melee", imageSrc: "Gemini_Generated_Image_gsn3rlgsn3rlgsn3.png", color: "text-purple-500", bg: "bg-purple-900/30", desc: "A master of mystic arts and katana strikes, he slices through reality itself.", stats: { str: 60, agi: 95, int: 60 } },
-            { name: "Sylv", title: "Forest Phantom", role: "Scout / Evasive", imageSrc: "Gemini_Generated_Image_p6hw1ip6hw1ip6hw.png", color: "text-green-500", bg: "bg-green-900/30", desc: "She moves unseen through the canopy, unleashing needles and roots.", stats: { str: 40, agi: 85, int: 50 } },
-            { name: "Nhors", title: "Crystal Ward", role: "Support / Utility", imageSrc: "Gemini_Generated_Image_ifr51pifr51pifr5.png", color: "text-blue-400", bg: "bg-blue-900/30", desc: "Protects her team with reflective wards and botanical essence.", stats: { str: 45, agi: 40, int: 90 } },
-            { name: "Jeff", title: "Spirit Guide", role: "Mage / Summoner", imageSrc: "Gemini_Generated_Image_4ovsov4ovsov4ovs.png", color: "text-yellow-200", bg: "bg-yellow-900/30", desc: "Summons cranes and lanterns to confuse enemies and duplicate allies.", stats: { str: 55, agi: 40, int: 95 } },
-            { name: "Geno", title: "Heavy Hitter", role: "Tank / Disabler", imageSrc: "Gemini_Generated_Image_7lkmvg7lkmvg7lkm.png", color: "text-red-500", bg: "bg-red-900/30", desc: "A powerhouse who stuns enemies with seismic belly flops and iron fists.", stats: { str: 95, agi: 30, int: 35 } },
-            { name: "Berlyn", title: "Shutter Sniper", role: "Sniper / Support", imageSrc: "Gemini_Generated_Image_ip2oyiip2oyiip2o.png", color: "text-teal-300", bg: "bg-teal-900/30", desc: "Captures enemies in her lens, blinding them with flash photography.", stats: { str: 45, agi: 80, int: 70 } }
+            { name: "Joy", title: "Graphic Burst", role: "Carry / Ranged", imageSrc: "Gemini_Generated_Image_grsgsfgrsgsfgrsg.png", color: "text-rose-400", bg: "bg-rose-900/30", stats: { str: 45, agi: 90, int: 55 } },
+            { name: "Vincent", title: "Bamboo Brawler", role: "Tank / Stealth", imageSrc: "Gemini_Generated_Image_cba8odcba8odcba8.png", color: "text-orange-400", bg: "bg-orange-900/30", stats: { str: 85, agi: 50, int: 45 } },
+            { name: "Rai", title: "Zen Master", role: "Support / Global", imageSrc: "Gemini_Generated_Image_pv4f4opv4f4opv4f.png", color: "text-amber-400", bg: "bg-amber-900/30", stats: { str: 50, agi: 60, int: 80 } },
+            { name: "Kenji", title: "Demon Slayer", role: "Carry / Melee", imageSrc: "Gemini_Generated_Image_gsn3rlgsn3rlgsn3.png", color: "text-purple-500", bg: "bg-purple-900/30", stats: { str: 60, agi: 95, int: 60 } },
+            { name: "Sylv", title: "Forest Phantom", role: "Scout / Evasive", imageSrc: "Gemini_Generated_Image_p6hw1ip6hw1ip6hw.png", color: "text-green-500", bg: "bg-green-900/30", stats: { str: 40, agi: 85, int: 50 } },
+            { name: "Nhors", title: "Crystal Ward", role: "Support / Utility", imageSrc: "Gemini_Generated_Image_ifr51pifr51pifr5.png", color: "text-blue-400", bg: "bg-blue-900/30", stats: { str: 45, agi: 40, int: 90 } },
+            { name: "Jeff", title: "Spirit Guide", role: "Mage / Summoner", imageSrc: "Gemini_Generated_Image_4ovsov4ovsov4ovs.png", color: "text-yellow-200", bg: "bg-yellow-900/30", stats: { str: 55, agi: 40, int: 95 } },
+            { name: "Geno", title: "Heavy Hitter", role: "Tank / Disabler", imageSrc: "Gemini_Generated_Image_7lkmvg7lkmvg7lkm.png", color: "text-red-500", bg: "bg-red-900/30", stats: { str: 95, agi: 30, int: 35 } },
+            { name: "Berlyn", title: "Shutter Sniper", role: "Sniper / Support", imageSrc: "Gemini_Generated_Image_ip2oyiip2oyiip2o.png", color: "text-teal-300", bg: "bg-teal-900/30", stats: { str: 45, agi: 80, int: 70 } }
         ];
 
         const allHeroes = [...warriors, ...simulaTeam, ...wakasTeam];
 
-        function init() {
-            renderWarriors();
-            renderSimula();
-            renderWakas(); 
-            loadComments();
-            // Default to Home but ensure history tab content is ready if clicked
-            switchTab('home'); 
-        }
+        // --- UNIQUE ABILITY DATABASE ---
+        const abilityDB = {
+            "Pablo": {
+                q: { name: "Tidal Trap", desc: "Summons water to stun and damage enemies in an area." },
+                w: { name: "Reef Barrier", desc: "Creates a wall of sharp coral that blocks movement." },
+                e: { name: "Tactical Mind", desc: "Passive: Increases nearby allies' mana regen." },
+                r: { name: "Wolf's Rage", desc: "TRANSFORMATION: Becomes a melee beast with cleave damage." },
+                items: ["Aghanim's Scepter", "Refresher Orb", "Shiva's Guard", "Arcane Blink", "Octarine Core", "Scythe of Vyse"],
+                talents: ["+250 Mana", "+15% Spell Amp", "Wolf Form Cooldown"]
+            },
+            "Josh": {
+                q: { name: "Shield Bash", desc: "Slams shield, stunning single target." },
+                w: { name: "Iron Skin", desc: "Reduces incoming physical damage by 40%." },
+                e: { name: "Brother's Keeper", desc: "Passive: Redirects damage from nearest ally to self." },
+                r: { name: "Unmovable Object", desc: "Becomes immune to crowd control and heals rapidly." },
+                items: ["Heart of Tarrasque", "Crimson Guard", "Blade Mail", "Assault Cuirass", "Pipe of Insight", "Guardian Greaves"],
+                talents: ["+5 Armor", "+20 HP Regen", "Global Shield Aura"]
+            },
+            "Simula Vanguard": { // Karle
+                q: { name: "Smartphone Strike", desc: "Hurls a device that explodes, stunning enemies." },
+                w: { name: "Parkour Dash", desc: "Quickly slides to target location, evading projectiles." },
+                e: { name: "Gadget Mastery", desc: "Passive: Reduces item cooldowns by 15%." },
+                r: { name: "Utility Overload", desc: "Deploys all gadgets at once, silencing area." },
+                items: ["Diffusal Blade", "Manta Style", "Hurricane Pike", "Butterfly", "Linken's Sphere", "Swift Blink"],
+                talents: ["+20 Agility", "+2s Silence Duration", "Dash has 2 Charges"]
+            },
+            "Rus": {
+                q: { name: "Jade Slam", desc: "Smashes ground with jade fist, slowing enemies." },
+                w: { name: "Reflective Carapace", desc: "Returns 100% of damage taken for 3 seconds." },
+                e: { name: "Hardened Gem", desc: "Passive: Grants bonus armor per missing HP." },
+                r: { name: "Emerald Overgrowth", desc: "Roots all enemies in a massive radius." },
+                items: ["Lotus Orb", "Blade Mail", "Eternal Shroud", "Heart of Tarrasque", "Radiance", "Phase Boots"],
+                talents: ["+250 HP", "+20% Reflect Damage", "Global Root"]
+            },
+            "Jai": {
+                q: { name: "Healing Drone", desc: "Deploys a drone that heals ally over time." },
+                w: { name: "Vitality Ward", desc: "Prevents ally HP from dropping below 1." },
+                e: { name: "Cleanse", desc: "Passive: Dispeels debuffs from nearby allies." },
+                r: { name: "Guardian Angel", desc: "Grants physical immunity to entire team." },
+                items: ["Holy Locket", "Guardian Greaves", "Glimmer Cape", "Force Staff", "Solar Crest", "Aeon Disk"],
+                talents: ["+20% Heal Amp", "-30s Ult Cooldown", "AoE Cleanse"]
+            },
+            "Missy": {
+                q: { name: "Deadline Rush", desc: "Charges forward, knocking back enemies." },
+                w: { name: "Blueprints", desc: "Creates temporary cover/walls." },
+                e: { name: "Organized Chaos", desc: "Passive: Spells have a chance to cast twice." },
+                r: { name: "Master Plan", desc: "Global nuke that reveals all enemies." },
+                items: ["Ethereal Blade", "Dagon", "Kaya and Sange", "Travel Boots", "Bloodstone", "Refresher Orb"],
+                talents: ["+100 Cast Range", "+15% Spell Lifesteal", "Pure Damage Ult"]
+            },
+            "Geno": {
+                q: { name: "Seismic Flop", desc: "Belly flops, stunning area." },
+                w: { name: "Iron Grip", desc: "Holds an enemy in place, disabling them." },
+                e: { name: "Heavyweight", desc: "Passive: Cannot be pushed or knocked back." },
+                r: { name: "Sumo Slam", desc: "Knocks an enemy back 1000 units." },
+                items: ["Blink Dagger", "Black King Bar", "Skull Basher", "Overwhelming Blink", "Cuirass", "Heart"],
+                talents: ["+30 Strength", "+2s Stun", "Slam Pierces BKB"]
+            }
+            // ... (Other characters would follow this pattern, default generic generator handles missing ones)
+        };
 
-        // --- DYNAMIC CONTENT GENERATOR ---
         function getHeroDetails(hero) {
-            // Generate thematic skills based on role keywords
+            // Check specific DB first
+            if(abilityDB[hero.name]) {
+                return {
+                    abilities: [
+                        { key: "Q", ...abilityDB[hero.name].q },
+                        { key: "W", ...abilityDB[hero.name].w },
+                        { key: "E", ...abilityDB[hero.name].e },
+                        { key: "R", ...abilityDB[hero.name].r }
+                    ],
+                    talents: abilityDB[hero.name].talents,
+                    inventory: abilityDB[hero.name].items
+                };
+            }
+
+            // Fallback Generator
             let q = "Strike", w = "Defend", e = "Passive", r = "Ultimate";
-            let items = ["Boots of Speed", "Magic Wand", "Iron Branch"];
+            let items = ["Boots", "Wand", "Branch"];
+            let talents = ["+Stats", "+Health", "+Damage"];
             
-            if(hero.role.includes("Tank") || hero.role.includes("Guardian")) {
-                q = "Iron Skin"; w = "Seismic Slam"; e = "Endurance"; r = "Unbreakable Wall";
-                items = ["Vanguard", "Heart of Tarrasque", "Blade Mail", "Phase Boots", "Magic Wand", "Soul Ring"];
+            if(hero.role.includes("Tank")) {
+                q = "Fortify"; w = "Taunt"; e = "Thick Skin"; r = "Unstoppable";
+                items = ["Vanguard", "Pipe", "Crimson Guard", "Heart", "Cuirass", "Blink"];
+                talents = ["+5 Armor", "+400 Health", "AoE Taunt"];
             } else if(hero.role.includes("Mage") || hero.role.includes("Nuker")) {
-                q = "Arcane Bolt"; w = "Silence"; e = "Mana Flow"; r = "Cataclysm";
-                items = ["Aghanim's Scepter", "Scythe of Vyse", "Blink Dagger", "Arcane Boots", "Bottle", "Void Stone"];
-            } else if(hero.role.includes("Healer") || hero.role.includes("Support")) {
-                q = "Healing Touch"; w = "Purify"; e = "Aura of Life"; r = "Divine Intervention";
-                items = ["Mekansm", "Guardian Greaves", "Glimmer Cape", "Force Staff", "Observer Ward", "Smoke"];
+                q = "Mystic Bolt"; w = "Hex"; e = "Mana Void"; r = "Chaos Meteor";
+                items = ["Kaya", "Aghanim", "Scythe", "Travel Boots", "Octarine", "Blink"];
             } else if(hero.role.includes("Carry") || hero.role.includes("Marksman")) {
-                q = "Precision Shot"; w = "Quick Dash"; e = "Critical Strike"; r = "Assassinate";
-                items = ["Butterfly", "Daedalus", "Hurricane Pike", "Power Treads", "BKB", "Satanic"];
+                q = "Rapid Fire"; w = "Evasion"; e = "Crit"; r = "Headshot";
+                items = ["Daedalus", "Butterfly", "Satanic", "Manta", "BKB", "Skadi"];
+            } else if(hero.role.includes("Support") || hero.role.includes("Healer")) {
+                q = "Mend"; w = "Protect"; e = "Aura"; r = "Revitalize";
+                items = ["Mekansm", "Glimmer", "Force Staff", "Ward", "Urn", "Greaves"];
             }
 
             return {
                 abilities: [
-                    { key: "Q", name: q, desc: "A primary skill that defines the hero's lane presence." },
-                    { key: "W", name: w, desc: "Utility or defensive skill for tactical plays." },
-                    { key: "E", name: e, desc: "Passive ability that enhances survivability or damage." },
-                    { key: "R", name: r, desc: "Ultimate ability. High impact, high cooldown." }
+                    { key: "Q", name: q, desc: "Primary active skill." },
+                    { key: "W", name: w, desc: "Secondary utility skill." },
+                    { key: "E", name: e, desc: "Passive enhancement." },
+                    { key: "R", name: r, desc: "Ultimate ability." }
                 ],
-                talents: ["+200 Health", "+15 Movement Speed", "+20 Damage"],
+                talents: talents,
                 inventory: items
             };
         }
@@ -232,7 +301,6 @@
                 if(el) el.classList.add('hidden');
             });
 
-            // Handle dropdown button color
             const btnWarriorsMain = document.getElementById('btn-warriors-main');
             if(['warriors', 'simula', 'wakas'].includes(tabId)) {
                 btnWarriorsMain.classList.add('text-white', 'bg-slate-800');
@@ -242,21 +310,17 @@
                 btnWarriorsMain.classList.add('text-slate-400');
             }
 
-            // Show selected view
             const selected = document.getElementById(`view-${tabId}`);
             if(selected) {
                 selected.classList.remove('hidden');
                 window.scrollTo(0,0);
             }
-            
-            // Close hero interface if open
             closeHeroInterface();
         }
 
         function createCardHTML(w) {
             return `
-                <div onclick="selectWarrior('${w.name}')" 
-                     class="group relative p-6 rounded-3xl border border-slate-800 hover:border-slate-600 bg-slate-900/80 hover:bg-slate-800 transition-all cursor-pointer">
+                <div onclick="selectWarrior('${w.name}')" class="group relative p-6 rounded-3xl border border-slate-800 hover:border-slate-600 bg-slate-900/80 hover:bg-slate-800 transition-all cursor-pointer">
                     <div class="aspect-square rounded-2xl overflow-hidden mb-6 border-2 border-slate-700 group-hover:border-amber-500/50 transition-colors relative">
                          <div class="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors z-10"></div>
                          <img src="${w.imageSrc}" alt="${w.name}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" loading="lazy">
@@ -283,9 +347,9 @@
                     <div class="lg:w-1/4 space-y-4 flex flex-col justify-center order-2 lg:order-1">
                         <h4 class="text-amber-500 font-bold uppercase tracking-widest border-b border-slate-700 pb-2">Abilities</h4>
                         ${details.abilities.map(ab => `
-                            <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 hover:border-amber-500/50 transition-colors">
+                            <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 hover:border-amber-500/50 transition-colors group">
                                 <div class="flex items-center gap-4 mb-2">
-                                    <div class="w-12 h-12 ability-icon rounded flex items-center justify-center font-bold text-xl text-white shadow-lg">${ab.key}</div>
+                                    <div class="w-12 h-12 rounded flex items-center justify-center font-black text-xl text-white shadow-lg skill-icon-${ab.key.toLowerCase()} transform group-hover:scale-110 transition-transform">${ab.key}</div>
                                     <div><h5 class="font-bold text-slate-200">${ab.name}</h5><span class="text-[10px] text-slate-500 uppercase">Active</span></div>
                                 </div>
                                 <p class="text-xs text-slate-400 leading-relaxed">${ab.desc}</p>
@@ -299,12 +363,12 @@
                             <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-8">
                                 <h1 class="text-5xl font-mario text-white mb-2" style="text-shadow: 2px 2px 0 #000;">${hero.name}</h1>
                                 <p class="text-lg ${hero.color} font-bold uppercase tracking-widest">${hero.title}</p>
-                                <p class="text-sm text-slate-400 mt-2">${hero.desc}</p>
+                                <p class="text-sm text-slate-400 mt-2 italic">"${hero.desc}"</p>
                                 
-                                <div class="flex gap-6 mt-6">
-                                    <div class="text-center"><div class="text-red-500 font-bold text-xl">${hero.stats.str}</div><div class="text-[10px] text-slate-500 uppercase">STR</div></div>
-                                    <div class="text-center"><div class="text-green-500 font-bold text-xl">${hero.stats.agi}</div><div class="text-[10px] text-slate-500 uppercase">AGI</div></div>
-                                    <div class="text-center"><div class="text-blue-500 font-bold text-xl">${hero.stats.int}</div><div class="text-[10px] text-slate-500 uppercase">INT</div></div>
+                                <div class="flex gap-6 mt-6 justify-center">
+                                    <div class="text-center"><div class="text-red-500 font-bold text-xl drop-shadow-md">${hero.stats.str}</div><div class="text-[10px] text-slate-500 uppercase tracking-widest">STR</div></div>
+                                    <div class="text-center"><div class="text-green-500 font-bold text-xl drop-shadow-md">${hero.stats.agi}</div><div class="text-[10px] text-slate-500 uppercase tracking-widest">AGI</div></div>
+                                    <div class="text-center"><div class="text-blue-500 font-bold text-xl drop-shadow-md">${hero.stats.int}</div><div class="text-[10px] text-slate-500 uppercase tracking-widest">INT</div></div>
                                 </div>
                             </div>
                         </div>
@@ -314,8 +378,9 @@
                         <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-700">
                             <h4 class="text-amber-500 font-bold uppercase tracking-widest border-b border-slate-700 pb-2 mb-4">Talent Tree</h4>
                             <div class="space-y-3">
-                                ${details.talents.map(t => `<div class="text-center p-2 rounded bg-slate-800 text-sm text-slate-300 border border-slate-600">${t}</div>`).join('')}
-                                <div class="text-center p-2 rounded bg-amber-500/20 text-amber-300 text-xs font-bold border border-amber-500/50">Level 25 Talent</div>
+                                <div class="text-center p-2 rounded bg-amber-500/20 text-amber-300 text-xs font-bold border border-amber-500/50 shadow-[0_0_10px_rgba(245,158,11,0.2)]">Level 25: ${details.talents[2]}</div>
+                                <div class="text-center p-2 rounded bg-slate-800 text-sm text-slate-300 border border-slate-600">Level 20: ${details.talents[1]}</div>
+                                <div class="text-center p-2 rounded bg-slate-800 text-sm text-slate-400 border border-slate-700">Level 15: ${details.talents[0]}</div>
                             </div>
                         </div>
 
@@ -324,11 +389,11 @@
                             <div class="grid grid-cols-3 gap-3">
                                 ${details.inventory.map(item => `
                                     <div class="aspect-square item-slot rounded flex items-center justify-center group relative cursor-help">
-                                        <span class="text-[10px] text-slate-500 font-bold text-center px-1">${item}</span>
+                                        <span class="text-[10px] text-slate-400 font-bold text-center px-1 leading-tight group-hover:text-white">${item}</span>
                                     </div>
                                 `).join('')}
                             </div>
-                            <div class="flex justify-between mt-4 text-[10px] text-amber-500 font-bold uppercase">
+                            <div class="flex justify-between mt-4 text-[10px] text-amber-500 font-bold uppercase tracking-widest">
                                 <span>Gold: 2,450</span>
                                 <span>K/D/A: 12/3/15</span>
                             </div>
@@ -338,12 +403,12 @@
             `;
 
             interface.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Lock scroll
+            document.body.style.overflow = 'hidden'; 
         }
 
         function closeHeroInterface() {
             document.getElementById('hero-interface').classList.add('hidden');
-            document.body.style.overflow = ''; // Unlock scroll
+            document.body.style.overflow = '';
         }
 
         // Render Functions
