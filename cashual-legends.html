@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cashual Legends</title>
-    <link rel="icon" href="favicon.png" type="image/jpeg">
+    <title>Cashual Legends - Sulu-Basi</title>
+    <link rel="icon" href="favicon.jpg" type="image/jpeg">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,6 +28,10 @@
         
         /* Dropdown specific styles */
         .dropdown:hover .dropdown-menu { display: block; }
+
+        /* Item Grid */
+        .item-slot { background: radial-gradient(circle, #1e293b 0%, #0f172a 100%); border: 1px solid #334155; box-shadow: inset 0 0 10px #000; }
+        .ability-icon { background: linear-gradient(135deg, #334155, #0f172a); border: 2px solid #475569; }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-200 min-h-screen selection:bg-amber-500/30 pb-40 overflow-x-hidden">
@@ -94,453 +98,57 @@
         </div>
 
         <div id="view-history" class="space-y-12 animate-fade-in hidden">
-            <div class="text-center space-y-6 py-10">
+             <div class="text-center space-y-6 py-10">
                 <h1 class="text-5xl md:text-7xl font-mario text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-500 to-amber-700" style="text-shadow: 2px 2px 0 #000; -webkit-text-stroke: 1px black;">THE CHRONICLES</h1>
-                <p class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed">Select a chapter to uncover the truth of the Eternal Five and the Wolf.</p>
             </div>
-
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 <div onclick="switchTab('history-ch1')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-amber-500/50 transition-all duration-300 relative group overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><h1 class="text-9xl font-black text-amber-500">I</h1></div>
-                    <div class="relative z-10">
-                        <span class="text-amber-500 font-bold text-xs uppercase tracking-widest">The Beginning</span>
-                        <h3 class="text-2xl font-bold text-white mt-2 mb-4 font-mario">Salt & Steel</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">The legend of the Eternal Five, the invasion from the west, and the sacrifice that shaped the islands.</p>
-                        <div class="mt-6 flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest group-hover:gap-4 transition-all">
-                            Read Chapter <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </div>
-                    </div>
+                    <h3 class="text-2xl font-bold text-white font-mario">I. Salt & Steel</h3>
                 </div>
-
                 <div onclick="switchTab('history-ch2')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-cyan-500/50 transition-all duration-300 relative group overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><h1 class="text-9xl font-black text-cyan-500">II</h1></div>
-                    <div class="relative z-10">
-                        <span class="text-cyan-500 font-bold text-xs uppercase tracking-widest">The Legacy</span>
-                        <h3 class="text-2xl font-bold text-white mt-2 mb-4 font-mario">Child of the Wolf</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">After the wars, the Wolf finds a child. The secret origin of Karle and the life in the Sanctuary.</p>
-                        <div class="mt-6 flex items-center gap-2 text-cyan-400 text-xs font-bold uppercase tracking-widest group-hover:gap-4 transition-all">
-                            Read Chapter <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </div>
-                    </div>
+                    <h3 class="text-2xl font-bold text-white font-mario">II. Child of the Wolf</h3>
                 </div>
-
                 <div onclick="switchTab('history-ch3')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-teal-500/50 transition-all duration-300 relative group overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><h1 class="text-9xl font-black text-teal-500">III</h1></div>
-                    <div class="relative z-10">
-                        <span class="text-teal-500 font-bold text-xs uppercase tracking-widest">The Integration</span>
-                        <h3 class="text-2xl font-bold text-white mt-2 mb-4 font-mario">School of Simula</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">Karle enters the world of Simula, meeting allies Rus and Jai, while hiding his true lineage.</p>
-                        <div class="mt-6 flex items-center gap-2 text-teal-400 text-xs font-bold uppercase tracking-widest group-hover:gap-4 transition-all">
-                            Read Chapter <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </div>
-                    </div>
+                    <h3 class="text-2xl font-bold text-white font-mario">III. School of Simula</h3>
                 </div>
-
                 <div onclick="switchTab('history-ch4')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-indigo-500/50 transition-all duration-300 relative group overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><h1 class="text-9xl font-black text-indigo-500">IV</h1></div>
-                    <div class="relative z-10">
-                        <span class="text-indigo-500 font-bold text-xs uppercase tracking-widest">The Awakening</span>
-                        <h3 class="text-2xl font-bold text-white mt-2 mb-4 font-mario">Trial of Youth</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed">The teacher calls, the five villages gather, and the Wolf makes his first public appearance in the Coliseum.</p>
-                        <div class="mt-6 flex items-center gap-2 text-indigo-400 text-xs font-bold uppercase tracking-widest group-hover:gap-4 transition-all">
-                            Read Chapter <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </div>
-                    </div>
+                    <h3 class="text-2xl font-bold text-white font-mario">IV. Trial of Youth</h3>
                 </div>
-
                 <div onclick="switchTab('history-ch5')" class="chapter-card bg-slate-900 border border-slate-800 p-8 rounded-3xl cursor-pointer hover:bg-slate-800 hover:border-rose-500/50 transition-all duration-300 relative group overflow-hidden md:col-span-2 lg:col-span-2">
-                    <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><h1 class="text-9xl font-black text-rose-500">V</h1></div>
-                    <div class="relative z-10">
-                        <span class="text-rose-500 font-bold text-xs uppercase tracking-widest">The Climax</span>
-                        <h3 class="text-3xl font-bold text-white mt-2 mb-4 font-mario">The Coliseum Battles</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed max-w-lg">Magic vs Tech. Brains vs Brawn. The tournament begins, leading to the shocking unmasking of the Wolf.</p>
-                        <div class="mt-6 flex items-center gap-2 text-rose-400 text-xs font-bold uppercase tracking-widest group-hover:gap-4 transition-all">
-                            Read Chapter <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </div>
-                    </div>
+                    <h3 class="text-2xl font-bold text-white font-mario">V. The Coliseum Battles</h3>
                 </div>
             </div>
         </div>
-
-        <div id="view-history-ch1" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto pb-10">
-            <button onclick="switchTab('history')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-4"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Contents</button>
-            
-            <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
-                    <div>
-                        <span class="text-amber-500 font-bold text-xs uppercase tracking-widest block mb-2">Chapter I</span>
-                        <h2 class="text-4xl lg:text-5xl font-bold text-white font-mario">Salt & Steel</h2>
-                    </div>
-                    <audio controls class="h-10 w-full md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
-                        <source src="The Eternal Five Sacrifice and The Wolf.mp3" type="audio/mpeg">
-                    </audio>
-                </div>
-                <div class="story-text text-slate-300 text-lg">
-                    <p>Long before the arena was built, in the Golden Age of the Sulubasi, there lived five brothers. They were not bound by blood, but by something stronger: salt in their veins and steel in their spines. They were the Eternal Five: Pablo, Josh, Justin, Ken, and Stell.</p>
-                    <p>Their paradise was shattered not by magic, but by iron. Invaders arrived in iron-clad ships from Germania, bringing only brute force. The brothers knew that to save their home, they could not just be warriors; they had to become aspects of war itself.</p>
-                    
-                    <h3 class="text-2xl font-bold text-white mt-8 mb-4">Chapter II: The Wall and The Soul</h3>
-                    <p>First, there was Josh. When the brute force of the iron ships crashed against the shore, Josh did not strike back. He stood without a weapon, holding only a shield. He became The Wall. He held the pass alone, taking a thousand blows so his brothers would not have to take one. He was the definition of the Tank—ultimate sacrifice through raw endurance.</p>
-                    <p>Behind him stood Justin, the Gentle Soul. Amidst the fire and blood, Justin refused to carry a weapon. Instead, he possessed a lost magic, pouring his own life force into his kin. He knitted his kin back together, healing their broken bodies by unraveling his own spirit. When he fell, the legend says he died with a smile on his face, believing he had saved them all.</p>
-
-                    <h3 class="text-2xl font-bold text-white mt-8 mb-4">Chapter III: The Arrow and The Ghost</h3>
-                    <p>As the invasion shifted from brute force to the disciplined fleets of the French, the brothers changed their tactics.</p>
-                    <p>Stell climbed to the high cliffs. He became The Arrow. He did not aim to sink the hulls; he aimed to create terror. Using lightning-bolt arrows, he would pin a captain’s sleeve to the mast, immobilizing the command and crippling their will before they even made landfall. He ran out of arrows eventually, but he fought on, becoming a weapon himself.</p>
-                    <p>Below in the jungle, Ken became The Ghost. He was the silent hunter, the counter-assassin who ensured the soil itself was protected. While Stell rained terror from above, Ken moved unseen through the trees, guarding the land with silence and blood.</p>
-
-                    <h3 class="text-2xl font-bold text-white mt-8 mb-4">Chapter IV: The Wolf</h3>
-                    <p>The defense was coordinated by Pablo, the strategist. At first, he used his intellect, turning the tides and reefs into weapons against the ships. But as his brothers fell—Josh the Wall, Justin the Soul, Stell the Arrow, and Ken the Ghost—something broke within Pablo.</p>
-                    <p>The man of intellect died, and a monster was born. He became The Wolf.</p>
-                    <p>He did not drive back the final Spanish commander with strategy; he drove him back with pure, terrifying rage. It was madness, born of grief, that finally cleared the seas.</p>
-
-                    <h3 class="text-2xl font-bold text-white mt-8 mb-4">Epilogue: The Arena of Grief</h3>
-                    <p>Victory came, but Pablo hated the silence that followed. He believed the peace was too costly; he believed that peace made them weak and dishonored the memory of his brothers.</p>
-                    <p>To ensure the world never forgot their sacrifice, Pablo carved his rage into the islands. He built the arena on Mahalima, right on his brothers' grave. He set the ancient rules: Lane against Lane, Ancient against Ancient.</p>
-                    <p>This is why the Mahalima Challenge exists. It is not a game. It is a ritual designed by the Wolf to ensure that eternal conflict can truly honor the fallen.</p>
-
-                    <h3 class="text-2xl font-bold text-white mt-8 mb-4">Final Chronicle: The Division of the Islands</h3>
-                    <p>Victory brought no peace. Pablo, consumed by grief and fury, lost his mind. He declared that the archipelago must be divided:</p>
-                    <ul class="list-disc pl-5 space-y-2 mb-4">
-                        <li><strong>Simula Island:</strong> The beginning, a land of hope and renewal.</li>
-                        <li><strong>Wakas Island:</strong> The end, a land of endings and remembrance.</li>
-                        <li><strong>Mahalima Island:</strong> Created in the center of the archipelago, where Simula and Wakas would clash to honor the Eternal Five and their armies.</li>
-                    </ul>
-                    <p>On Mahalima, Pablo decreed a ritual: every year, five champions from Simula and five champions from Wakas would battle under rules like the great game of Dota 2. The victors would rule the archipelago for one year, ensuring balance through eternal struggle.</p>
-                    <p>Thus, the Wolf ensured that grief would never fade, and that conflict itself would become the eternal monument to his fallen brothers.</p>
-                </div>
-            </div>
-            
-            <div class="aspect-video rounded-3xl overflow-hidden border-2 border-slate-800 shadow-2xl bg-slate-950">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/7MOEn8hvDrw" title="Chapters 1 & 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-
-        <div id="view-history-ch2" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto pb-10">
-            <button onclick="switchTab('history')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-4"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Contents</button>
-            
-            <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
-                    <div>
-                        <span class="text-cyan-500 font-bold text-xs uppercase tracking-widest block mb-2">Chapter II</span>
-                        <h2 class="text-4xl lg:text-5xl font-bold text-white font-mario">Child of the Wolf</h2>
-                    </div>
-                    <audio controls class="h-10 w-full md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
-                        <source src="Wolf_Warrior_Becomes_Quiet_Guardian_Father.m4a" type="audio/mpeg">
-                    </audio>
-                </div>
-                <div class="story-text text-slate-300 text-lg">
-                    <h3 class="text-2xl font-bold text-cyan-400 mb-4">The Sanctuary</h3>
-                    <p>When the wars were finished and the seas grew quiet, Pablo returned to the Mahalima Sanctuary, the sacred home where the Eternal Five once gathered. It was here, among the stones and salt air, that he found a child left upon his doorstep.</p>
-                    <p>No name, no family—only a letter: <em class="text-white">“I will get him back in the near future.”</em></p>
-                    <p>Pablo searched the sanctuary, but no clue revealed itself. The Wolf, once consumed by rage, now faced a different battle: the duty of a father. He took the child in, gave him food, gave him shelter, and raised him as his own.</p>
-
-                    <h3 class="text-2xl font-bold text-cyan-400 mt-8 mb-4">The Bond</h3>
-                    <p>Years passed, and the boy grew under Pablo’s care. The Wolf, who had once carved arenas from grief, now carved a life of quiet guardianship. He gave the boy warmth, guidance, and the strength of discipline.</p>
-                    <p>On the child’s seventh year, Pablo bestowed upon him a gift: a bracelet from the Cave of Moonlight, where the Eternal Five had once sworn their brotherhood beneath silver waters. The boy wore it, unaware of the blood and sacrifice that had forged its meaning.</p>
-                    <p>Pablo never spoke of his past, nor of the ritual battles between Simula and Wakas. Yet he began to teach the boy—first the art of fighting, then the art of thinking. He told him only one truth: “One day, I will not be here. You must protect yourself.”</p>
-
-                    <h3 class="text-2xl font-bold text-cyan-400 mt-8 mb-4">The Legacy</h3>
-                    <p>From seven to twelve, the boy learned blade and mind, endurance and wisdom. He was shaped by Pablo’s grief, but also by his love. Though the child did not yet know the full story of the Eternal Five, nor the ritual battles of the archipelago, destiny was already being written upon him.</p>
-                    <p>The people saw only a father and son, bound not by blood but by choice. Yet in the silence of the sanctuary, Pablo knew the boy carried the future of conflict and remembrance.</p>
-
-                    <h3 class="text-2xl font-bold text-cyan-400 mt-8 mb-4">The Revelation</h3>
-                    <p>And so the tale of the Wolf did not end with rage—it continued with legacy.</p>
-                    <p>The child who had been left at the sanctuary’s door, the boy raised in shadow and moonlight, the heir to Pablo’s wisdom and sorrow…</p>
-                    <p class="text-2xl text-white font-bold">His name was Karle.</p>
-                </div>
-            </div>
-
-            <div class="aspect-video rounded-3xl overflow-hidden border-2 border-slate-800 shadow-2xl bg-slate-950">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/7MOEn8hvDrw" title="Chapters 1 & 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-
-        <div id="view-history-ch3" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto pb-10">
-            <button onclick="switchTab('history')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-4"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Contents</button>
-            
-            <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
-                    <div>
-                        <span class="text-teal-500 font-bold text-xs uppercase tracking-widest block mb-2">Chapter III</span>
-                        <h2 class="text-4xl lg:text-5xl font-bold text-white font-mario">School of Simula</h2>
-                    </div>
-                    <audio controls class="h-10 w-full md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
-                        <source src="The_Wolf’s_Secret_Training_For_Karle.m4a" type="audio/x-m4a">
-                    </audio>
-                </div>
-                <div class="story-text text-slate-300 text-lg">
-                    <p>When Karle reached twelve years of age, Pablo spoke to him with gravity.</p>
-                    <p>"I have another obligation to attend," the Wolf said. "You must go to my brother Josue, who owns land on Simula Island. There, you will attend the school of the Simulayans, meet their children, and learn their ways. You must connect with the people, for strength is not only in arms but in understanding."</p>
-                    <p>Karle frowned. "Why? I don’t need to be in school. I am already ready for anything. I am brawns with brains, you know."</p>
-                    <p>Pablo laughed, his white hair flowing like a banner of age and endurance. "You are still a child. There are many things to learn in this life and in this world."</p>
-                    <p>Karle sighed, but obeyed.</p>
-
-                    <h3 class="text-2xl font-bold text-teal-400 mt-8 mb-4">Four Years in Simula</h3>
-                    <p>Time passed. From twelve to sixteen, Karle lived among the Simulayans. He grew close to Josue’s family, playing with his cousins, sharing meals, and walking to school with them. To the people, he was just an ordinary boy—average, quiet, wearing glasses, blending into the rhythm of village life.</p>
-                    <p>He made two friends, Rus and Jai, who became his companions in study and play. Yet Karle kept his secret. When asked about his father, he only said, “He is very busy, so my uncle takes care of me.” He wanted a low-key life, far from the shadow of legends.</p>
-                    <p>Every Christmas, he sent gifts to Pablo by delivery, a quiet thread of connection between the sanctuary and the island.</p>
-
-                    <h3 class="text-2xl font-bold text-teal-400 mt-8 mb-4">The Hidden Truth</h3>
-                    <p>Karle knew of the Eternal Five, for their story was carved in stone. But the carvings showed faces of heroes, not the aged man with white hair and a body still carved like stone who trained him. He did not connect the myth to Pablo.</p>
-                    <p>The people of Simula spoke of Mahalima Island as a place of mystery, ruled by a powerful unknown figure. None knew it was Pablo. None knew of the Mahalima Sanctuary, save for Pablo and Karle. Pablo told him:</p>
-                    <p>"This is a secret place. Only you and I know it. Guard it well."</p>
-                    <p>Karle understood its weight and never spoke of it.</p>
-
-                    <h3 class="text-2xl font-bold text-teal-400 mt-8 mb-4">The Challenge Revealed</h3>
-                    <p>On Karle’s sixteenth year, Pablo’s voice grew solemn.</p>
-                    <p>"It is time. You must be ready. The battle of the Mahalima Challenge approaches. Each year, five champions rise from Simula and five from Wakas. They fight upon Mahalima Island, and the victors rule the archipelago for one year. Who will step forward this time? Who will form the five-man team?"</p>
-                    <p>Karle’s eyes widened. "What is that? The Mahalima Challenge… in Mahalima Island?"</p>
-                    <p>And so, the boy who had lived quietly among the Simulayans, the child raised in secrecy, now stood at the threshold of destiny. The world of ritual conflict, hidden legacy, and eternal remembrance was opening before him.</p>
-                </div>
-            </div>
-
-            <div class="aspect-video rounded-3xl overflow-hidden border-2 border-slate-800 shadow-2xl bg-slate-950">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/P3bWUOEeOok" title="Chapters 3 & 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-
-        <div id="view-history-ch4" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto pb-10">
-            <button onclick="switchTab('history')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-4"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Contents</button>
-            
-            <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
-                    <div>
-                        <span class="text-indigo-500 font-bold text-xs uppercase tracking-widest block mb-2">Chapter IV</span>
-                        <h2 class="text-4xl lg:text-5xl font-bold text-white font-mario">The Trial of Youth</h2>
-                    </div>
-                    <audio controls class="h-10 w-full md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
-                        <source src="The_Mahalima_Challenge_Rules_and_The_Wolf.m4a" type="audio/x-m4a">
-                    </audio>
-                </div>
-                <div class="story-text text-slate-300 text-lg">
-                    <h3 class="text-2xl font-bold text-indigo-400 mb-4">The Teacher’s Call</h3>
-                    <p>At sixteen, Karle’s quiet life in Simula shifted. He sat in class, half-listening, half-drifting into memory. In his mind, he heard Pablo’s voice: "You must prepare. The time has come. At sixteen, you are no longer a child. You must learn not by hearsay, but by trial. For the Mahalima Challenge waits, and the archipelago needs its champions."</p>
-                    <p>Karle blinked, startled. He thought it was Pablo speaking to him, guiding him once more. But when he looked up, he realized the words were coming from Ms. Ramos, his teacher. He had been daydreaming, and Pablo’s lessons had bled into reality.</p>
-
-                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">Ms. Ramos</h3>
-                    <p>Ms. Ramos was no ordinary teacher. At fifty years old, she carried the quiet dignity of a woman who had lived through war and healing. In another country, she had been a renowned medic, saving countless lives on battlefields scarred by fire. But here, in Simula, she chose a different path.</p>
-                    <p>"To teach is to heal," she often said. For her, guiding the youth of Simula was the best way to serve the archipelago. She wanted to give them strength, wisdom, and unity—so that when the time came, they could save their people.</p>
-                    <p>Though single and without children of her own, she poured her heart into her students. To Karle, Rus, and Jai, she was more than a teacher—she was a guardian of their future.</p>
-
-                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">The Five Villages of Simula</h3>
-                    <p>The archipelago was divided into five villages, each with its own soul and strength:</p>
-                    <ul class="list-disc pl-5 space-y-2 mb-4">
-                        <li><strong>Aplaya Cove (The Gateway):</strong> Bustling harbor of trade, diplomacy, and shipbuilding.</li>
-                        <li><strong>Terrasol (The Breadbasket):</strong> Fertile plains of agriculture and livestock, feeding the island.</li>
-                        <li><strong>Ironwood Grove (The Makers):</strong> Dense rainforest of artisans, hunters, and medicine.</li>
-                        <li><strong>The Apex Sanctum (The Keepers):</strong> Ascetic scholars and spiritual leaders on the volcano slopes.</li>
-                        <li><strong>Mire’s Edge (The Survivors):</strong> Foggy swamps of poisons, shadows, and resilience.</li>
-                    </ul>
-                    <p>Each village would send contenders to the coliseum, where one-on-one duels would determine who earned points. Victory came when an opponent was struck down or forced to yield. The five highest scorers would form the team to represent Simula in the Mahalima Challenge.</p>
-
-                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">The Contenders</h3>
-                    <p>From across the villages, 25 young warriors gathered—five from each village. Among them were Karle, Rus, and Jai:</p>
-                    <ul class="list-disc pl-5 space-y-2 mb-4">
-                        <li><strong>Karle of Ironwood Grove:</strong> the agile tactician with strange gadgets and clever improvisation.</li>
-                        <li><strong>Rus of Mire’s Edge:</strong> the immovable shield, rooted in strength and resilience.</li>
-                        <li><strong>Jai of Terrasol:</strong> the healer, calm and radiant, carrying the spirit of endurance.</li>
-                    </ul>
-                    <p>They stood among their peers, each preparing to prove themselves worthy of the five-man team.</p>
-
-                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">The Coliseum</h3>
-                    <p>The tournaments would be held in the great coliseum of Simula, a stone arena carved into the heart of the island. The roar of villagers filled the air as contenders gathered, their weapons and skills gleaming under the sun. The fights had not yet begun, but the tension was palpable.</p>
-
-                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">The Shadow Above</h3>
-                    <p>As the crowd settled, a shadow moved across the top of the coliseum, climbing toward the high platform reserved for the leaders of Simula.</p>
-                    <p>The figure stepped into the light.</p>
-                    <p><strong>The Wolf stood in the center.</strong></p>
-                    <p>Half-human, half-beast, his face hidden behind a mask. His attire was solemn: a barong tagalog, black pants, and polished black shoes. The predator cloaked in tradition.</p>
-                    <p>The people gasped in awe. To them, he was not Pablo. He was only The Wolf, the mysterious guardian of the ritual, the architect of eternal conflict. His name was forgotten, buried beneath legend.</p>
-
-                    <h3 class="text-2xl font-bold text-indigo-400 mt-8 mb-4">Karle’s Question</h3>
-                    <p>Karle’s heart pounded. He looked up at the figure, his hand tightening around the bracelet of moonlight. The crowd saw only a myth. But Karle felt something more. Something in the Wolf’s stance, in the way his masked eyes lingered, struck him deeply.</p>
-                    <p>He tilted his head, confusion clouding his thoughts. <em>Why does this figure feel familiar? Why does he stir something inside me?</em></p>
-                    <p>Karle did not know the Wolf was Pablo. Not yet. To him, the figure was only a legend, a shadow of power. But the feeling pressed into him, heavy and unshakable, as if destiny itself was whispering a secret he could not yet hear.</p>
-                    <p>And so, beneath the gaze of the Wolf, the 25 contenders stood ready. The battles had not yet begun, but destiny was already unfolding. The people cheered for the Wolf. Karle stared in silence, his mind caught between awe and unease. The coliseum was about to ignite.</p>
-                </div>
-            </div>
-
-            <div class="aspect-video rounded-3xl overflow-hidden border-2 border-slate-800 shadow-2xl bg-slate-950">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/P3bWUOEeOok" title="Chapters 3 & 4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-
-        <div id="view-history-ch5" class="hidden animate-fade-in space-y-8 max-w-4xl mx-auto pb-10">
-            <button onclick="switchTab('history')" class="text-slate-400 hover:text-white flex items-center gap-2 text-sm font-bold uppercase tracking-widest mb-4"><svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back to Contents</button>
-            
-            <div class="bg-slate-900 border border-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
-                <div class="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-6 mb-8 gap-4">
-                    <div>
-                        <span class="text-rose-500 font-bold text-xs uppercase tracking-widest block mb-2">Chapter V</span>
-                        <h2 class="text-4xl lg:text-5xl font-bold text-white font-mario">The Coliseum Battles</h2>
-                    </div>
-                    <audio controls class="h-10 w-full md:w-64 rounded opacity-90" style="filter: invert(0.9) hue-rotate(180deg);">
-                        <source src="Wolf_Revelation_and_Coliseum_Strategy_Breakdown.m4a" type="audio/x-m4a">
-                    </audio>
-                </div>
-                <div class="story-text text-slate-300 text-lg">
-                    <h3 class="text-2xl font-bold text-rose-400 mb-4">Karle vs. Ernel</h3>
-                    <p>The moon cast long shadows across the ancient, overgrown ruins that served as their arena. The air crackled with anticipation. On one side stood Ernel, the mystic mage, his hands already aglow with arcane energy, a confident smile on his face. Opposite him was Karle, adjusting his glasses and checking the straps of his utility bag.</p>
-                    <p>"Your gadgets are no match for the ancient arts, Karle," Ernel declared, slamming his staff onto the ground. A complex blue runic circle flared to life beneath his feet – the Mystic Shadow Warp.</p>
-                    <p>Karle smirked. "We’ll see about that."</p>
-                    <p>The duel unfolded in a storm of magic and movement—Ernel’s Spirit Bloom shield and Solar Blossom bolts against Karle’s Urban Dash, Parkour Mastery, and clever use of his Utility Bag. The decisive moment came when Karle hurled his Smartphone Strike, blasting Ernel into defeat.</p>
-                    <p>Karle rushed to check on him, and Ernel, scratched but smiling, admitted: "You’re good."</p>
-
-                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">Jai vs. Missy</h3>
-                    <p>The battle began instantly. Missy blurred forward with Deadline Rush, shouting, "Time is money, Jai!" She unleashed Master Plan and Organized Chaos, trying to overwhelm him.</p>
-                    <p>But Jai remained calm. His Vitality Ward countered the storm, and when Missy hurled her Document Blast, Jai’s Lotus Orb reflected it back.</p>
-                    <p>THWACK! Missy was struck by her own attack. Jai followed with Guardian Angel, a wave of golden light that healed him and knocked her down.</p>
-                    <p>Missy, defeated, thanked him: "I am here if you need anything." Jai simply gave an ok hand gesture, his health bar full.</p>
-
-                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">Rus vs. Denice</h3>
-                    <p>Denice danced across the arena, unleashing Wika’s Echo and her Heritage Fan to silence and blind Rus.</p>
-                    <p>Rus shook it off. His Jade Carapace reflected her damage, and his Verdant Slam slowed her retreat.</p>
-                    <p>"Nowhere left to run!" Rus roared, unleashing Emerald Overgrowth. Roots and vines erupted, binding Denice completely. She raised her hand in defeat: "I can’t move! I give up!"</p>
-                    <p>Rus helped her free herself from the vines, showing strength and compassion.</p>
-
-                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">Toward the Finals</h3>
-                    <p>The battles had thinned the contenders to ten. The semi-finals loomed, and the coliseum trembled with anticipation.</p>
-                    <p>Karle sat alone in the preparation chamber, packing his things carefully. He tightened the straps of his utility bag, adjusted his glasses, and took a long drink of water. His hands shook slightly, though he tried to hide it even from himself. This was it—the last match before Mahalima Island.</p>
-                    <p>Behind him, a voice broke the silence.</p>
-                    <p>"Hey."</p>
-                    <p>Karle froze. Slowly, he turned.</p>
-                    <p>The Wolf stood there, tall and imposing, mask in hand. With deliberate slowness, he lifted it away.</p>
-                    <p>The crowd outside roared, but in that small space, time seemed to stop.</p>
-                    <p>The face beneath was one Karle knew.</p>
-                    <p>"Pablo…" he whispered, his voice cracking.</p>
-                    <p>A storm of emotions surged through him—joy, shock, anger, longing. He wanted to cry, but no tears came. He didn’t even know what to feel. His chest tightened, his breath caught, and his mind spun.</p>
-                    <p>He carried that confusion, that raw surge of feeling, with him as he stepped into the center of the arena. The cheers of the crowd blurred into a distant hum. All he could think of was the face he had just seen—the father he thought lost, revealed as the Wolf.</p>
-
-                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">Karle vs. Karlos</h3>
-                    <p>The arena for the semi-finals hummed with tension. On one side, the crowd roared for the Gymnastic Dynamo, Karlos, who stretched his limbs, his Gold Medalist aura shimmering. On the other stood Karle, adjusting his glasses, his mind still reeling from the revelation. His father was the Wolf. His father was an Eternal.</p>
-                    <p>"Begin!"</p>
-                    <p>Karlos exploded from his starting position. His passive, Perfect Form, allowed him to accelerate instantly, stacking movement speed with every step. He launched a Tumble Assault, spinning like a buzzsaw towards Karle.</p>
-                    <p>But Karle didn’t panic. He analyzed the trajectory. Just as Karlos was about to connect, Karle triggered Urban Dash, phasing through the attack and sliding behind a crumbling pillar.</p>
-                    <p>"Running won’t save you!" Karlos shouted. He leaped high into the air, activating Gravity Defy. For several seconds, he became untargetable, a golden comet hovering above the battlefield, immune to all crowd control.</p>
-                    <p>Karle’s mind raced. He’s immune while airborne. But he has to land. And when he lands, he’ll try to burst me down.</p>
-                    <p>Fueled by the shocking truth of Pablo’s identity, Karle fought with renewed clarity. He used Manta Style illusions, baited Karlos’s Championship Routine, and struck back with Diffusal Blade and Utility Bag silence. Finally, his Smartphone Strike landed true, stunning the gymnast and ending the match.</p>
-                    <p>Brain beat brawn.</p>
-                    <p>Winner: Karle.</p>
-
-                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">The Circle of Friends</h3>
-                    <p>As the ovation continued, Rus and Jai rushed forward, their voices rising above the crowd: “Karle! Karle!” They clapped him on the back, proud and exhilarated.</p>
-                    <p>Behind them, Missy, Denice, and Ernel joined in, smiling and cheering—not for themselves, but for him. Their respect was clear: Karle had earned this moment.</p>
-                    <p>"You fought brilliantly," Ernel said, his earlier arrogance gone.<br>
-                    "You stood your ground," Missy added, nodding with admiration.<br>
-                    Denice grinned. "That was genius, Karle. You outsmarted him completely."</p>
-                    <p>The six of them stood together, but the celebration belonged to Karle alone. The arena’s chant carried his name, echoing into the night.</p>
-
-                    <h3 class="text-2xl font-bold text-rose-400 mt-8 mb-4">The Last Scene</h3>
-                    <p>Karle lifted his gaze once more. On the platform above, Pablo—the Wolf—watched him. No words were spoken. Only a smile, and the weight of truth.</p>
-                    <p>The chapter closed not with dialogue, but with silence—an unspoken bond between father and son, waiting to be revealed.</p>
-                </div>
-            </div>
-
-            <div class="aspect-video rounded-3xl overflow-hidden border-2 border-slate-800 shadow-2xl bg-slate-950">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/KcjI8mMiQsw" title="Chapter V" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </div>
-        </div>
-
         <div id="view-warriors" class="animate-slide-up hidden">
-            <div class="max-w-6xl mx-auto mb-16 rounded-3xl overflow-hidden shadow-2xl border-2 border-slate-800 relative group animate-fade-in">
-                <img src="Gemini_Generated_Image_esdcrmesdcrmesdc.jpg" alt="Monument of the Five" class="w-full h-auto max-h-[600px] object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-700">
-                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent p-10">
-                    <p class="text-center text-amber-200/90 font-serif italic tracking-widest text-lg md:text-2xl drop-shadow-lg">"Carved in stone, bound by fate. The Eternal Five watch over us."</p>
-                </div>
-            </div>
-            <h2 class="text-5xl font-bold text-center mb-16 text-slate-100 font-mario" style="text-shadow: 2px 2px 0 #000;">The Fallen & The Survivor</h2>
+            <h2 class="text-5xl font-bold text-center mb-16 text-slate-100 font-mario mt-10" style="text-shadow: 2px 2px 0 #000;">The Eternal Five</h2>
             <div id="warriors-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-16"></div>
         </div>
 
         <div id="view-simula" class="animate-slide-up hidden">
-            <div class="text-center space-y-4 mb-16">
-                <h2 class="text-5xl font-bold text-cyan-400 font-mario" style="text-shadow: 2px 2px 0 #000;">THE SIMULA FORCES</h2>
-                <p class="text-slate-400 text-xl max-w-3xl mx-auto">The defenders of the future.</p>
-            </div>
+            <h2 class="text-5xl font-bold text-center mb-16 text-cyan-400 font-mario mt-10" style="text-shadow: 2px 2px 0 #000;">THE SIMULA FORCES</h2>
             <div id="simula-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"></div>
         </div>
 
         <div id="view-wakas" class="animate-slide-up hidden">
-            <div class="text-center space-y-4 mb-16">
-                <h2 class="text-5xl font-bold text-rose-500 font-mario" style="text-shadow: 2px 2px 0 #000;">THE WAKAS FORCES</h2>
-                <p class="text-slate-400 text-xl max-w-3xl mx-auto">Masters of the end. They bring power, precision, and finality to the battlefield.</p>
-            </div>
+            <h2 class="text-5xl font-bold text-center mb-16 text-rose-500 font-mario mt-10" style="text-shadow: 2px 2px 0 #000;">THE WAKAS FORCES</h2>
             <div id="wakas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"></div>
         </div>
 
-        <div id="warrior-detail" class="hidden bg-slate-900 rounded-3xl p-10 border border-slate-700 animate-zoom-in shadow-2xl scroll-mt-32 max-w-6xl mx-auto mb-20"></div>
-
-        <div id="view-aftermath" class="space-y-20 animate-fade-in hidden">
-            <div class="text-center space-y-4">
-                <h2 class="text-5xl font-bold text-slate-100 font-mario" style="text-shadow: 2px 2px 0 #000;">Battle for the Aegis</h2>
-                <p class="text-slate-400 text-xl max-w-3xl mx-auto">Two teams, one island. The Simula and Wakas clash for glory.</p>
-            </div>
-            <div onclick="openMapZoom()" class="cursor-pointer max-w-6xl mx-auto rounded-3xl overflow-hidden border-2 border-slate-700 shadow-2xl relative group hover:border-amber-500/50 transition-colors">
-                <img src="Gemini_Generated_Image_2nujm22nujm22nuj.png" alt="Mahalima Island Map" class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-1000">
-            </div>
-            <div class="max-w-6xl mx-auto bg-gradient-to-br from-orange-950/40 to-slate-900 rounded-3xl border border-orange-700/30 overflow-hidden relative">
-                <div class="grid lg:grid-cols-2 gap-0">
-                    <div class="relative h-[500px] lg:h-auto border-r border-orange-900/30">
-                        <img src="Gemini_Generated_Image_mb1di8mb1di8m.png" alt="The Leviathan" class="absolute inset-0 w-full h-full object-cover">
-                    </div>
-                    <div class="p-10 lg:p-16 flex flex-col justify-center space-y-8">
-                        <div>
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-red-900/50 text-red-400 border border-red-500/30 px-3 py-1 rounded text-xs font-bold uppercase tracking-widest">Immortal Boss</span>
-                            </div>
-                            <h2 class="text-4xl lg:text-6xl font-bold text-orange-500 font-mario" style="text-shadow: 2px 2px 0 #431407;">THE LEVIATHAN</h2>
-                            <h3 class="text-xl text-orange-200/70 font-bold uppercase tracking-widest mt-1">Guardian of the Breach</h3>
-                        </div>
-                        <p class="text-slate-300 leading-relaxed text-lg">Like Roshan in the ancient texts, the Leviathan guards the breach between dimensions.</p>
-                    </div>
+        <div id="hero-interface" class="fixed inset-0 bg-slate-950/95 backdrop-blur-xl z-[60] hidden flex flex-col animate-fade-in overflow-y-auto">
+            <button onclick="closeHeroInterface()" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors z-50 p-2 bg-slate-800/50 rounded-full hover:bg-red-500/50">
+                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+            <div id="hero-content" class="w-full max-w-7xl mx-auto p-4 md:p-8 flex-1 flex flex-col justify-center">
                 </div>
-            </div>
         </div>
 
-        <div id="view-social" class="space-y-12 animate-fade-in hidden">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl mt-12">
-                <div class="p-8 border-b border-slate-800 bg-slate-900/50 flex justify-between items-center">
-                    <h3 class="text-2xl font-bold text-slate-100 font-mario" style="text-shadow: 2px 2px 0 #000;">Traveler's Log</h3>
-                </div>
-                <div class="grid lg:grid-cols-3 gap-0 min-h-[500px]">
-                    <div class="lg:col-span-1 p-8 bg-slate-950/50 border-r border-slate-800">
-                        <form id="comment-form" onsubmit="addComment(event)" class="space-y-6">
-                            <div><label class="block text-xs uppercase text-slate-500 font-bold mb-2 tracking-widest">Name / Alias</label><input type="text" id="username" required placeholder="Enter your name..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-slate-200 focus:border-amber-500 focus:outline-none transition-colors"></div>
-                            <div><label class="block text-xs uppercase text-slate-500 font-bold mb-2 tracking-widest">Message</label><textarea id="user-message" required rows="6" placeholder="Share your legend..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-slate-200 focus:border-amber-500 focus:outline-none transition-colors resize-none"></textarea></div>
-                            <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-white font-bold py-3 rounded-lg text-sm transition-all flex items-center justify-center gap-3 shadow-lg hover:-translate-y-1 font-mario" style="text-shadow:none;">Post Message</button>
-                        </form>
-                    </div>
-                    <div class="lg:col-span-2 p-8 max-h-[500px] overflow-y-auto custom-scrollbar bg-slate-900" id="comments-container">
-                        <div class="space-y-6" id="comments-list"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="view-aftermath" class="hidden">...</div>
+        <div id="view-social" class="hidden">...</div>
 
     </main>
 
-    <footer class="border-t border-slate-800 bg-slate-900/95 backdrop-blur fixed bottom-0 w-full z-40 shadow-[0_-5px_30px_rgba(0,0,0,0.5)]">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="flex items-center gap-3 text-amber-500 opacity-90 shrink-0 hover:text-white transition-colors">
-                <button onclick="switchTab('history')" class="flex items-center gap-2">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-                    <span class="font-bold tracking-[0.2em] uppercase text-xs md:text-sm font-mario" style="text-shadow:none;">The Chronicle</span>
-                </button>
-            </div>
-            <div class="flex items-center gap-4">
-                <span class="text-[10px] text-slate-500 uppercase tracking-widest font-bold hidden md:inline">Select a chapter to begin audio logs</span>
-            </div>
-        </div>
-    </footer>
-
-    <div id="map-modal" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm hidden flex items-center justify-center p-4 md:p-10 cursor-zoom-out animate-fade-in" onclick="closeMapZoom()">
-        <button class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors z-50 p-2 bg-slate-800/50 rounded-full hover:bg-slate-700">Close</button>
-        <img src="Gemini_Generated_Image_2nujm22nujm22nuj.png" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl relative z-10" onclick="event.stopPropagation()">
-    </div>
-
     <script>
         // --- DATA ---
-        // 1. ANCIENT WARRIORS
         const warriors = [
             { name: "Pablo", title: "The Strategist", role: "Leader / Mage", imageSrc: "image_3.png", color: "text-blue-400", bg: "bg-blue-900/30", desc: "A strategist with fire in his heart.", stats: { str: 40, agi: 50, int: 95 } },
             { name: "Josh", title: "The Iron Wall", role: "Tank / Guardian", imageSrc: "image_4.png", color: "text-red-400", bg: "bg-red-900/30", desc: "A wall of muscle and courage.", stats: { str: 95, agi: 30, int: 40 } },
@@ -549,7 +157,6 @@
             { name: "Stell", title: "The Silent Arrow", role: "Marksman / Carry", imageSrc: "image_1.png", color: "text-purple-400", bg: "bg-purple-900/30", desc: "Silent and precise.", stats: { str: 45, agi: 95, int: 40 } }
         ];
 
-        // 2. SIMULA TEAM
         const simulaTeam = [
             { name: "BB Panda", title: "Gentle Giant", role: "Tank / Initiator", imageSrc: "Gemini_Generated_Image_ldaq34ldaq34ldaq.png", color: "text-slate-200", bg: "bg-slate-800/50", desc: "A modern warrior channeling the spirit of the bear.", stats: { str: 90, agi: 60, int: 50 } },
             { name: "Jai", title: "Field Medic", role: "Healer / Support", imageSrc: "Gemini_Generated_Image_8izyq08izyq08izy.png", color: "text-teal-400", bg: "bg-teal-900/30", desc: "Bringing advanced medical tech to the battlefield.", stats: { str: 60, agi: 40, int: 85 } },
@@ -563,7 +170,6 @@
             { name: "Charles", title: "Pathfinder", role: "Scout / Utility", imageSrc: "Gemini_Generated_Image_p0p8fop0p8fop0p8.png", color: "text-cyan-300", bg: "bg-cyan-900/30", desc: "A skilled pathfinder utilizing ancient techniques alongside modern Simula gadgets.", stats: { str: 50, agi: 85, int: 65 } }
         ];
 
-        // 3. WAKAS TEAM
         const wakasTeam = [
             { name: "Joy", title: "Graphic Burst", role: "Carry / Ranged", imageSrc: "Gemini_Generated_Image_grsgsfgrsgsfgrsg.png", color: "text-rose-400", bg: "bg-rose-900/30", desc: "Armed with determination and twin strikes, she bursts enemies with graphic energy.", stats: { str: 45, agi: 90, int: 55 } },
             { name: "Vincent", title: "Bamboo Brawler", role: "Tank / Stealth", imageSrc: "Gemini_Generated_Image_cba8odcba8odcba8.png", color: "text-orange-400", bg: "bg-orange-900/30", desc: "Hides in the trees and strikes with blinding sunlight and bamboo spears.", stats: { str: 85, agi: 50, int: 45 } },
@@ -576,95 +182,81 @@
             { name: "Berlyn", title: "Shutter Sniper", role: "Sniper / Support", imageSrc: "Gemini_Generated_Image_ip2oyiip2oyiip2o.png", color: "text-teal-300", bg: "bg-teal-900/30", desc: "Captures enemies in her lens, blinding them with flash photography.", stats: { str: 45, agi: 80, int: 70 } }
         ];
 
-        // Combine all for search
         const allHeroes = [...warriors, ...simulaTeam, ...wakasTeam];
-        let selectedWarriorName = null;
 
         function init() {
             renderWarriors();
             renderSimula();
             renderWakas(); 
             loadComments();
+            // Default to Home but ensure history tab content is ready if clicked
             switchTab('home'); 
         }
 
+        // --- DYNAMIC CONTENT GENERATOR ---
+        function getHeroDetails(hero) {
+            // Generate thematic skills based on role keywords
+            let q = "Strike", w = "Defend", e = "Passive", r = "Ultimate";
+            let items = ["Boots of Speed", "Magic Wand", "Iron Branch"];
+            
+            if(hero.role.includes("Tank") || hero.role.includes("Guardian")) {
+                q = "Iron Skin"; w = "Seismic Slam"; e = "Endurance"; r = "Unbreakable Wall";
+                items = ["Vanguard", "Heart of Tarrasque", "Blade Mail", "Phase Boots", "Magic Wand", "Soul Ring"];
+            } else if(hero.role.includes("Mage") || hero.role.includes("Nuker")) {
+                q = "Arcane Bolt"; w = "Silence"; e = "Mana Flow"; r = "Cataclysm";
+                items = ["Aghanim's Scepter", "Scythe of Vyse", "Blink Dagger", "Arcane Boots", "Bottle", "Void Stone"];
+            } else if(hero.role.includes("Healer") || hero.role.includes("Support")) {
+                q = "Healing Touch"; w = "Purify"; e = "Aura of Life"; r = "Divine Intervention";
+                items = ["Mekansm", "Guardian Greaves", "Glimmer Cape", "Force Staff", "Observer Ward", "Smoke"];
+            } else if(hero.role.includes("Carry") || hero.role.includes("Marksman")) {
+                q = "Precision Shot"; w = "Quick Dash"; e = "Critical Strike"; r = "Assassinate";
+                items = ["Butterfly", "Daedalus", "Hurricane Pike", "Power Treads", "BKB", "Satanic"];
+            }
+
+            return {
+                abilities: [
+                    { key: "Q", name: q, desc: "A primary skill that defines the hero's lane presence." },
+                    { key: "W", name: w, desc: "Utility or defensive skill for tactical plays." },
+                    { key: "E", name: e, desc: "Passive ability that enhances survivability or damage." },
+                    { key: "R", name: r, desc: "Ultimate ability. High impact, high cooldown." }
+                ],
+                talents: ["+200 Health", "+15 Movement Speed", "+20 Damage"],
+                inventory: items
+            };
+        }
+
         function switchTab(tabId) {
-            // Hide all main views
-            ['home', 'history', 'warriors', 'simula', 'wakas', 'aftermath', 'social'].forEach(id => {
-                const view = document.getElementById(`view-${id}`);
-                if (view) view.classList.add('hidden');
-                
-                const btn = document.getElementById(`btn-${id}`);
-                if (btn) {
-                    btn.classList.remove('text-white', 'bg-slate-800/50');
-                    if(id === 'simula') btn.classList.add('text-cyan-400');
-                    else if(id === 'wakas') btn.classList.add('text-rose-400');
-                    else btn.classList.add('text-slate-400');
-                    
-                    const underline = btn.querySelector('span');
-                    if(underline) underline.classList.remove('w-1/2', '-translate-x-1/2');
-                }
+            const views = ['home', 'history', 'warriors', 'simula', 'wakas', 'aftermath', 'social', 'history-ch1', 'history-ch2', 'history-ch3', 'history-ch4', 'history-ch5'];
+            views.forEach(id => {
+                const el = document.getElementById(`view-${id}`);
+                if(el) el.classList.add('hidden');
             });
 
-            // Hide history chapters specifically
-            ['history-ch1', 'history-ch2', 'history-ch3', 'history-ch4', 'history-ch5'].forEach(id => {
-                const view = document.getElementById(`view-${id}`);
-                if (view) view.classList.add('hidden');
-            });
-
-            // Hide warrior detail panel when switching tabs
-            const detail = document.getElementById('warrior-detail');
-            if(detail) detail.classList.add('hidden');
-
-            // Handle the dropdown button activation visually
+            // Handle dropdown button color
             const btnWarriorsMain = document.getElementById('btn-warriors-main');
-            if (['warriors', 'simula', 'wakas'].includes(tabId)) {
+            if(['warriors', 'simula', 'wakas'].includes(tabId)) {
+                btnWarriorsMain.classList.add('text-white', 'bg-slate-800');
                 btnWarriorsMain.classList.remove('text-slate-400');
-                btnWarriorsMain.classList.add('text-white');
             } else {
-                btnWarriorsMain.classList.remove('text-white');
+                btnWarriorsMain.classList.remove('text-white', 'bg-slate-800');
                 btnWarriorsMain.classList.add('text-slate-400');
             }
 
-            // If the tabId is a history chapter, we also need to visually activate the 'history' button
-            let activeBtnId = tabId;
-            if (tabId.startsWith('history-')) {
-                activeBtnId = 'history';
+            // Show selected view
+            const selected = document.getElementById(`view-${tabId}`);
+            if(selected) {
+                selected.classList.remove('hidden');
+                window.scrollTo(0,0);
             }
-
-            const selectedView = document.getElementById(`view-${tabId}`);
-            if (selectedView) selectedView.classList.remove('hidden');
-            window.scrollTo(0, 0);
-
-            const activeBtn = document.getElementById(`btn-${activeBtnId}`);
-            if (activeBtn) {
-                activeBtn.classList.remove('text-slate-400', 'text-cyan-400', 'text-rose-400');
-                activeBtn.classList.add('text-white');
-                const underline = activeBtn.querySelector('span');
-                if(underline) underline.classList.add('w-1/2', '-translate-x-1/2');
-            }
-        }
-
-        function renderWarriors() {
-            const grid = document.getElementById('warriors-grid');
-            if(grid) grid.innerHTML = warriors.map(w => createCardHTML(w)).join('');
-        }
-
-        function renderSimula() {
-            const grid = document.getElementById('simula-grid');
-            if(grid) grid.innerHTML = simulaTeam.map(w => createCardHTML(w)).join('');
-        }
-
-        function renderWakas() {
-            const grid = document.getElementById('wakas-grid');
-            if(grid) grid.innerHTML = wakasTeam.map(w => createCardHTML(w)).join('');
+            
+            // Close hero interface if open
+            closeHeroInterface();
         }
 
         function createCardHTML(w) {
             return `
                 <div onclick="selectWarrior('${w.name}')" 
-                     class="group relative p-6 rounded-3xl border border-slate-800 hover:border-slate-600 bg-slate-900/80 hover:bg-slate-800 transition-all cursor-pointer"
-                     id="card-${w.name.replace(/\s/g, '')}">
+                     class="group relative p-6 rounded-3xl border border-slate-800 hover:border-slate-600 bg-slate-900/80 hover:bg-slate-800 transition-all cursor-pointer">
                     <div class="aspect-square rounded-2xl overflow-hidden mb-6 border-2 border-slate-700 group-hover:border-amber-500/50 transition-colors relative">
                          <div class="absolute inset-0 bg-slate-950/20 group-hover:bg-transparent transition-colors z-10"></div>
                          <img src="${w.imageSrc}" alt="${w.name}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" loading="lazy">
@@ -679,60 +271,90 @@
         }
 
         function selectWarrior(name) {
-            selectedWarriorName = name;
-            const w = allHeroes.find(h => h.name === name);
-            if(!w) return;
+            const hero = allHeroes.find(h => h.name === name);
+            if(!hero) return;
 
-            const detailContainer = document.getElementById('warrior-detail');
-            detailContainer.classList.remove('hidden');
-            detailContainer.innerHTML = `
-                <div class="flex flex-col lg:flex-row gap-12 items-start">
-                    <div class="p-3 rounded-3xl ${w.bg} inline-block border-4 border-slate-800 shadow-2xl shrink-0 mx-auto lg:mx-0">
-                        <div class="w-64 h-64 lg:w-80 lg:h-80 rounded-2xl overflow-hidden relative">
-                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent z-10"></div>
-                            <img src="${w.imageSrc}" alt="${w.name}" class="w-full h-full object-cover" loading="lazy">
+            const details = getHeroDetails(hero);
+            const interface = document.getElementById('hero-interface');
+            const content = document.getElementById('hero-content');
+
+            content.innerHTML = `
+                <div class="flex flex-col lg:flex-row gap-8 items-stretch h-full">
+                    <div class="lg:w-1/4 space-y-4 flex flex-col justify-center order-2 lg:order-1">
+                        <h4 class="text-amber-500 font-bold uppercase tracking-widest border-b border-slate-700 pb-2">Abilities</h4>
+                        ${details.abilities.map(ab => `
+                            <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-700 hover:border-amber-500/50 transition-colors">
+                                <div class="flex items-center gap-4 mb-2">
+                                    <div class="w-12 h-12 ability-icon rounded flex items-center justify-center font-bold text-xl text-white shadow-lg">${ab.key}</div>
+                                    <div><h5 class="font-bold text-slate-200">${ab.name}</h5><span class="text-[10px] text-slate-500 uppercase">Active</span></div>
+                                </div>
+                                <p class="text-xs text-slate-400 leading-relaxed">${ab.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="lg:w-2/4 relative flex flex-col items-center justify-center order-1 lg:order-2">
+                        <div class="relative w-full max-w-md aspect-[3/4] rounded-3xl overflow-hidden border-4 border-slate-800 shadow-[0_0_50px_rgba(0,0,0,0.8)]">
+                            <img src="${hero.imageSrc}" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent p-8">
+                                <h1 class="text-5xl font-mario text-white mb-2" style="text-shadow: 2px 2px 0 #000;">${hero.name}</h1>
+                                <p class="text-lg ${hero.color} font-bold uppercase tracking-widest">${hero.title}</p>
+                                <p class="text-sm text-slate-400 mt-2">${hero.desc}</p>
+                                
+                                <div class="flex gap-6 mt-6">
+                                    <div class="text-center"><div class="text-red-500 font-bold text-xl">${hero.stats.str}</div><div class="text-[10px] text-slate-500 uppercase">STR</div></div>
+                                    <div class="text-center"><div class="text-green-500 font-bold text-xl">${hero.stats.agi}</div><div class="text-[10px] text-slate-500 uppercase">AGI</div></div>
+                                    <div class="text-center"><div class="text-blue-500 font-bold text-xl">${hero.stats.int}</div><div class="text-[10px] text-slate-500 uppercase">INT</div></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex-1 space-y-8 w-full">
-                        <div>
-                            <h2 class="text-4xl lg:text-5xl font-bold ${w.color} mb-2 font-mario" style="text-shadow: 2px 2px 0 #000;">${w.name}</h2>
-                            <p class="text-xl text-slate-400 font-medium uppercase tracking-widest">${w.title}</p>
-                            <span class="inline-block mt-2 px-3 py-1 bg-slate-800 rounded text-xs text-slate-300 font-mono">${w.role}</span>
+
+                    <div class="lg:w-1/4 flex flex-col gap-6 justify-center order-3">
+                        <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-700">
+                            <h4 class="text-amber-500 font-bold uppercase tracking-widest border-b border-slate-700 pb-2 mb-4">Talent Tree</h4>
+                            <div class="space-y-3">
+                                ${details.talents.map(t => `<div class="text-center p-2 rounded bg-slate-800 text-sm text-slate-300 border border-slate-600">${t}</div>`).join('')}
+                                <div class="text-center p-2 rounded bg-amber-500/20 text-amber-300 text-xs font-bold border border-amber-500/50">Level 25 Talent</div>
+                            </div>
                         </div>
-                        <p class="text-lg text-slate-300 leading-relaxed max-w-2xl">${w.desc}</p>
-                        
-                        <div class="grid grid-cols-3 gap-6 pt-4">
-                            <div class="bg-slate-950/50 p-6 rounded-2xl text-center border border-slate-800">
-                                <div class="text-slate-500 text-xs uppercase tracking-widest mb-2">Strength</div>
-                                <div class="text-red-400 font-bold text-3xl mb-3">${w.stats.str}</div>
-                                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden"><div class="bg-red-500 h-full shadow-[0_0_10px_rgba(239,68,68,0.5)]" style="width: ${w.stats.str}%"></div></div>
+
+                        <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-700">
+                            <h4 class="text-amber-500 font-bold uppercase tracking-widest border-b border-slate-700 pb-2 mb-4">Inventory</h4>
+                            <div class="grid grid-cols-3 gap-3">
+                                ${details.inventory.map(item => `
+                                    <div class="aspect-square item-slot rounded flex items-center justify-center group relative cursor-help">
+                                        <span class="text-[10px] text-slate-500 font-bold text-center px-1">${item}</span>
+                                    </div>
+                                `).join('')}
                             </div>
-                            <div class="bg-slate-950/50 p-6 rounded-2xl text-center border border-slate-800">
-                                <div class="text-slate-500 text-xs uppercase tracking-widest mb-2">Agility</div>
-                                <div class="text-green-400 font-bold text-3xl mb-3">${w.stats.agi}</div>
-                                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden"><div class="bg-green-500 h-full shadow-[0_0_10px_rgba(34,197,94,0.5)]" style="width: ${w.stats.agi}%"></div></div>
-                            </div>
-                            <div class="bg-slate-950/50 p-6 rounded-2xl text-center border border-slate-800">
-                                <div class="text-slate-500 text-xs uppercase tracking-widest mb-2">Intellect</div>
-                                <div class="text-blue-400 font-bold text-3xl mb-3">${w.stats.int}</div>
-                                <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden"><div class="bg-blue-500 h-full shadow-[0_0_10px_rgba(59,130,246,0.5)]" style="width: ${w.stats.int}%"></div></div>
+                            <div class="flex justify-between mt-4 text-[10px] text-amber-500 font-bold uppercase">
+                                <span>Gold: 2,450</span>
+                                <span>K/D/A: 12/3/15</span>
                             </div>
                         </div>
                     </div>
                 </div>
             `;
-            
-            detailContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            interface.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Lock scroll
         }
 
-        function openMapZoom() { document.getElementById('map-modal').classList.remove('hidden'); }
-        function closeMapZoom() { document.getElementById('map-modal').classList.add('hidden'); }
+        function closeHeroInterface() {
+            document.getElementById('hero-interface').classList.add('hidden');
+            document.body.style.overflow = ''; // Unlock scroll
+        }
 
-        // --- COMMUNITY FEATURES ---
+        // Render Functions
+        function renderWarriors() { document.getElementById('warriors-grid').innerHTML = warriors.map(w => createCardHTML(w)).join(''); }
+        function renderSimula() { document.getElementById('simula-grid').innerHTML = simulaTeam.map(w => createCardHTML(w)).join(''); }
+        function renderWakas() { document.getElementById('wakas-grid').innerHTML = wakasTeam.map(w => createCardHTML(w)).join(''); }
+
+        // Community Features
         function loadComments() {
             const comments = JSON.parse(localStorage.getItem('clashComments')) || [];
-            const list = document.getElementById('comments-list');
-            list.innerHTML = comments.map(c => `
+            document.getElementById('comments-list').innerHTML = comments.map(c => `
                 <div class="bg-slate-800/30 p-6 rounded-2xl border border-slate-700/50 animate-slide-up">
                     <div class="flex justify-between items-start mb-3">
                         <div class="flex items-center gap-3">
@@ -750,17 +372,9 @@
             e.preventDefault();
             const user = document.getElementById('username').value;
             const msg = document.getElementById('user-message').value;
-            
-            const newComment = {
-                user: user,
-                msg: msg,
-                time: new Date().toLocaleDateString()
-            };
-
             const comments = JSON.parse(localStorage.getItem('clashComments')) || [];
-            comments.unshift(newComment);
+            comments.unshift({ user, msg, time: new Date().toLocaleDateString() });
             localStorage.setItem('clashComments', JSON.stringify(comments));
-            
             loadComments();
             document.getElementById('comment-form').reset();
         }
