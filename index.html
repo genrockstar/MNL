@@ -140,7 +140,7 @@
             </div>
             <div onclick="selectWarrior('The Leviathan')" class="cursor-pointer max-w-5xl mx-auto mt-12 bg-slate-900 rounded-3xl border border-orange-900/50 overflow-hidden flex flex-col md:flex-row hover:border-orange-500 transition-colors group">
                 <div class="md:w-1/2 relative min-h-[300px]">
-                    <img src="https://placehold.co/600x800/7c2d12/fed7aa?text=Leviathan" class="absolute inset-0 w-full h-full object-cover">
+                    <img src="Gemini_Generated_Image_mb1di8mb1di8m.png" class="absolute inset-0 w-full h-full object-cover">
                 </div>
                 <div class="md:w-1/2 p-12 flex flex-col justify-center">
                     <h2 class="text-6xl font-mario text-orange-500 mb-4 group-hover:text-orange-400">THE LEVIATHAN</h2>
@@ -350,15 +350,20 @@
         // --- BOSSES ---
         const bossTeam = [
             {
-                name: "The Leviathan", title: "Guardian of the Breach", role: "Neutral / Boss", src: "https://placehold.co/600x800/7c2d12/fed7aa?text=Leviathan", color: "text-orange-500",
+                name: "The Leviathan", title: "Guardian of the Breach", role: "Neutral / Boss", src: "Gemini_Generated_Image_mb1di8mb1di8m.png", color: "text-orange-500",
                 stats: { str: 999, agi: 100, int: 50 },
                 abilities: {
-                    q: { name: "Magma Slam", desc: "Slams the ground every 4 seconds, dealing massive damage and slowing all nearby enemies." },
-                    w: { name: "Bash", desc: "PASSIVE: Attacks have a 15% chance to stun the target for 1.65 seconds." },
-                    e: { name: "Spell Block", desc: "PASSIVE: Blocks one targeted spell every 15 seconds. (Linken's Effect)" },
-                    r: { name: "Immortality", desc: "Upon death, drops the Aegis of the Immortal, granting the bearer one reincarnation." }
+                    q: { name: "Molten Eruption", desc: "Ruptures the ground, creating a zone of magma that deals high damage over time to enemies standing within." },
+                    w: { name: "Gear Grinder", desc: "Fires a mechanical claw that drags the first enemy hit towards Leviathan, dealing physical damage." },
+                    e: { name: "Obsidian Armor", desc: "PASSIVE: Reduces incoming damage by 30% and reflects 20% of damage taken back to the attacker." },
+                    r: { name: "Cataclysmic Breach", desc: "ULTIMATE: Smashes the ground to open a portal to the core, stunning all nearby enemies and dealing massive lava damage." }
                 },
-                talents: [ { left: "Drops Cheese", right: "Drops Refresher Shard" }, { left: "Double Health", right: "True Sight Aura" }, { left: "Bash pierces BKB", right: "Global Roar on Aggro" }, { left: "Drops Aghanim's Blessing", right: "Triple Gold Bounty" } ],
+                talents: [
+                    { left: "Volcanic Core: +2s Q Duration", right: "+20 Health Regen" },
+                    { left: "Forged Resilience: +15 Armor", right: "+300 Health" },
+                    { left: "Seismic Impact: Ult Slows 50%", right: "Gear Grinder Stuns" },
+                    { left: "Obsidian Armor 40% Reflect", right: "Molten Eruption Pure Dmg" }
+                ],
                 inventory: commonInventory.boss
             }
         ];
@@ -545,4 +550,5 @@
     </script>
 </body>
 </html>
+
 
